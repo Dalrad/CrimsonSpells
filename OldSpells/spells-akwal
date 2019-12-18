@@ -1,0 +1,728 @@
+    Extinguish:
+        spell-class: ".targeted.CleanseSpell"
+        name: Extinguish
+        description: Extinguish yourself.
+        remove:
+          - fire
+        target-self: true
+        beneficial: true
+        cost:
+            - mana 30
+        str-cost: 30 Mana
+        str-cast-self: "&5Extinguish"
+
+    Downpour:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Downpour
+        cast-item: STICK
+#        modifiers:
+#            - biome OCEAN,RIVER,BEACH,DEEP_OCEAN power 1.5
+        projectile-velocity: 0
+        projectile-gravity: 0
+        particle-name: dripWater
+        particle-speed: 1
+        particle-count: 250
+        particle-horizontal-spread: 1.5
+        particle-vertical-spread: 1.5
+        max-duration: 10
+        hit-radius: 6
+        hit-players: false
+        hit-non-players: false
+        hit-ground: false
+        hit-air-at-end: false
+        hit-air-during: true
+        hit-ground: false
+        spell-interval: 20
+        stop-on-hit-entity: false
+        stop-on-hit-ground: false
+        spell: xDownpour
+        cost:
+            - mana 100
+        str-cost: 100 Mana
+        str-cast-self: "&5Downpour"
+
+    xDownpour:
+        spell-class: ".targeted.AreaEffectSpell"
+        horizontal-radius: 6
+        vertical-radius: 6
+        point-blank: true
+        fail-if-no-targets: true
+        target-players: true
+        target-non-players: true
+        spells:
+            - shortweaknessslowhaze
+
+    Fissures:
+        spell-class: ".targeted.AreaEffectSpell"
+        name: Fissures
+        cooldown: 1
+#        modifiers:
+#            - biome OCEAN,RIVER,BEACH,DEEP_OCEAN power 1.5
+        cast-item: STICK
+        can-cast-by-command: true
+        horizontal-radius: 6
+        vertical-radius: 5
+        point-blank: true
+        target-players: true
+        target-non-players: true
+        target-invisible-players: true
+        fail-if-no-targets: false
+        effects:
+          targetparticles:
+            position: caster
+            effect: fireworks
+            flicker: false
+            trail: false
+            type: 1
+            flight: 0
+            colors: 0000FF
+        max-targets: 5
+        spell-source-in-center: true
+        spells:
+            - xGeyser
+        cost:
+            - mana 60
+        str-cost: 60 Mana
+        str-cast-self: "&5Fissures"
+
+    SwimOLD:
+        spell-class: ".instant.LeapSpell"
+        name: SwimOLD
+        cast-item: FISH
+        bindable: false
+        can-cast-by-command: false
+        forward-velocity: 15.0
+        upward-velocity: 0
+        cancel-damage: false
+        modifiers:
+            - inblock 8,9, required
+        str-cast-self: "&aSwim"
+
+    PowerStroke:
+        spell-class: ".instant.LeapSpell"
+        name: PowerStroke
+        cooldown: 1
+        modifiers:
+            - buffactive Swim denied
+            - inblock 8,9 required
+        cast-item: FISH
+        bindable: false
+        can-cast-by-command: true
+        forward-velocity: 80.0
+        upward-velocity: 0
+        cancel-damage: false
+        cost:
+            - mana 15
+        str-cost: 15 Mana
+        str-cast-self: "&5PowerStroke"
+
+    BlessWater:
+        spell-class: ".instant.ConjureSpell"
+        name: BlessWater
+        modifiers:
+            - biome OCEAN,RIVER,BEACH,DEEP_OCEAN required
+        cast-item: POTION
+        bindable: false
+        can-cast-by-command: false
+        items:
+            - 373:8197 1
+        add-to-inventory: false
+        auto-equip: true
+        effects:
+          targetparticles:
+            position: target
+            effect: particles
+            particle-name: splash
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0.1
+            count: 50
+            y-offset: 1
+            render-distance: 15
+        cost:
+            - POTION 1
+        str-cost: 1 Bottled Water
+        str-cast-self: "&5Bless Water"
+
+    WaterWalk:
+        spell-class: ".buff.WaterwalkSpell"
+        name: WaterWalk
+        cast-item: STICK
+        speed: 0.05
+        duration: 120
+        cancel-on-logout: true
+        cancel-on-teleport: true
+        use-cost:
+            - mana 4
+        use-cost-interval: 2
+        str-cost: 2 mana per block walked.
+        str-cast-self: "&5Water Walk"
+        str-fade: "&4Water Walk Ended"
+    Aquastep:
+        spell-class: ".buff.WaterwalkSpell"
+        name: Aquastep
+        cast-item:
+        speed: 5.0
+        duration: 0
+        cancel-on-logout: true
+        cancel-on-teleport: true
+        str-cast-self: "&9Aquastep"
+        str-fade: "&cAquastep"
+    AquastepP:
+        spell-class: ".PassiveSpell"
+        triggers:
+            - sprint 
+        chance: 100
+        cooldown: 0
+        modifiers:
+            - buffactive Aquastep required
+        spells:
+            - AquastepS
+            - AquastepS2
+    AquastepP2:
+        spell-class: ".PassiveSpell"
+        triggers:
+            - stopsprint 
+        chance: 100
+        cooldown: 0
+        modifiers:
+            - buffactive Aquastep required
+        spells:
+            - AquastepS
+            - AquastepS2
+    AquastepP3:
+        spell-class: ".PassiveSpell"
+        triggers:
+            - spellcast Aquastep
+        chance: 100
+        cooldown: 0
+        spells:
+            - AquastepS2
+    AquastepS:
+        spell-class: ".buff.DummySpell"
+        duration: 0
+        effects:
+          Fairy1:
+            position: buff
+            effect-interval: 0
+            effect: particles
+            particle-name: wake
+            render-distance: 100
+            horiz-spread: 0.2
+            vert-spread: 0.4
+            speed: 0.3
+            count: 200
+            y-offset: 0
+          SOUNDFairy:
+            position: buff
+            effect-interval: 0
+            effect: sound
+            sound: entity.player.splash
+            volume: 10
+            pitch: 1.1
+    AquastepS2:
+        spell-class: ".buff.DummySpell"
+        duration: 0
+        effects:
+          Fairy12:
+            position: buff
+            effect-interval: 0
+            effect: particles
+            render-distance: 100
+            particle-name: wake
+            horiz-spread: 0.2
+            vert-spread: 0.1
+            speed: 0.01
+            count: 50
+            y-offset: 0
+          SOUNDFairy2:
+            position: buff
+            effect-interval: 4
+            effect: sound
+            sound: entity.player.splash
+            volume: 3
+            pitch: 1.0
+
+
+    AkwalGift:
+        spell-class: ".instant.ConjureSpell"
+        name: AkwalGift
+#        modifiers:
+#            - biome OCEAN,RIVER,BEACH,DEEP_OCEAN required
+        cast-item: IRON_INGOT
+        bindable: false
+        can-cast-by-command: false
+        cooldown: 1200
+        items:
+            - 373 1
+            - 265 1 40%
+            - 333 1 10%
+            - 35:3 1-2 5%
+            - 35:9 1-2 5%
+            - 22 1 5%
+            - 326 1 5%
+            - 383:94 1 5%
+        add-to-inventory: false
+        cost:
+            - IRON_INGOT 1
+        str-cost: 1 Iron Ingot
+        str-cast-self: "&5Things appear!"
+
+    BangFish:
+        spell-class: ".instant.ProjectileSpell"
+        name: BangFish
+        cast-item: "PUFFERFISH"
+        bindable: false
+        can-cast-by-command: false
+        cooldown: 5
+        projectile: "349:3"
+        velocity: 1
+        require-hit-entity: false
+        cancel-damage: true
+        remove-projectile: true
+        target-players: true
+        max-distance: 25
+        spells: [2Explode]
+        cost:
+            - "PUFFERFISH 1"
+        str-cost: 1 Pufferfish.
+        str-cast-self: "&aBang Fish"
+
+
+    Drain:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Drain
+        cast-item: STICK
+        cooldown: 2
+        can-cast-by-command: true
+#        modifiers:
+#            - biome OCEAN,RIVER,BEACH,DEEP_OCEAN power 1.5
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: splash
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 15
+        max-duration: 10
+        hit-radius: 1
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        effects:
+          casterparticles:
+            position: target
+            effect: bluesparkle
+          targetparticles:
+            position: target
+            effect: particles
+            particle-name: dripWater
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0.5
+            count: 50
+            y-offset: 2
+            render-distance: 15
+        spell: xDrain
+        cost:
+            - mana 80
+        str-cost: 80 Mana
+        str-cast-self: "&5Drain"
+
+    xDrain:
+        spell-class: ".targeted.DrainlifeSpell"
+        cast-item: STICK
+        can-cast-by-command: false
+        range: 30
+        take-type: health
+        take-amt: 12
+        give-type: health
+        give-amt: 12
+        show-spell-effect: true
+        animation-speed: 2
+        instant: true
+        ignore-armor: true
+        obey-los: true
+        target-players: true
+        check-plugins: false
+
+    Osmosis:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Osmosis
+        cast-item: STICK
+#        modifiers:
+#            - biome OCEAN,RIVER,BEACH,DEEP_OCEAN power 1.5
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: dripWater
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 15
+        max-duration: 10
+        hit-radius: 1
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: false
+        hit-ground: false
+        effects:
+          casterparticles:
+            position: target
+            effect: bluesparkle
+          targetparticles:
+            position: target
+            effect: particles
+            particle-name: dripWater
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0.5
+            count: 50
+            y-offset: 2
+            render-distance: 15
+        spell: xOsmosis
+        cost:
+            - mana 50
+        str-cast-self: "&5Osmosis"
+
+    xOsmosis:
+        spell-class: ".targeted.DrainlifeSpell"
+        take-type: experience
+        take-amt: 20
+        give-type: mana
+        give-amt: 70
+        show-spell-effect: true
+        animation-speed: 2
+        instant: true
+        ignore-armor: true
+        target-modifiers:
+            - levelabove 2 required
+        obey-los: true
+        target-players: true
+        check-plugins: false
+
+    Geyser:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Geyser
+        cooldown: 1
+        cast-item: STICK
+        can-cast-by-command: true
+#        modifiers:
+#            - biome OCEAN,RIVER,BEACH,DEEP_OCEAN power 1.5
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: splash
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 20
+        max-duration: 10
+        hit-radius: 1
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        spell: xGeyser
+        cost:
+            - mana 20
+        str-cost: 20 Mana
+        str-cast-self: "&5Geyser"
+
+    xGeyser:
+        spell-class: ".targeted.GeyserSpell"
+        range: 30
+        damage: 2
+        velocity: 12
+        animation-speed: 2
+        geyser-height: 3
+        geyser-type: water
+        ignore-armor: true
+        obey-los: true
+        target-players: true
+        check-plugins: false
+
+    Artesian:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Artesian
+        cast-item: STICK
+#        modifiers:
+#            - biome OCEAN,RIVER,BEACH,DEEP_OCEAN power 1.5
+        can-cast-by-command: false
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: splash
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 20
+        max-duration: 10
+        hit-radius: 1
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        spell: xArtesian
+        cost:
+            - mana 60
+        str-cost: 60 mana
+        str-cast-self: "&5Artesian"
+
+    xArtesian:
+        spell-class: ".targeted.GeyserSpell"
+        name: xArtesian
+        range: 15
+        damage: 4
+        velocity: 14
+        animation-speed: 2
+        geyser-height: 6
+        geyser-type: water
+        ignore-armor: true
+        obey-los: true
+        target-players: true
+        check-plugins: false
+
+    Drown:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Drown
+        cooldown: 1
+        cast-item: STICK
+        can-cast-by-command: true
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: dripWater
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 20
+        max-duration: 10
+        hit-radius: 1
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        effects:
+          casterparticles:
+            position: target
+            effect: bluesparkle
+          targetparticles:
+            position: target
+            effect: particles
+            particle-name: dripWater
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0.5
+            count: 50
+            y-offset: 2
+            render-distance: 15
+        spell: xDrown
+        cost:
+            - mana 40
+        str-cost: 40 Mana
+        str-cast-self: "&5Drown"
+    xDrown:
+        spell-class: ".TargetedMultiSpell"
+        target-players: true
+        check-individual-cooldowns: false
+        spells:
+            - drownsilence
+            - 2harm
+            - DrownEff
+            - DrownEff2
+    drownsilence:
+        spell-class: ".targeted.SilenceSpell"
+        prevent-cast: true
+        prevent-chat: true
+        prevent-commands: true
+        duration: 50
+        allowed-spells:
+            - list
+            - help
+        str-cast-self: "&9You drown %t"
+        str-cast-target: "&9You feel yourself being pulled down"
+    DrownSelf:
+        spell-class: ".MultiSpell"
+        target-players: true
+        check-individual-cooldowns: false
+        spells:
+            - DrownEff3
+            - DELAY 10
+            - DrownEff3
+            - DELAY 10
+            - DrownEff3
+            - DELAY 10
+            - DrownEff3
+            - DELAY 10
+            - DrownEff3
+            - DELAY 10
+    DrownEff2:
+        spell-class: ".targeted.ForcebombSpell"
+        name: DrownEff2
+        range: 15
+        radius: 1
+        pushback-force: 0
+        additional-vertical-force: -50
+        target-players: true
+        target-non-players: true
+        dont-target-caster: true
+        cost:
+            - mana 0
+    DrownP:
+        spell-class: ".PassiveSpell"
+        triggers:
+            - spelltargeted DrownX
+        cast-without-target: true
+        chance: 100
+        cooldown: 0
+        spells:
+            - DrownSelf
+    DrownEff3:
+        spell-class: ".instant.LeapSpell"
+        name: DrownEff3
+        cooldown: 0
+        forward-velocity: 0
+        upward-velocity: -5
+        cancel-damage: true
+    VoidPour:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: VoidPour
+        cast-item: STICK
+#        modifiers:
+#            - biome OCEAN,RIVER,BEACH,DEEP_OCEAN power 1.5
+        projectile-velocity: 0
+        projectile-gravity: 0
+        particle-name: depthsuspend
+        particle-speed: 1
+        particle-count: 250
+        particle-horizontal-spread: 1.5
+        particle-vertical-spread: 1.5
+        max-duration: 10
+        hit-radius: 6
+        hit-players: false
+        hit-non-players: false
+        hit-ground: false
+        hit-air-at-end: false
+        hit-air-during: true
+        hit-ground: false
+        spell-interval: 20
+        stop-on-hit-entity: false
+        stop-on-hit-ground: false
+        spell: xDownpour
+        cost:
+            - mana 100
+        str-cost: 100 Mana
+        str-cast-self: "&5Downpour"
+    Rainritual:
+        spell-class: ".instant.RitualSpell"
+        name: Rainritual
+        cooldown: 30
+        incantations:
+        ritual-duration: 500
+        req-participants: 1
+        need-spell-to-participate: true
+        charge-reagents-immediately: false
+        set-cooldown-immediately: true
+        set-cooldown-for-all: true
+        spell: ReturnC
+        cost:
+            - mana 100
+        str-cast-self: "&3The clouds darken"
+        str-cast-others:
+        str-ritual-success: "&3You have returned to another place."
+        str-ritual-joined: "&3A storm begins to brew."
+        str-ritual-interrupted: "&cThe storm fades."
+        str-ritual-fail:
+        effects:
+          SOUND:
+            position: caster
+            effect-interval: 25
+            effect: sound
+            sound: portal.trigger
+            volume: 0.2
+            pitch: 2
+          ZelphStuff1:
+            position: orbit
+            orbit-radius: 0.5
+            orbit-seconds-per-revolution: 1.0
+            orbit-tick-interval: 1
+            orbit-y-offset: 1.0
+            effect: particles
+            particle-name: fireworksSpark
+            horiz-spread: 0.0001
+            vert-spread: 0.0001
+            speed: 0
+            count: 20
+            y-offset: 0.8
+    RainritualC:
+        spell-class: ".ExternalCommandSpell"
+        name: RainritualC
+        enabled: true
+        modifiers:
+            - permission magicspells.grant.Cloudritual required
+        description: Back
+        cast-item: STICK
+        can-cast-by-command: true
+        can-cast-with-item: true
+        command-to-execute:
+            - "weather storm"
+        cooldown: 300
+        command-delay: 0
+        temporary-op: false
+        temporary-permissions: 
+            - "essentials.weather"
+        require-player-target: false
+        execute-as-target-instead: false
+        block-chat-output: true
+        obey-los: false
+        range: 1
+        cost:
+            - mana 0
+        str-cost:
+        str-cast-self:
+        str-cant-use-command:
+    Swim:
+        spell-class: ".buff.DummySpell"
+        toggle: true
+        cast-item: FISH
+        bindable: true
+        can-cast-by-command: true
+        modifiers:
+            - inblock 8,9 required
+        str-cast-self: "&9You begin swimming quickly."
+        str-fade: "&cYou are no longer swimming quickly."
+    SwimP:
+        spell-class: ".PassiveSpell"
+        modifiers:
+            - buffactive Swim required
+            - inblock 8,9 required
+        triggers: 
+            - ticks 1
+        chance: 100
+        cooldown: 0
+        spells:
+            - SwimC
+    SwimC:
+        spell-class: ".instant.LeapSpell"
+        name: SwimC
+        cast-item: FISH
+        bindable: false
+        can-cast-by-command: false
+        forward-velocity: 10.0
+        upward-velocity: 0
+        cancel-damage: false
+        modifiers:
+            - inblock 8,9 required
+        str-cast-self:
