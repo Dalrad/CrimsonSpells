@@ -1,0 +1,226 @@
+##Flameshot -- Homing Missile multispell - Functional 12/18/2019
+
+Flameshot:
+    spell-class: ".MultiSpell"
+    cooldown: 60
+    cost:
+      - mana 75
+    str-cost: 75 Mana
+    str-cast-self: "&cYou channel your mana into the flames"
+    spells:
+        - FlameshotOrbs
+        - FlameshotSlow
+        - DELAY 10
+        - FlameshotSpiral
+        - DELAY 30
+        - FlameshotOrb1
+        - FlameshotOrb2        
+        - FlameshotOrb3
+        - FlameshotOrb4
+
+
+FlameshotSlow:
+    spell-class: ".targeted.PotionEffectSpell"
+    target-self: false
+    type: 2
+    duration: 40
+    strength: 6
+    beneficial: false
+    ambient: false
+    hidden: true
+
+
+FlameshotOrbs:
+  spell-class: ".instant.DummySpell"
+  effects:
+        orb1:
+            position: caster
+            effect: effectlibentity
+            effectlib:
+                class: AnimatedBall
+                particle: Flame
+                duration: 4500
+                x_factor: 0.3
+                y_factor: 0.3
+                z_factor: 0.3
+                particles: 50
+                relative-offset: -0.1,1,1.75
+        orb2:
+            position: caster
+            effect: effectlibentity
+            effectlib:
+                class: AnimatedBall
+                particle: Flame
+                duration: 4500
+                x_factor: 0.3
+                y_factor: 0.3
+                z_factor: 0.3
+                particles: 50
+                relative-offset: -0.2,1.75,0.5
+        orb3:
+            position: caster
+            effect: effectlibentity
+            effectlib:
+                class: AnimatedBall
+                particle: Flame
+                duration: 4500
+                x_factor: 0.3
+                y_factor: 0.3
+                z_factor: 0.3
+                particles: 50
+                relative-offset: -0.1,1.75,-0.5
+        orb4:
+            position: caster
+            effect: effectlibentity 
+            effectlib:
+                class: AnimatedBall
+                particle: Flame
+                duration: 4500
+                x_factor: 0.3
+                y_factor: 0.3
+                z_factor: 0.3
+                particles: 50
+                relative-offset: -0.2,1,-1.75
+
+FlameshotSpiral:
+  spell-class: ".instant.DummySpell"
+  effects:
+        Spiral1:
+            position: caster
+            effect: effectlib 
+            effectlib:
+                class: Helix
+                particle: Flame
+                radius: 3
+                particles: 50
+                relative-offset: 0,0,0
+        Spiral2:
+            position: caster
+            effect: effectlibentity 
+            effectlib:
+                class: Helix
+                particle: Flame
+                radius: 6
+                particles: 50
+                relative-offset: 0,9,0
+
+FlameshotOrb1:
+    spell-class: ".targeted.HomingMissileSpell"
+    range: 100
+    projectile-velocity: 15
+    projectile-inertia: 1.5
+    max-duration: 15
+    tick-interval: 1
+    spell: FlameshotDamage
+    str-no-target: "&cThey fail to find their mark"
+    special-effect-interval: 1
+    relative-offset: -0.1,1,1.75
+    can-target: players,nonplayers
+    effects:
+        OrbEffect:
+            position: special
+            effect: effectlib 
+            effectlib:
+                class: AnimatedBall
+                particle: Flame
+                x_factor: 0.3
+                duration: 500
+                y_factor: 0.3
+                z_factor: 0.3
+                particles: 50
+
+FlameshotOrb2:
+    spell-class: ".targeted.HomingMissileSpell"
+    range: 100
+    projectile-velocity: 15
+    projectile-inertia: 1.5
+    max-duration: 15
+    tick-interval: 1
+    spell: FlameshotFakeOrbs
+    special-effect-interval: 1
+    relative-offset: -0.2,1.75,0.5
+    can-target: players,nonplayers
+    effects:
+        OrbEffect:
+            position: special
+            effect: effectlib 
+            effectlib:
+                class: AnimatedBall
+                particle: Flame
+                x_factor: 0.3
+                duration: 500
+                y_factor: 0.3
+                z_factor: 0.3
+                particles: 50
+
+FlameshotOrb3:
+    spell-class: ".targeted.HomingMissileSpell"
+    range: 100
+    projectile-velocity: 15
+    projectile-inertia: 1.5
+    max-duration: 15
+    tick-interval: 1
+    spell: FlameshotFakeOrbs
+    special-effect-interval: 1
+    relative-offset: -0.1,1.75,-0.5
+    can-target: players,nonplayers
+    effects:
+        OrbEffect:
+            position: special
+            effect: effectlib 
+            effectlib:
+                class: AnimatedBall
+                particle: Flame
+                x_factor: 0.3
+                duration: 500
+                y_factor: 0.3
+                z_factor: 0.3
+                particles: 50
+
+FlameshotOrb4:
+    spell-class: ".targeted.HomingMissileSpell"
+    range: 100
+    projectile-velocity: 15
+    projectile-inertia: 1.5
+    max-duration: 15
+    tick-interval: 1
+    spell: FlameshotFakeOrbs
+    special-effect-interval: 1
+    relative-offset: -0.2,1,-1.75
+    can-target: players,nonplayers
+    effects:
+        OrbEffect:
+            position: special
+            effect: effectlib 
+            effectlib:
+                class: AnimatedBall
+                particle: Flame
+                x_factor: 0.3
+                y_factor: 0.3
+                duration: 500
+                z_factor: 0.3
+                particles: 50
+
+FlameshotFakeOrbs:
+    spell-class: ".instant.DummySpell"
+    effects:
+        FlameshotEffect:
+            position: target
+            effect: effectlib 
+            effectlib:
+                class: Explode
+                duration: 500
+FlameshotDamage:
+    spell-class: ".targeted.ForcetossSpell"
+    horizontal-force: 10
+    vertical-force: 10
+    damage: 15
+    check-plugins: false
+    avoid-damage-modification: true
+    effects:
+        FlameshotEffect:
+            position: target
+            effect: effectlib 
+            effectlib:
+                class: Explode
+                duration: 500
