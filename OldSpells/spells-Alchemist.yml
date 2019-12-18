@@ -1,0 +1,40 @@
+Concoct:
+    spell-class: ".instant.ConjureSpell"
+    name: Concoct
+    description: Conjure a Potion.
+    cast-item: GLASS_BOTTLE
+    bindable: false
+    can-cast-by-command: true
+    items:
+        - POTIONOFREGENERATE 1 %10
+        - POTIONOFSWIFT 1 %10
+        - POTIONOFFIRERES 1 %10
+        - POTIONOFPOISON 1 %10
+        - POTIONOFHEALING 1 %10
+        - POTIONOFNIGHTVISION 1 %10
+        - POTIONOFWEAKNESS 1 %10
+        - POTIONOFWATERBREATHING 1 %2
+        - POTIONOFREGENERATEII 1 %5
+        - POTIONOFSWIFTII 1 %5
+        - POTIONOFHEALINGII 1 %5
+        - POTIONOFSTRENGTHII 1 %5
+        - POTIONOFREGENERATEEXTENDED 1 %2
+        - POTIONOFSWIFTEXTENDED 1 %2
+        - POTIONOFFIRERESEXTENDED 1 %1
+        - POTIONOFSTRENGTHEXTENDED 1 %2
+        - POTIONOFWATERBREATHINGEXTENDED 1 %1
+        - 373:8289 1 %0
+        - 373:8290 1 %0
+        - 373:8297 1 %0
+    add-to-inventory: true
+    auto-equip: true
+    calculate-drops-individually: false
+    cost:
+        - GLASS_BOTTLE 1
+        - mana 150
+        - health 5
+        - hunger 2
+        - levels 2
+    str-cost: 1 Glass Bottle, 150 Mana, 5 Health, 2 Hunger, 2 XP Levels
+    str-cast-self: You have conjured a Potion.
+    str-missing-reagents: You do not have the required reagents.

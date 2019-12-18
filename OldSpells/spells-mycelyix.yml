@@ -1,0 +1,611 @@
+    MushroomTomb:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: MushroomTomb
+        cast-item: STICK
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: portal
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 15
+        max-duration: 10
+        hit-radius: 1
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        effects:
+          casterparticles:
+            position: target
+            effect: bluesparkle
+        spell: xMushroomTomb
+        cost:
+            - mana 50
+        str-cost: 50 Mana
+        str-cast-self: "&5Mushroom Tomb"
+
+    xMushroomTomb:
+        spell-class: ".targeted.EntombSpell"
+        obey-los: true
+        damage: 1
+        target-players: true
+        tomb-block-type: 100
+        tomb-duration: 10
+
+    Mushroom:
+        spell-class: ".targeted.TreeSpell"
+        name: Mushroom
+        spell-icon: 6
+        range: 15
+        tree-type: red mushroom
+        animation-speed: 20
+        cost:
+            - mana 50
+        str-cost: 50 Mana
+        str-no-target: You cannot grow a mushroom there.
+    GrowMushroom:
+        spell-class: ".TargetedMultiSpell"
+        name: GrowMushroom
+        check-individual-cooldowns: false
+        require-entity-target: false
+        target-players: false
+        cast-random-spell-instead: true
+        cost:
+            - mana 0
+        str-cost: 0 mana
+        spells:
+            - RedMushroom1
+            - RedMushroom2
+            - RedMushroom3
+            - RedMushroom4
+            - BrownMushroom1
+            - BrownMushroom2
+            - BrownMushroom3
+            - BrownMushroom4
+    RedMushroom1:
+        spell-class: ".targeted.PasteSpell"
+        schematic: "RedMushroom1.schematic"
+        y-offset: 1
+        blocks-per-second: 25
+        paste-air: false
+        paste-entities: false
+        paste-at-caster: true
+    RedMushroom2:
+        spell-class: ".targeted.PasteSpell"
+        schematic: "RedMushroom2.schematic"
+        y-offset: 1
+        blocks-per-second: 25
+        paste-air: false
+        paste-entities: false
+        paste-at-caster: true
+    RedMushroom3:
+        spell-class: ".targeted.PasteSpell"
+        schematic: "RedMushroom3.schematic"
+        y-offset: 1
+        blocks-per-second: 25
+        paste-air: false
+        paste-entities: false
+        paste-at-caster: true
+    RedMushroom4:
+        spell-class: ".targeted.PasteSpell"
+        schematic: "RedMushroom4.schematic"
+        y-offset: 1
+        blocks-per-second: 25
+        paste-air: false
+        paste-entities: false
+        paste-at-caster: true
+    BrownMushroom1:
+        spell-class: ".targeted.PasteSpell"
+        schematic: "BrownMushroom1.schematic"
+        y-offset: 1
+        blocks-per-second: 25
+        paste-air: false
+        paste-entities: false
+        paste-at-caster: true
+    BrownMushroom2:
+        spell-class: ".targeted.PasteSpell"
+        schematic: "BrownMushroom2.schematic"
+        y-offset: 1
+        blocks-per-second: 25
+        paste-air: false
+        paste-entities: false
+        paste-at-caster: true
+    BrownMushroom3:
+        spell-class: ".targeted.PasteSpell"
+        schematic: "BrownMushroom3.schematic"
+        y-offset: 1
+        blocks-per-second: 25
+        paste-air: false
+        paste-entities: false
+        paste-at-caster: true
+    BrownMushroom4:
+        spell-class: ".targeted.PasteSpell"
+        schematic: "BrownMushroom4.schematic"
+        y-offset: 1
+        blocks-per-second: 25
+        paste-air: false
+        paste-entities: false
+        paste-at-caster: true
+
+    Hyphae:
+        spell-class: ".MultiSpell"
+        name: Hyphae
+        cooldown: 20
+        target-players: true
+        check-individual-cooldowns: false
+        spells:
+            - resistancemushroom
+            - weaknessmushroom
+            - hyphaeeffect
+        cost:
+            - mana 50
+        str-cost: 50 Mana.
+
+    resistancemushroom:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: resistancemushroom
+        type: 11
+        strength: 3
+        duration: 300
+        targeted: false
+
+    weaknessmushroom:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: weaknessmushroom
+        type: 18
+        strength: 2
+        duration: 300
+        targeted: false
+
+    hyphaeeffect:
+        spell-class: ".buff.DummySpell"
+        duration: 15
+        effects:
+          hyphaeeffect1:
+            position: orbit
+            orbit-radius: 0.5
+            orbit-seconds-per-revolution: 1.0
+            orbit-tick-interval: 1
+            orbit-y-offset: 1.0
+            effect: particles
+            particle-name: witchMagic
+            horiz-spread: 0.001
+            vert-spread: 0.001
+            speed: 0
+            count: 10
+            y-offset: 0
+
+    Putrefy:
+        spell-class: ".MultiSpell"
+        name: Putrefy
+        target-players: true
+        cooldown: 15
+        check-individual-cooldowns: false
+        spells:
+            - ManaMushroom
+            - PrimHunger
+            - PutrefyEffect
+        cost:
+            - health 10
+        shared-cooldowns:
+            - mend 15
+            - heal 15
+            - Convalescence 15
+        str-cost: 50 Mana.
+
+    ManaMushroom:
+        spell-class: ".instant.ManaSpell"
+        name: ManaMushroom
+        spell-icon: potion:8193
+        mana: 100
+        cooldown: 15
+        cost:
+            - health 10
+        shared-cooldowns:
+            - mend 15
+            - heal 15
+            - Convalescence 15
+        str-cost: 20 Health
+        str-cast-self: "&5The putrid decay enhances your mana."
+
+    PutrefyEffect:
+        spell-class: ".buff.DummySpell"
+        effects:
+          Primeffect1:
+            position: caster
+            effect: particles
+            particle-name: witchMagic
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0
+            count: 50
+            y-offset: 0
+
+    Stalk:
+        spell-class: ".targeted.PulserSpell"
+        name: Stalk
+        cast-item: "110"
+        bindable: false
+        require-cast-item-on-command: true
+        total-pulses: 5
+        interval: 100
+        max-distance: 20
+        cap-per-player: 1
+        block-type: "110"
+        unbreakable: false
+        only-count-on-success: false
+        spells:
+            - StalkMulti
+        cost:
+            - 110 1
+            - mana 100
+
+    StalkMulti:
+        spell-class: ".targeted.AreaEffectSpell"
+        name: StalkMulti
+        cast-item: STICK
+        horizontal-radius: 20
+        vertical-radius: 20
+        point-blank: true
+        fail-if-no-targets: true
+        target-players: false
+        target-non-players: true
+        spells:
+            - StalkNausea
+            - StalkSlowness
+            - 2harm
+            - PutrefyEffect
+            - StalkEffect
+            - StalkSelf
+        cost:
+            - mana 100
+        str-cost: 100 Mana
+
+    StalkEffect:
+        spell-class: ".targeted.DummySpell"
+        duration: 300
+        effects:
+          Primeffect1:
+            position: target
+            effect: particles
+            particle-name: witchMagic
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0
+            count: 50
+            y-offset: 0
+
+    StalkSelf:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: StalkSelf
+        type: 15
+        strength: 1
+        duration: 300
+        targeted: false
+
+    StalkNausea:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: StalkNausea
+        type: 9
+        strength: 3
+        duration: 300
+        targeted: true
+
+    StalkSlowness:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: StalkSlowness
+        type: 2
+        strength: 3
+        duration: 300
+        targeted: true
+
+    Mold:
+        spell-class: ".MultiSpell"
+        name: Mold
+        cooldown: 30
+        target-players: true
+        check-individual-cooldowns: false
+        spells:
+            - MoldNausea
+            - MoldSlowness
+            - extrastrength
+            - MoldEffect
+        cost:
+            - mana 50
+        str-cost: 50 Mana.
+
+    MoldNausea:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: MoldNausea
+        type: 9
+        strength: 3
+        duration: 300
+        targeted: false
+
+    MoldSlowness:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: MoldSlowness
+        type: 2
+        strength: 3
+        duration: 300
+        targeted: false
+
+    MoldEffect:
+        spell-class: ".buff.DummySpell"
+        duration: 300
+        effects:
+          MoldEffect1:
+            position: caster
+            effect: fireworks
+            flicker: false
+            trail: false
+            type: 1
+            flight: 0
+            colors: 9F59D2
+
+    Decay:
+        spell-class: ".MultiSpell"
+        name: Decay
+        target-players: true
+        cooldown: 5
+        check-individual-cooldowns: false
+        spells:
+            - DecayProjectile
+            - weaknessmushroom
+            - DecayEffect
+        cost:
+            - mana 20
+        str-cost: 20 Mana.
+
+    DecayEffect:
+        spell-class: ".buff.DummySpell"
+        duration: 100
+        effects:
+          hyphaeeffect1:
+            position: target
+            effect: particles
+            particle-name: portal
+            horiz-spread: 0.001
+            vert-spread: 0.001
+            speed: 0
+            count: 10
+            y-offset: 0
+
+    DecayProjectile:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: DecayProjectile
+        cast-item: STICK
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: witchMagic
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 15
+        max-duration: 10
+        hit-radius: 1
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        effects:
+          casterparticles:
+            position: target
+            effect: bluesparkle
+        spell: 4harm
+        cost:
+            - mana 50
+        str-cost: 50 Mana
+        str-cast-self: "&5Decay"
+
+    Primordium:
+        spell-class: ".MultiSpell"
+        name: Primordium
+        cooldown: 20
+        target-players: true
+        check-individual-cooldowns: false
+        spells:
+            - PrimAbsorption
+            - PrimHunger
+            - PrimEffect
+        cost:
+            - mana 50
+        str-cost: 50 Mana.
+
+    PrimAbsorption:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: PrimAbsorption
+        type: 10
+        strength: 3
+        duration: 300
+        targeted: false
+
+    PrimHunger:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: PrimHunger
+        type: 17
+        strength: 3
+        duration: 300
+        targeted: false
+
+    PrimEffect:
+        spell-class: ".buff.DummySpell"
+        duration: 15
+        effects:
+          Primeffect1:
+            position: orbit
+            orbit-radius: 0.5
+            orbit-seconds-per-revolution: 1.0
+            orbit-tick-interval: 1
+            orbit-y-offset: 1.0
+            effect: particles
+            particle-name: witchMagic
+            horiz-spread: 0.001
+            vert-spread: 0.001
+            speed: 0
+            count: 10
+            y-offset: 0
+          Primeffect2:
+            position: orbit
+            orbit-radius: 0.5
+            orbit-seconds-per-revolution: 1.0
+            orbit-tick-interval: 1
+            orbit-y-offset: 1.0
+            orbit-counter-clockwise: true
+            effect: particles
+            particle-name: witchMagic
+            horiz-spread: 0.001
+            vert-spread: 0.001
+            speed: 0
+            count: 10
+            y-offset: 0
+
+    IsleBeast:
+        spell-class: ".targeted.SpawnMonsterSpell"
+        name: IsleBeast
+        cast-item: STICK
+        can-cast-by-command: true
+        location: target
+        entity-type: mushroomcow
+        range: 10
+        cost:
+            - mana 80
+        effects:
+          Spawn Effect:
+            position: target
+            effect: spawn
+          Spawn Sound:
+            position: target
+            effect: sound
+            sound: random.pop
+        str-cost: 50 Mana.
+        str-cast-self: "&5Isle Beast"
+
+    PlaguedSoil:
+        spell-class: ".ExternalCommandSpell"
+        name: PlaguedSoil
+        enabled: true
+        can-cast-by-command: true
+        can-cast-with-item: true
+        command-to-execute:
+            - "replacenear 3 3,12 110"
+        command-to-execute-later:
+            - ""
+        command-delay: 1
+        temporary-op: true
+        require-player-target: false
+        execute-as-target-instead: false
+        block-chat-output: true
+        obey-los: false
+        range: 10
+        cost:
+            - mana 25
+
+    mycelyixblock:
+        spell-class: ".instant.ThrowBlockSpell"
+        name: mycelyixblock
+        cooldown: 10
+        block-type: 110
+        velocity: 1.0
+        vertical-adjustment: 0.5
+        rotation-offset: 0
+        fall-damage: 2.0
+        fall-damage-max: 20
+        drop-item: false
+        remove-blocks: false
+        call-target-event: true
+        check-plugins: false
+        cost:
+            - mana 25
+
+    Spores:
+        spell-class: ".MultiSpell"
+        name: Spores
+        cooldown: 10
+        target-players: true
+        check-individual-cooldowns: false
+        spells:
+            - SporesGroundEffect
+            - sporepain
+            - moldslowness
+            - sporeseffect
+        cost:
+            - mana 50
+        str-cost: 50 Mana.
+        modifiers:
+            - onblock 0,8,9,10,11 denied
+
+    SporesGroundEffect:
+        spell-class: ".ExternalCommandSpell"
+        enabled: true
+        can-cast-by-command: true
+        can-cast-with-item: true
+        command-to-execute:
+            - "schem load mycelyixspell"
+            - "/paste -a"
+        command-to-execute-later:
+            - "/undo"
+        command-delay: 140
+        temporary-op: true
+        require-player-target: false
+        execute-as-target-instead: false
+        block-chat-output: true
+        obey-los: false
+        range: 10
+
+    sporeseffect:
+        spell-class: ".targeted.DummySpell"
+        duration: 300
+        effects:
+          Primeffect1:
+            position: target
+            effect: particles
+            particle-name: witchMagic
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0
+            count: 50
+            y-offset: 0
+
+    sporepain:
+        spell-class: ".targeted.AreaEffectSpell"
+        cast-item: STICK
+        horizontal-radius: 20
+        vertical-radius: 20
+        point-blank: true
+        fail-if-no-targets: true
+        target-players: true
+        target-non-players: true
+        spells:
+            - 4harm
+        cost:
+            - mana 100
+        str-cost: 100 Mana
+
+    PlagueBound:
+        spell-class: ".instant.GateSpell"
+        name: PlagueBound
+        cast-item: 39
+        can-cast-by-command: false
+        can-cast-with-item: true
+        bindable: false
+        cast-time: 600
+        world: world
+        coordinates: 7402,77,-7209
+        effects:
+            - pos1 ender
+            - pos2 ender
+        cost:
+            - BROWN_MUSHROOM 1
+        str-cost: 1 Brown Mushroom
+        str-cast-self: "&5You appear at the Isles."
+        str-cast-others: "%a dissapears!"
+        str-cast-interrupted: "&4Your journey was interrupted."
+        str-gate-failed: "&4Nothing Happens."

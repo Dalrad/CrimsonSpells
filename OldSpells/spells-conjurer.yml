@@ -1,0 +1,915 @@
+Portal:
+    spell-class: ".instant.PortalSpell"
+    name: Portal
+    mark-spell: "Telemark"
+    duration: 600
+    teleport-cooldown: 4
+    min-distance: 1
+    max-distance: 5000
+    allow-return: true
+    teleport-cost:
+        - mana 10
+    charge-cost-to-teleporter: false
+    effect-interval: 5
+    effects:
+      Fairy1:
+        position: special
+        effect: particles
+        particle-name: blockcrack_160_10
+        horiz-spread: 0.3
+        vert-spread: 0.6
+        speed: 0
+        count: 100
+        y-offset: 0.3
+      Fairy2:
+        position: special
+        effect: particles
+        particle-name: blockcrack_160_1
+        horiz-spread: 0.3
+        vert-spread: 0.6
+        speed: 0
+        count: 100
+        y-offset: 0.3
+      Fairy3:
+        position: special
+        effect: particles
+        particle-name: blockcrack_160_6
+        horiz-spread: 0.3
+        vert-spread: 0.6
+        speed: 0
+        count: 100
+        y-offset: 0.3
+      SOUNDFairy:
+        position: special
+        effect-interval: 25
+        effect: sound
+        sound: portal.portal
+        volume: 1
+        pitch: 2
+    cost:
+        - mana 100
+    str-cost: 100 mana, 1 Gold Ingot, 1 Redstone Dust.
+    str-no-mark: "You have not marked a location to make a portal to."
+    str-too-close: "You are too close to your marked location."
+    str-too-far: "You are too far away from your marked location."
+Summon:
+    spell-class: ".targeted.SummonSpell"
+    name: Summon
+    description: Summons another player to your location.
+    require-exact-name: false
+    require-acceptance: true
+    max-accept-delay: 90
+    cooldown: 20
+    cast-time: 10
+    accept-command: accept
+    str-usage: |
+        Usage: /cast summon <playername>
+    str-no-target: Target player not found.
+    cost:
+        - 331 1
+        - Mana 100
+    str-cost: 1 Redstone dust. 100 Mana
+    str-cast-self: "&dYou have summoned %t."
+    str-summon-pending: "&dYou are being summoned by %a! Type /accept to agree."
+    str-summon-accepted: "&dYou have been summoned."
+    str-summon-expired: "&dThe summon has expired."
+ClockSound:
+    spell-class: ".buff.DummySpell"
+    duration: 2
+    effects:
+      SOUNDFairy:
+        position: buff
+        effect-interval: 5
+        effect: sound
+        sound: random.click
+        volume: 1
+        pitch: 1
+      SOUNDFairyrw:
+        position: buff
+        effect-interval: 10
+        effect: sound
+        sound: random.click
+        volume: 1
+        pitch: 0
+RecallSoundE:
+    spell-class: ".buff.DummySpell"
+    duration: 2
+    effects:
+      SOUNDFairy:
+        position: buff
+        effect-interval: 50
+        effect: sound
+        sound: minecart.base
+        volume: 6
+        pitch: 2
+TickTock:
+    spell-class: ".PassiveSpell"
+    modifiers:
+    triggers:
+        - spellcast Telemark
+    chance: 100
+    cooldown: 0
+    spells:
+        - ClockSound
+RecallSound:
+    spell-class: ".PassiveSpell"
+    modifiers:
+    triggers:
+        - spellcast Mark
+    chance: 100
+    cooldown: 0
+    spells:
+        - RecallSoundE
+build:
+    spell-class: ".targeted.BuildSpell"
+    name: build
+    description: Build blocks from 40 blocks away.
+    cast-item: 270
+    bindable: false
+    can-cast-by-command: false
+    range: 40
+    slot: 1
+    consume-block: true
+    show-effect: true
+    check-plugins: true
+    allowed-types: 1,2,3,4,5,12,13,17,20,22,24,35,41,42,43,44,45,47,48,49,50,53,57,65,67,80,85,87,88,89,91,92
+    cost:
+        - mana 5
+    str-cost: 5 mana
+    str-invalid-block: You can't build that block.
+    str-cant-build: You can't build there.
+
+Tornado:
+    spell-class: ".instant.ParticleProjectileSpell"
+    name: Tornado
+    cooldown: 5
+    projectile-velocity: 1.5
+    projectile-gravity: 0
+    tick-interval: 3
+    particle-name: largeexplode
+    particle-speed: 0
+    particle-count: 200
+    particle-horizontal-spread: 0.4
+    particle-vertical-spread: 10
+    max-distance: 20
+    hit-radius: 6
+    hit-players: false
+    hit-non-players: false
+    hit-ground: false
+    hit-air-during: true
+    spell-interval: 1
+    stop-on-hit-entity: false
+    stop-on-hit-ground: false
+    spell: xTornado
+    special-effect-interval: 10
+    effects:
+      SOUNDTornado:
+        position: caster
+        effect-interval: 50
+        effect: sound
+        sound: item.elytra.flying
+        volume: 10
+        pitch: 0.1
+    cost:
+        - mana 100
+    str-cost: 100 mana
+    str-cast-self: "&5Tornado"
+
+xTornado:
+    spell-class: ".targeted.AreaEffectSpell"
+    horizontal-radius: 6
+    vertical-radius: 6
+    point-blank: true
+    fail-if-no-targets: false
+    target-players: true
+    target-non-players: true
+    max-targets: 20
+    spells:
+        - TornadoPull
+TornadoPull:
+    spell-class: ".targeted.ForcetossSpell"
+    name: TornadoPull
+    spell-icon:
+    description:
+    cast-item:
+    cooldown: 0
+    range: 15
+    damage: 2
+    horizontal-force: -30
+    vertical-force: 3
+    target-players: true
+EncroachingDark:
+    spell-class: ".instant.ParticleProjectileSpell"
+    name: EncroachingDark
+    cooldown: 5
+    cast-item: 351
+    max-duration: 20
+    projectile-velocity: 0.00
+    projectile-gravity: 0.0001
+    particle-name: largesmoke       
+    particle-speed: 0
+    particle-count: 150
+    particle-horizontal-spread: 1.0
+    particle-vertical-spreadd: 1.0
+    max-distance: 20
+    hit-radius: 5.0
+    hit-players: false
+    hit-non-players: false
+    hit-ground: false
+    hit-air-at-end: false
+    hit-air-during: true
+    hit-ground: false
+    stop-on-hit-entity: false
+    spell: ZeoConjSpell
+    special-effect-interval: 10
+    effects:
+        - special sound entity.endermen.death 3.0 0.0
+    cost:
+        - mana 100
+ZeoConjSpell:
+    spell-class: ".targeted.AreaEffectSpell"
+    horizontal-radius: 6
+    vertical-radius: 6
+    point-blank: true
+    fail-if-no-targets: true
+    target-players: true
+    target-non-players: true
+    max-targets: 4
+    spells:
+        - 2harm
+        - blackened
+
+Inferno:
+    spell-class: ".instant.ParticleProjectileSpell"
+    name: Inferno
+    cast-item: 280
+    projectile-velocity: 0
+    projectile-gravity: 0
+    particle-name: flame
+    particle-speed: 1
+    particle-count: 250
+    particle-horizontal-spread: 1.5
+    particle-vertical-spread: 1.5
+    max-duration: 10
+    hit-radius: 6
+    hit-players: false
+    hit-non-players: false
+    hit-ground: false
+    hit-air-at-end: false
+    hit-air-during: true
+    hit-ground: false
+    spell-interval: 20
+    stop-on-hit-entity: false
+    stop-on-hit-ground: false
+    spell: xxInferno
+    special-effect-interval: 10
+    cost:
+        - mana 100
+    effects:
+        - special sound fire.fire 3.0 0.0
+    str-cost: 100 mana
+    str-cast-self: "&5Inferno"
+xxInferno:
+    spell-class: ".targeted.AreaEffectSpell"
+    horizontal-radius: 6
+    vertical-radius: 6
+    point-blank: true
+    fail-if-no-targets: true
+    target-players: true
+    target-non-players: true
+    max-targets: 4
+    spells:
+        - xxnetherrage
+
+Deluge:
+    spell-class: ".instant.ParticleProjectileSpell"
+    name: Deluge
+    cooldown: 2
+    cast-item: 280
+    projectile-velocity: 0
+    projectile-gravity: 0
+    particle-name: dripWater
+    particle-speed: 1
+    particle-count: 150
+    particle-horizontal-spread: 1.5
+    particle-vertical-spread: 1.5
+    max-duration: 10
+    hit-radius: 6
+    hit-players: false
+    hit-non-players: false
+    hit-ground: false
+    hit-air-at-end: false
+    hit-air-during: true
+    hit-ground: false
+    spell-interval: 20
+    stop-on-hit-entity: false
+    stop-on-hit-ground: false
+    spell: xDeluge
+    special-effect-interval: 10
+    cost:
+        - mana 100
+    effects:
+        - special sound liquid.splash 3.0 0.0
+    str-cost: 100 mana
+    str-cast-self: "&5Deluge"
+xDeluge:
+    spell-class: ".targeted.AreaEffectSpell"
+    horizontal-radius: 6
+    vertical-radius: 6
+    point-blank: true
+    fail-if-no-targets: true
+    target-players: true
+    target-non-players: true
+    max-targets: 4
+    spells:
+        - 5harm
+
+Frost:
+    spell-class: ".instant.ParticleProjectileSpell"
+    name: Frost
+    cast-item: 280
+    projectile-velocity: 0
+    projectile-gravity: 0
+    particle-name: snowshovel
+    particle-speed: 1
+    particle-count: 150
+    particle-horizontal-spread: 1.5
+    particle-vertical-spread: 1.5
+    max-duration: 10
+    hit-radius: 6
+    hit-players: false
+    hit-non-players: false
+    hit-ground: false
+    hit-air-at-end: false
+    hit-air-during: true
+    hit-ground: false
+    spell-interval: 20
+    stop-on-hit-entity: false
+    stop-on-hit-ground: false
+    spell: xFrost
+    special-effect-interval: 10
+    cost:
+        - mana 100
+    str-cost: 100 mana
+    str-cast-self: "&5Frost"
+xFrost:
+    spell-class: ".targeted.AreaEffectSpell"
+    horizontal-radius: 6
+    vertical-radius: 6
+    point-blank: true
+    fail-if-no-targets: true
+    target-players: true
+    target-non-players: true
+    max-targets: 4
+    spells:
+        - target200slow3
+
+Brilliance:
+    spell-class: ".instant.ParticleProjectileSpell"
+    name: Brilliance
+    cast-item: 280
+    projectile-velocity: 0
+    projectile-gravity: 0
+    particle-name: fireworksSpark
+    particle-speed: 1
+    particle-count: 150
+    particle-horizontal-spread: 1.5
+    particle-vertical-spread: 1.5
+    max-duration: 10
+    hit-radius: 6
+    hit-players: false
+    hit-non-players: false
+    hit-ground: false
+    hit-air-at-end: false
+    hit-air-during: true
+    hit-ground: false
+    spell-interval: 20
+    stop-on-hit-entity: false
+    stop-on-hit-ground: false
+    spell: xBrilliance
+    special-effect-interval: 10
+    cost:
+        - mana 100
+    str-cost: 100 mana
+    str-no-target: No target found.
+    str-cast-self: "&5Brilliance"
+xBrilliance:
+    spell-class: ".targeted.AreaEffectSpell"
+    horizontal-radius: 6
+    vertical-radius: 6
+    point-blank: true
+    fail-if-no-targets: true
+    target-players: true
+    target-non-players: true
+    max-targets: 4
+    spells:
+        - targettedhaze
+
+ViciousMist:
+    spell-class: ".instant.ParticleProjectileSpell"
+    name: ViciousMist
+    cast-item: 280
+    projectile-velocity: 0
+    projectile-gravity: 0
+    particle-name: happyVillager
+    particle-speed: 1
+    particle-count: 150
+    particle-horizontal-spread: 1.5
+    particle-vertical-spread: 1.5
+    max-duration: 10
+    hit-radius: 6
+    hit-players: false
+    hit-non-players: false
+    hit-ground: false
+    hit-air-at-end: false
+    hit-air-during: true
+    hit-ground: false
+    spell-interval: 20
+    stop-on-hit-entity: false
+    stop-on-hit-ground: false
+    spell: xViciousMist
+    special-effect-interval: 10
+    cost:
+        - mana 100
+    str-cost: 100 mana
+    str-cast-self: "&5ViciousMist"
+xViciousMist:
+    spell-class: ".targeted.AreaEffectSpell"
+    horizontal-radius: 6
+    vertical-radius: 6
+    point-blank: true
+    fail-if-no-targets: true
+    target-players: true
+    target-non-players: true
+    max-targets: 4
+    spells:
+        - xcavespit
+
+SnareSeeds:
+    spell-class: ".instant.ParticleProjectileSpell"
+    name: SnareSeeds
+    cast-item: 280
+    projectile-velocity: 0
+    projectile-gravity: 0
+    particle-name: depthsuspend
+    particle-speed: 1
+    particle-count: 150
+    particle-horizontal-spread: 1.5
+    particle-vertical-spread: 1.5
+    max-duration: 10
+    hit-radius: 6
+    hit-players: false
+    hit-non-players: false
+    hit-ground: false
+    hit-air-at-end: false
+    hit-air-during: true
+    hit-ground: false
+    spell-interval: 10
+    stop-on-hit-entity: false
+    stop-on-hit-ground: false
+    spell: xSnareSeeds
+    special-effect-interval: 10
+    cost:
+        - mana 100
+    str-cost: 100 mana
+    str-cast-self: "&5SnareSeeds"
+xSnareSeeds:
+    spell-class: ".targeted.AreaEffectSpell"
+    horizontal-radius: 6
+    vertical-radius: 6
+    point-blank: true
+    fail-if-no-targets: true
+    target-players: true
+    target-non-players: true
+    max-targets: 4
+    spells:
+        - xleaftomb
+
+SporeCloud:
+    spell-class: ".instant.ParticleProjectileSpell"
+    name: SporeCloud
+    cooldown: 2
+    cast-item: 280
+    projectile-velocity: 0
+    projectile-gravity: 0
+    particle-name: witchMagic
+    particle-speed: 1
+    particle-count: 150
+    particle-horizontal-spread: 1.5
+    particle-vertical-spread: 1.5
+    max-duration: 10
+    hit-radius: 6
+    hit-players: false
+    hit-non-players: false
+    hit-ground: false
+    hit-air-at-end: false
+    hit-air-during: true
+    hit-ground: false
+    spell-interval: 20
+    stop-on-hit-entity: false
+    stop-on-hit-ground: false
+    spell: xSporeCloud
+    special-effect-interval: 10
+    cost:
+        - mana 100
+    str-cost: 100 mana
+    str-cast-self: "&5SporeCloud"
+xSporeCloud:
+    spell-class: ".targeted.AreaEffectSpell"
+    horizontal-radius: 6
+    vertical-radius: 6
+    point-blank: true
+    fail-if-no-targets: true
+    target-players: true
+    target-non-players: true
+    max-targets: 4
+    spells:
+        - shortweaknessslowhaze
+        - 2harm
+
+Whimsy:
+    spell-class: ".TargetedMultiSpell"
+    name: Whimsy
+    check-individual-cooldowns: false
+    require-entity-target: true
+    target-players: true
+    cast-random-spell-instead: true
+    cost:
+        - mana 150
+    str-cost: 150 mana
+    spells:
+        - combust
+        - xBiolith
+        - caveminion
+        - chaser
+        - xCorrode
+        - dilate
+        - xdownpour
+        - xnetherrage
+        - xDrain
+        - xCaveSpit
+        - heavyhaze
+        - shortslow
+        - blackened
+        - glasstomb
+        - cage
+        - speed
+        - doomfinger
+        - poisonself
+        - lightning
+        - regeneration
+        - weakness
+        - givehaste
+        - fatigue
+        - strength
+        - zap
+        - forcebomb
+        - 4harm
+        - 2harm
+        - 5harm
+        - fizzle
+        - xSpiderweb
+        - xCorrode
+        - xHeatstroke
+        - Doomself
+SquidSkin:
+    spell-class: ".MultiSpell"
+    name: SquidSkin
+    check-individual-cooldowns: false
+    modifiers:
+        - inblock 8,9 required
+        - onblock 1,1:2,1:3,1:4,1:5,1:6,2,3,3:1,3:2,4,5,5:1,5:2,5:3,5:4,5:5,17,18,12,78,79,80,87,88,89,110 denied
+    cost:
+        - mana 100
+    str-cost: 100 Mana.
+    spells:
+        - SquidShift
+        - DELAY 5
+        - SquidA
+    str-cast-self:
+
+SquidA:
+    spell-class: ".buff.ArmorSpell"
+    name: SquidA
+    replace: false
+    toggle: true
+    cast-item: 280
+    duration: 9999
+    num-uses: 999
+    helmet: leather_helmet#0e1fba;depth_strider-50+OXYGEN-3+DURABILITY-20+LUCK-10|&9&lSquid__Skin|&9&lSkin__Of__The__Depths 100%
+    chestplate: leather_chestplate#0e1fba;depth_strider-50+DURABILITY-20+LUCK-10|&9&lSquid__Skin|&9&lSkin__Of__The__Depths 100%
+    leggings: leather_leggings#0e1fba;depth_strider-50+DURABILITY-20+LUCK-10+WATER_WORKER-10|&9&lSquid__Skin|&9&lSkin__Of__The__Depths 100%
+    boots: leather_boots#0e1fba;depth_strider-50+WATER_WORKER-10+DURABILITY-20+LUCK-10|&9&lSquid__Skin|&9&lSkin__Of__The__Depths 100%
+    cost:
+    str-cost: 
+    str-cast-self:
+    str-has-armor: Shed your armor to take the form of the depths.
+SquidSpeed:
+    spell-class: ".PassiveSpell"
+    modifiers:
+        - buffactive SquidA required
+        - onblock 1,1:2,1:3,1:4,1:5,1:6,2,3,3:1,3:2,4,5,5:1,5:2,5:3,5:4,5:5,17,18,12,78,79,80,87,88,89,110 denied
+    triggers:
+        - ticks 500
+    chance: 100
+    cooldown: 15
+    spells:
+        - SquidS
+SquidSlow:
+    spell-class: ".PassiveSpell"
+    modifiers:
+        - buffactive SquidA required
+        - onblock 1,1:2,1:3,1:4,1:5,1:6,2,3,3:1,3:2,4,5,5:1,5:2,5:3,5:4,5:5,17,18,12,78,79,80,87,88,89,110 required
+    triggers:
+        - ticks 100
+    chance: 100
+    cooldown: 0
+    spells:
+        - SquidSL
+TickTock:
+    spell-class: ".PassiveSpell"
+    modifiers:
+    triggers:
+        - spellcast Telemark
+    chance: 100
+    cooldown: 0
+    spells:
+        - ClockSound
+
+OwlForm:
+    spell-class: ".MultiSpell"
+    name: OwlForm
+    check-individual-cooldowns: false
+    cost:
+        - mana 50
+    str-cost: 50 Mana.
+    spells:
+        - OwlSkin
+        - OwlA
+        - FeatherfallSuper
+    str-cast-self:
+
+OwlA:
+    spell-class: ".buff.ArmorSpell"
+    name: OwlA
+    replace: false
+    toggle: true
+    cast-item: 280
+    duration: 9999
+    num-uses: 9999
+    helmet: leather_helmet#ffffff;PROTECTION-10+DURABILITY-10|&f&lSky's__Skin|&f&lSkin__Of__The__Clouds 100%
+    chestplate: leather_chestplate#ffffff;PROTECTION-10+DURABILITY-10|&f&lSky's__Skin|&f&lSkin__Of__The__Clouds 100%
+    leggings: leather_leggings#ffffff;PROTECTION-10+DURABILITY-10|&f&lSky's__Skin|&f&lSkin__Of__The__Clouds 100%
+    boots: leather_boots#ffffff;PROTECTION-10+DURABILITY-10|&f&lSky's__Skin|&f&lSkin__Of__The__Clouds 100%
+    cost:
+    str-cost: 
+    str-cast-self:
+    str-has-armor: Shed your armor to take on your Owl Form.
+OwlSlow:
+    spell-class: ".PassiveSpell"
+    modifiers:
+        - buffactive OwlA required
+        - onblock 1,1:2,1:3,1:4,1:5,1:6,2,3,3:1,3:2,4,5,5:1,5:2,5:3,5:4,5:5,17,18,12,78,79,80,87,88,89,110 required
+    triggers:
+        - ticks 100
+    chance: 100
+    cooldown: 0
+    spells:
+        - SquidSL
+ZelphStormTick:
+    spell-class: ".PassiveSpell"
+    modifiers:
+        - buffactive ZelphStormEff1 required
+    triggers:
+        - ticks 50
+    chance: 100
+    cooldown: 0
+    spells:
+        - ZelphStorm
+GuardianSkin:
+    spell-class: ".MultiSpell"
+    name: GuardianSkin
+    check-individual-cooldowns: false
+    modifiers:
+        - inblock 8,9 required
+        - onblock 1,1:2,1:3,1:4,1:5,1:6,2,3,3:1,3:2,4,5,5:1,5:2,5:3,5:4,5:5,17,18,12,78,79,80,87,88,89,110 denied
+    cost:
+        - mana 100
+    str-cost: 100 Mana.
+    spells:
+        - GuardianA
+        - DELAY 5
+        - GuardianShift
+GuardianA:
+    spell-class: ".buff.ArmorSpell"
+    name: GuardianA
+    replace: false
+    toggle: true
+    cast-item: 280
+    duration: 9999
+    num-uses: 9999
+    helmet: leather_helmet#37baaa;depth_strider-50+OXYGEN-3+DURABILITY-20+LUCK-10|&3&lGuardian__Skin|&7Autorepair__V|&7Shielded__I|&9&lScales__Of__The__Depth 100%
+    chestplate: leather_chestplate#37baaa;depth_strider-50+DURABILITY-20+LUCK-10|&3&lGuardian__Skin|&7Autorepair__V|&7Shielded__II|&9&lScales__Of__The__Depth 100%
+    leggings: leather_leggings#37baaa;depth_strider-50+DURABILITY-20+LUCK-10+WATER_WORKER-10|&3&lGuardian__Skin|&7Autorepair__V|&7Shielded__II|&3&lScales__Of__The__Depth 100%
+    boots: leather_boots#37baaa;depth_strider-50+WATER_WORKER-10+DURABILITY-20+LUCK-10|&3&lGuardian__Skin|&7Autorepair__V|&7Shielded__I|&3&lScales__Of__The__Depth 100%
+    cost:
+    str-cost: 
+    str-cast-self: "&9You take on the true form of the depths."
+    str-has-armor: Shed your armor to take the form of the depths.
+GuardianSpeed:
+    spell-class: ".PassiveSpell"
+    modifiers:
+        - buffactive GuardianA required
+        - onblock 1,1:2,1:3,1:4,1:5,1:6,2,3,3:1,3:2,4,5,5:1,5:2,5:3,5:4,5:5,17,18,12,78,79,80,87,88,89,110 denied
+    triggers:
+        - ticks 500
+    chance: 100
+    cooldown: 15
+    spells:
+        - SquidS
+GuardianSlow:
+    spell-class: ".PassiveSpell"
+    modifiers:
+        - buffactive GuardianA required
+        - onblock 1,1:2,1:3,1:4,1:5,1:6,2,3,3:1,3:2,4,5,5:1,5:2,5:3,5:4,5:5,17,18,12,78,79,80,87,88,89,110 required
+    triggers:
+        - ticks 100
+    chance: 100
+    cooldown: 0
+    spells:
+        - SquidSL
+beamchain1:
+    spell-class: ".targeted.ChainSpell"
+    spell: 2harm
+    range: 15
+    obey-los: false
+    bounces: 10
+    bounce-range: 0
+    interval: 100
+    beneficial: false
+    target-players: true
+    target-non-players: true
+    effects:
+      2:
+        position: line
+        effect: particles
+        particle-name: driplava
+        horiz-spread: 0.1
+        vert-spread: 0.1
+        distance-between: 0.5
+        height-offset: 0
+        speed: 0
+        count: 200
+
+Beamgaze:
+    spell-class: ".MultiSpell"
+    description: Summons a Fairy
+    name: Beamgaze
+    check-individual-cooldowns: false
+    check-individual-modifiers: true
+    cooldown: 30
+    cost:
+        - mana 75
+    str-cost: "75 Mana"
+    str-cast-self: ""
+    str-cast-others: ""
+    effects:
+      SOUNDFa:
+        position: caster
+        effect: sound
+        sound: entity.elder_guardian.curse
+        volume: 5
+        pitch: 0.1
+    spells:
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+        - BeamChain1
+        - DELAY 10
+Armour:
+    spell-class: ".buff.ArmorSpell"
+    name: Armour
+    cooldown: 160
+    replace: false
+    toggle: false
+    cast-item: 280
+    duration: 60
+    num-uses: 120
+    helmet: 245;DURABILITY-10|&6&lConjured__&d&lHelmet|&7Autorepair__V|&7Shielded__I|&6&lReal__strength__&d&lcomes__from__within. 100%
+    chestplate: leather_chestplate#D57098;DURABILITY-10|&6&lConjured__&d&lChestplate|&7Autorepair__V|&7Shielded__I|&6&lReal__strength__&d&lcomes__from__within. 100%
+    leggings: leather_leggings#D79E3E;DURABILITY-10|&6&lConjured__&d&lLeggings|&7Autorepair__V|&7Shielded__I|&6&lReal__strength__&d&lcomes__from__within. 100%
+    boots: leather_boots#7f3fb2;DURABILITY-10|&6&l&6&lConjured__&d&lBoots|&7Autorepair__V|&7Shielded__I|&6&lReal__strength__&d&lcomes__from__within. 100%
+    cost:
+        - mana 100
+    str-cost: 100 Mana
+    str-cast-others: "&6Arcane armor &dsnaps onto %a." 
+    str-cast-self: "&6Arcane armor &dsnaps onto you."
+    str-has-armor: The arcane armour cannot find a place to snap onto.
+    effects:
+      Fairy1:
+        position: caster
+        effect: fireworks
+        flicker: false
+        trail: true
+        type: 2
+        flight: 0
+        colors: ffff00
+        fade-colors: fe28a2
+ArmourR:
+    spell-class: ".PassiveSpell"
+    modifiers:
+        - buffactive Armour required
+    triggers:
+        - takedamage
+    chance: 100
+    cooldown: 0
+    spells:
+        - ArmorTestResist
+ArmourS:
+    spell-class: ".PassiveSpell"
+    modifiers:
+        - buffactive Armour required
+    triggers:
+        - takedamage
+    chance: 100
+    cooldown: 0
+    spells:
+        - ArmorTestSS
+ArmorTestResist:
+    spell-class: ".targeted.PotionEffectSpell"
+    name: ArmorTestResist
+    type: 11
+    strength: 1
+    duration: 100
+    targeted: false
+ArmorTestSS:
+    spell-class: ".buff.DummySpell"
+    duration: 1
+    effects:
+      SOUNDFa:
+        position: buff
+        effect-interval: 25
+        effect: sound
+        sound: entity.irongolem.hit
+        volume: 10
+        pitch: 1.5
+Sff:
+    spell-class: ".targeted.SpawnMonsterSpell"
+    name: wolf
+    location: target
+    entity-type: wolf
+    tamed: true
+    range: 10
+    potion-effects:
+      - 1 5000 0
+    attributes:
+      - "generic.maxHealth 10 add"

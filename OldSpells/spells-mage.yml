@@ -1,0 +1,750 @@
+##########################
+#   INTELLIGENCE SPELLS  #
+#   for MAGES and STUFF  #
+##########################
+
+##########################
+#  INT 10 NOVICE SPELLS  #
+##########################
+
+lifeTap:
+    spell-class: ".instant.ManaSpell"
+    name: LifeTap
+    spell-icon: potion:8193
+    cast-item: bone
+    mana: 50
+    cooldown: 15
+    cost:
+        - health 10
+    shared-cooldowns:
+        - mend 15
+        - prayer 15
+        - Convalescence 15
+    str-cost: 20 Health
+    str-cast-self: "&5Sparks fly from your fingers."
+clarity:
+    spell-class: ".buff.ManaRegenSpell"
+    name: Clarity
+    cost:
+        - mana 20
+    duration: 20
+    regen-mod-amt: 10
+    str-cast-self: "&5Your heart tingles."
+    str-fade: "&cYour heart no longer tingles"
+    str-cost: 20 Mana
+chaser:
+    spell-class: ".targeted.HomingMissileSpell"
+    cooldown: 5
+    projectile-velocity: 3
+    projectile-inertia: 10
+    tick-interval: 1
+    special-effect-interval: 2
+    hit-radius: 1.5
+    particle-name: magicCrit
+    target-non-players: true
+    target-players: true
+    spell: SmallHarm
+    effects:
+      wisp1:
+        position: special
+        effect: particles
+        particle-name: reddust
+        horiz-spread: 0.1
+        vert-spread: 0.1
+        speed: 0.5
+        count: 50
+        y-offset: 0
+      personal_sound:
+        position: caster
+        effect: soundpersonal
+        sound: entity.ghast.fireball
+        volume: 0.3
+        pitch: 1.5
+    cost:
+      - mana 50
+    str-cost: 50 Mana
+    str-cast-self: "&5Chaser"
+magicmissile:
+    spell-class: ".instant.ProjectileSpell"
+    name: MagicMissile
+    range: 100
+    projectile: snowball
+    cooldown: 0.5
+    can-cast-by-command: true
+    velocity: 4
+    require-hit-entity: true
+    cancel-damage: true
+    remove-projectile: true
+    target-players: true
+    max-distance: 100
+    spells: SmallHarm
+    cost:
+        - mana 10
+    effects:
+        - target fireworks no yes 2 F518EA FFFF00,FF00FF
+    str-cost: 10 Mana.
+VoidMissileC:
+    spell-class: ".instant.ProjectileSpell"
+    name: VoidMissileC
+    range: 100
+    projectile: snowball
+    cooldown: 0.5
+    can-cast-by-command: true
+    velocity: 4
+    require-hit-entity: true
+    cancel-damage: true
+    remove-projectile: true
+    target-players: true
+    max-distance: 100
+    spells: [ Restore ]
+    cost:
+        - mana 10
+    effects:
+      Fairy2:
+        position: target
+        effect: fireworks
+        flicker: false
+        trail: true
+        type: 2
+        flight: 0
+        colors: #ffffff
+        fade-colors: #000000
+    str-cost: 10 Mana.
+SmallHarm:
+    spell-class: ".targeted.PainSpell"
+    name: BigHarm
+    damage: 3
+    range: 10
+    ignore-armor: true
+    obey-los: false
+    target-players: false
+    check-plugins: false
+
+##########################
+#   INT 30 ADEPT SPELLS  #
+##########################
+
+ArcaneBolt:
+    spell-class: ".instant.ProjectileSpell"
+    name: ArcaneBolt
+    range: 15
+    projectile: spectral_arrow
+    can-cast-by-command: false
+    velocity: 4
+    require-hit-entity: true
+    cancel-damage: true
+    remove-projectile: true
+    target-players: true
+    max-distance: 50
+    aoe-radius: 5
+    spells: BigHarm
+    cost:
+        - mana 20
+    effects:
+        - target fireworks no yes 2 0000AA FFAA00,00AAAA
+    str-cost: 20 Mana.
+    shared-cooldowns:
+        - Flare 3
+BigHarm:
+    spell-class: ".targeted.PainSpell"
+    name: BigHarm
+    damage: 9
+    range: 10
+    ignore-armor: true
+    obey-los: false
+    target-players: false
+    check-plugins: false
+Return:
+    spell-class: ".instant.RitualSpell"
+    name: Return
+    cooldown: 30
+    incantations:
+    ritual-duration: 250
+    req-participants: 1
+    need-spell-to-participate: true
+    charge-reagents-immediately: false
+    set-cooldown-immediately: true
+    set-cooldown-for-all: true
+    spell: ReturnC
+    cost:
+        - mana 100
+    str-cast-self: "&3You begin to return to another place."
+    str-cast-others:
+    str-ritual-success: "&3You have returned to another place."
+    str-ritual-joined:
+    str-ritual-interrupted: "&cYou interrupt the return."
+    str-ritual-fail:
+    effects:
+      SOUND:
+        position: caster
+        effect-interval: 25
+        effect: sound
+        sound: portal.trigger
+        volume: 0.2
+        pitch: 2
+ReturnC:
+    spell-class: ".ExternalCommandSpell"
+    name: ReturnC
+    enabled: true
+    description: Back
+    cast-item: 280
+    can-cast-by-command: true
+    can-cast-with-item: true
+    command-to-execute:
+        - "back"
+    command-delay: 0
+    temporary-permissions:
+        - "essentials.back"
+        - "essentials.back.ondeath"
+    require-player-target: false
+    block-chat-output: true
+    execute-as-target-instead: false
+    obey-los: false
+    range: 1
+    cost:
+        - mana 0
+    str-cost:
+    str-cast-self:
+    str-cant-use-command:
+force:
+    spell-class: ".instant.ForcepushSpell"
+    name: Force
+    description: Push back mobs and players.
+    cast-item: 280
+    range: 20
+    pushback-force: 30
+    additional-vertical-force: 10
+    max-vertical-force: 15
+    target-players: true
+    cost:
+        - mana 25
+    str-cost: 25 Mana.
+    str-cast-self: You push back your enemies!
+    str-cast-others: "Someone releases a forceful blast of mana"
+forcechant:
+    spell-class: ".instant.RitualSpell"
+    name: Forcechant
+    description: Push back mobs.
+    incantations:
+        - "Lir fors out"
+    req-participants: 1
+    need-spell-to-participate: true
+    charge-reagents-immediately: false
+    set-cooldown-immediately: true
+    set-cooldown-for-all: true
+    spell: fusrodah
+    str-cast-self: You push back your enemies!
+
+Cage:
+    spell-class: ".targeted.EntombSpell"
+    name: Cage
+    cast-item: stick
+    cost:
+        - mana 50
+    range: 30
+    damage: 1
+    obey-los: true
+    target-players: true
+    tomb-block-type: 139
+    tomb-duration: 10
+
+Cage5:
+    spell-class: ".targeted.EntombSpell"
+    name: Cage5
+    cast-item: stick
+    cost:
+        - mana 50
+    range: 30
+    damage: 1
+    obey-los: true
+    target-players: true
+    tomb-block-type: 52
+    tomb-duration: 10
+##########################
+#  INT 70 MASTER SPELLS  #
+##########################
+Purge:
+    spell-class: ".targeted.AreaEffectSpell"
+    name: Purge
+    cast-item: 280
+    horizontal-radius: 8
+    vertical-radius: 6
+    point-blank: true
+    fail-if-no-targets: true
+    target-players: false
+    target-non-players: true
+    spells:
+        - 10harm
+    cost:
+        - mana 75
+    str-cost: 75 Mana
+    str-cast-self: "&5Purge"
+
+planurage:
+    spell-class: ".TargetedMultiSpell"
+    name: Planurage
+    cast-item: 280
+    target-players: true
+    range: 30
+    check-individual-cooldowns: false
+    spells:
+        - lightning
+        - bang
+        - PlanuRageEff
+    cost:
+        - mana 100
+    str-cost: 100 Mana.
+PlanuRageEff:
+    spell-class: ".targeted.DummySpell"
+    name: PlanuRageEff
+    effects:
+      Fairy1:
+        position: target
+        effect: particles
+        particle-name: happyvillager
+        horiz-spread: 1.5
+        vert-spread: 0.5
+        speed: 0
+        count: 200
+        y-offset: 0.5
+      SOUND1:
+        position: target
+        effect: sound
+        sound: entity.lightning.impact
+        volume: 10
+        pitch: 1.3
+      SOUND2:
+        position: target
+        effect: sound
+        sound: entity.lightning.thunder
+        volume: 10
+        pitch: 0.1
+
+Envernate:
+    spell-class: ".instant.ParticleProjectileSpell"
+    name: Envernate
+    cast-item: 280
+    can-cast-by-command: true
+    projectile-velocity: 10
+    projectile-gravity: 0
+    tick-interval: 2
+    special-effect-interval: 0
+    particle-name: crit
+    particle-speed: 0.3
+    particle-count: 20
+    particle-horizontal-spread: 0.5
+    particle-vertical-spread: 0.5
+    max-distance: 20
+    max-duration: 10
+    hit-radius: 1
+    vertical-hit-radius: 2
+    hit-players: true
+    hit-non-players: true
+    hit-ground: false
+    effects:
+      casterparticles:
+        position: target
+        effect: bluesparkle
+    spell: xEnvernate
+    cost:
+        - mana 50
+    str-cast-self: "&5Envernate"
+xEnvernate:
+    spell-class: ".TargetedMultiSpell"
+    check-individual-cooldowns: false
+    require-entity-target: true
+    can-target: players,nonplayers
+    check-individual-modifiers: true
+    spells:
+        - weakness
+        - target200slow2
+################################
+#  INT 100 THAUMATURGE SPELLS  #
+################################
+
+SwampStrike:
+     spell-class: ".instant.BlockBeamSpell"
+     block-type: 267
+     max-distance: 25
+     hit-radius: 1
+     remove-delay: 20
+     interval: 1
+     y-offset: 0
+     rotation-x: 60
+     rotation-y: 0
+     small: false
+     spell: SwampStrikeD
+
+SwampStrikeD:
+     spell-class: ".targeted.ExplodeSpell"
+     prevent-block-damage: true
+regular_confusion:
+    spell-class: ".instant.ConfusionSpell"
+    name: confusion
+    spell-icon: eye_of_ender
+    description: Cause nearby monsters to attack each other.
+    cast-item: bone
+    cooldown: 30
+    range: 20
+    can-target: zombie,skeleton,creeper
+    cost:
+        - mana 30
+    str-cost: 30 mana
+    str-cast-self: You cause nearby monsters to become confused and attack each other.
+    str-cast-others: "%a causes nearby monsters to attack each other."
+
+MG:
+     spell-class: ".instant.ThrowBlockSpell"
+     cast-item: 405
+     block-type: 112
+     velocity: 1.5
+     vertical-adjustment: 0
+     prevent-blocks: true
+     spell-on-land: MGE
+     effects:
+          Sound:
+               position: caster
+               effect: soundpersonal
+               sound: entity.enderdragon.flap
+               volume: 1
+               pitch: 1
+
+MGE:
+     spell-class: ".targeted.ExplodeSpell"
+     explosion-size: 5
+     prevent-block-damage: true
+     damage-multiplier: 2
+     effects:
+        Particles:
+             position: target
+             effect: particles
+             particle-name: blockcrack_112
+             horiz-spread: 3
+             vert-spread: 1
+             height-offset: 0
+             speed: 0.002
+             count: 80
+HandOfDecay:
+     spell-class: ".MultiSpell"
+     cast-item: "367|&5&lHand__Of__Mycelyix"
+     bindable: false
+     can-cast-by-command: false
+     ignore-grant-perms: false
+     ignore-cast-perms: false
+     effects:
+         - caster sound entity.zombie.ambient 3.0 0.0
+         - caster sound entity.zombie.ambient 3.0 0.0
+         - caster sound entity.zombie.ambient 3.0 0.0
+         - caster sound entity.zombie.ambient 3.0 0.0
+         - caster sound entity.zombie.ambient 3.0 0.0
+     cost:
+         - mana 100
+     str-cost: 100 mana
+     spells:
+          - ArcaneFork1
+          - ArcaneFork2
+          - ArcaneFork3
+          - ArcaneFork4
+          - ArcaneFork5
+
+ArcaneForkPain:
+     spell-class: ".targeted.PainSpell"
+     damage: 4
+
+ArcaneFork1:
+     spell-class: ".instant.BeamSpell"
+     rotation: 0.2
+     spell: HandOfDecayAOE
+     hit-radius: 0.3
+     stop-on-hit-ground: false
+     effects:
+          Particles:
+               position: special
+               effect: particles
+               particle-name: portal
+               horiz-spread: 0.3
+               vert-spread: 0.3
+               count: 10
+               speed: 0.002
+               height-offset: 0
+
+ArcaneFork2:
+     spell-class: ".instant.BeamSpell"
+     rotation: -0.2
+     spell: HandOfDecayAOE
+     hit-radius: 0.3
+     stop-on-hit-ground: false
+     effects:
+          Particles:
+               position: special
+               effect: particles
+               particle-name: portal
+               horiz-spread: 0.3
+               vert-spread: 0.3
+               count: 10
+               speed: 0.002
+               height-offset: 0
+
+ArcaneFork3:
+     spell-class: ".instant.BeamSpell"
+     rotation: -0.7
+     spell: HandOfDecayAOE
+     hit-radius: 0.3
+     stop-on-hit-ground: false
+     effects:
+          Particles:
+               position: special
+               effect: particles
+               particle-name: portal
+               horiz-spread: 0.3
+               vert-spread: 0.3
+               count: 10
+               speed: 0.002
+               height-offset: 0
+
+ArcaneFork4:
+     spell-class: ".instant.BeamSpell"
+     rotation: 0.7
+     spell: HandOfDecayAOE
+     hit-radius: 0.3
+     stop-on-hit-ground: false
+     effects:
+          Particles:
+               position: special
+               effect: particles
+               particle-name: portal
+               horiz-spread: 0.3
+               vert-spread: 0.3
+               count: 10
+               speed: 0.002
+               height-offset: 0
+ArcaneFork5:
+     spell-class: ".instant.BeamSpell"
+     rotation: 0
+     spell: HandOfDecayAOE
+     hit-radius: 0.3
+     stop-on-hit-ground: false
+     effects:
+          Particles:
+               position: special
+               effect: particles
+               particle-name: portal
+               horiz-spread: 0.3
+               vert-spread: 0.3
+               count: 10
+               speed: 0.002
+               height-offset: 0
+
+ElectricPathBeam:
+     spell-class: ".instant.BeamSpell"
+     beam-width: 2
+     y-offset: 0
+     max-distance: 20
+     interval: 5
+     spell: ElectricPathLightning
+
+ElectricPathLightning:
+     spell-class: ".targeted.LightningSpell"
+     require-entity-target: false
+     effects:
+          Particles:
+               position: line
+               effect: particles
+               particle-name: crit
+               horiz-spread: 2
+               vert-spread: 0.3
+               count: 30
+               speed: 0.002
+FlameBreathMulti:
+     spell-class: ".MultiSpell"
+     spells:
+          - FlameBreathBlock
+          - DELAY 1
+          - FlameBreathBlock
+          - DELAY 1
+          - FlameBreathBlock
+          - DELAY 1
+          - FlameBreathBlock
+          - DELAY 1
+          - FlameBreathBlock
+          - DELAY 1
+          - FlameBreathBlock
+          - DELAY 1
+          - FlameBreathBlock
+          - DELAY 1
+          - FlameBreathBlock
+          - DELAY 1
+          - FlameBreathBlock
+          - DELAY 1
+          - FlameBreathBlock
+          - DELAY 1
+          - FlameBreathBlock
+          - DELAY 1
+          - FlameBreathBlock
+          - DELAY 1
+          - FlameBreathBlock
+          - DELAY 1
+          - FlameBreathBlock
+          - DELAY 1
+          - FlameBreathBlock
+          - DELAY 1
+          - FlameBreathBlock
+          - DELAY 1
+          - FlameBreathBlock
+          - DELAY 1
+          - FlameBreathBlock
+          - DELAY 1
+          - FlameBreathBlock
+
+FlameBreathBlock:
+     spell-class: ".instant.ThrowBlockSpell"
+     block-type: 51
+     velocity: 2
+     vertical-adjustment: 0
+     prevent-blocks: false
+     spell-on-land: FlameBreathAoE
+     effects:
+          Particles:
+               position: caster
+               effect: particles
+               particle-name: flame
+               count: 3
+               horiz-spread: 0.3
+               vert-spread: 0.3
+               speed: 0.002
+               height-offset: 0
+          Sound:
+               position: caster
+               effect: sound
+               sound: item.firecharge.use
+
+FlameBreathAoE:
+     spell-class: ".targeted.AreaEffectSpell"
+     horizontal-radius: 3
+     vertical-radius: 1
+     fail-if-no-targets: false
+     spells:
+          - FlameBreathCombust
+     effects:
+          Particles:
+               position: special
+               effect: particles
+               particle-name: flame
+               count: 25
+               horiz-spread: 2
+               vert-spread: 1
+               speed: 0.002
+               height-offset: 0
+
+FlameBreathCombust:
+     spell-class: ".targeted.CombustSpell"
+flightpath:
+    spell-class: ".instant.FlightPathSpell"
+    x: 0
+    y: 70
+    z: 0
+    cruising-altitude: 150
+    speed: 1.5
+    mount: ""
+HomingShulkerbullet:
+    spell-class: ".targeted.HomingArrowSpell"
+    projectile-type: "dragonfireball"
+HomingArrow:
+    spell-class: ".targeted.HomingArrowSpell"
+    velocity: 1
+RotateS:
+    spell-class: ".targeted.RotateSpell"
+    random: true
+    rotation: 180
+    target-self: true
+Rewind:
+    spell-class: ".targeted.RewindSpell"
+    allow-force-rewind: true
+    rewind-health: true
+    rewind-mana: true
+    start-duration: 100
+    tick-interval: 20
+    rewind-interval: 2
+    target-self: true
+WindGlide:
+    spell-class: ".buff.WindglideSpell"
+    velocity: 0
+    height: 0
+    interval: 120
+    cancel-on-collision: false
+    block-collision-dmg: false
+    collision-spell:
+    spell:
+VineClimb:
+    spell-class: ".targeted.VinesSpell"
+    up: 3
+    down: 1
+    width: 1
+    animateInterval: 0
+DragonLegFlamewalk:
+    spell-class: ".buff.FlamewalkSpell"
+    range: 2
+    fire-ticks: 100
+    tick-interval: 10
+    duration: 10
+    effects:
+      Particles:
+        position: buff
+        effect: effectlibentity
+        effect-interval: 10
+        height-offset: -0.5
+        effectlib:
+            class: AnimatedBallEffect
+            size: 5
+            particle: FLAME
+            iterations: 20
+            size: 5
+            xFactor: 1
+            ZFactor: 2
+            yFactor: 1
+            relativeOffset: 0,-1,0
+            particlesPerIteration: 20
+      Sound:
+        position: buff
+        effect: sound
+        effect-interval: 10
+        sound: entity.generic.extinguish_fire
+BubblePuppeteer:
+    spell-class: ".targeted.LevitateSpell"
+    tick-rate: 1
+    duration: 25
+    cancel-on-item-switch: true
+    range: 15
+    effects:
+      Particles:
+        position: target
+        effect: effectlibentity
+        effectlib:
+            class: SphereEffect
+            radius: 1.5
+            particles: 250
+            particle: WATER_SPLASH
+CubeControl:
+    spell-class: ".targeted.LevitateSpell"
+    tick-rate: 1
+    duration: 25
+    cancel-on-item-switch: true
+    range: 15
+    effects:
+      Effect1:
+        position: target
+        effect: effectlibentity
+        effectlib:
+            class: CubeEffect
+            particle: redstone
+            iterations: 500
+            count: 500
+            angularVelocityX: 0.1
+            angularVelocityY: 0.1
+            angularVelocityZ: 0.1
+            size: 50
+            outlineOnly: true
+            radius: 50
+            color: 00ff00
+            period: 5
+            edgelength: 50

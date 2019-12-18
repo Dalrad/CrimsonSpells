@@ -1,0 +1,340 @@
+tz    CavilonKill:
+        spell-class: ".PassiveSpell"
+        triggers: 
+            - kill player
+        chance: 100
+        cooldown: 4
+        cast-without-target: true
+        spells:
+            - RedSand
+
+    SpawnBat:
+        spell-class: ".ExternalCommandSpell"
+        enabled: true
+        can-cast-by-command: true
+        can-cast-with-item: true
+        command-to-execute:
+            - "spawnmob bat"
+        command-to-execute-later:
+            - ""
+        command-delay: 0
+        temporary-op: true
+        require-player-target: false
+        execute-as-target-instead: false
+        block-chat-output: true
+        obey-los: false
+        range: 10
+
+    Senseore:
+        spell-class: ".instant.DowseSpell"
+        name: Senseore
+        block-type: diamond_ore
+        radius: 20
+        rotate-player: true
+        set-compass: false
+        cost:
+            - mana 25
+        str-cost: 25 mana
+        str-cast-self: "&5Senseore"
+        str-not-found: "&4Senseore Failed"
+
+    Encase:
+        spell-class: ".targeted.EntombSpell"
+        name: Encase
+        cast-item: STICK
+        range: 1
+        obey-los: true
+        target-players: false
+        target-self: true
+        tomb-block-type: 1
+        tomb-duration: 6
+        cost:
+            - mana 25
+        str-cost: 25 Mana.
+        str-cast-self: "&5Encase"
+
+    Dilate:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: Dilate
+        type: 16
+        strength: 2
+        duration: 2700
+        targeted: false
+        cost:
+            - mana 25
+        obey-los: 25 Mana
+        str-cast-self: "&5Dilate"
+
+    CavilonGift:
+        spell-class: ".instant.ConjureSpell"
+        name: CavilonGift
+        modifiers:
+            - outside denied
+        cast-item: IRON_INGOT
+        bindable: false
+        can-cast-by-command: false
+        cooldown: 1200
+        items:
+            - 66 2-4
+            - 50 10-20
+            - 273 1-2 10%
+            - 274 1 10%
+            - 256 1 5%
+            - 257 1 5%
+            - 265 1 40%
+            - 264 1 2%
+        add-to-inventory: false
+        cost:
+            - IRON_INGOT 1
+        str-cost: 1 Iron Ingot
+        str-cast-self: "&5Things appear."
+
+    Confusion:
+        spell-class: ".instant.ConfusionSpell"
+        name: Confusio
+        cast-item: STICK
+        range: 35
+        cost:
+            - mana 50
+        str-cost: 50 Mana
+        str-cast-self: "&5Confusion"
+
+    CaveMinion:
+        spell-class: ".targeted.SpawnMonsterSpell"
+        name: CaveMinion
+        cast-item: STICK
+        can-cast-by-command: true
+        location: target
+        entity-type: cavespider
+        range: 10
+        cost:
+            - mana 15
+        effects:
+          Spawn Effect:
+            position: target
+            effect: spawn
+          Spawn Sound:
+            position: target
+            effect: sound
+            sound: random.pop
+        str-cost: 15 Mana.
+        str-cast-self: "&5Cave Minion"
+
+    CaveSpit:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: CaveSpit
+        cast-item: STICK
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: slime
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 15
+        max-duration: 10
+        hit-radius: 1
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        effects:
+          casterparticles:
+            position: target
+            effect: bluesparkle
+        spell: xCaveSpit
+        cost:
+            - mana 40
+        str-cost: 40 Mana
+        str-cast-self: "&5CaveSpit"
+    xCaveSpit:
+        spell-class: ".targeted.PotionEffectSpell"
+        type: 19
+        strength: 3
+        duration: 300
+        targeted: true
+        target-players: true
+        target-non-players: true
+
+    Spiderweb:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Spiderweb
+        cast-item: STICK
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: spell
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.3
+        particle-vertical-spread: 0.3
+        max-distance: 15
+        max-duration: 10
+        hit-radius: 1
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        effects:
+          casterparticles:
+            position: target
+            effect: bluesparkle
+        spell: xSpiderweb
+        cost:
+            - mana 50
+        str-cost: 50 Mana
+        str-cast-self: "&5Spiderweb"
+    xSpiderweb:
+        spell-class: ".targeted.EntombSpell"
+        range: 30
+        damage: 4
+        obey-los: true
+        target-players: true
+        tomb-block-type: 30
+        tomb-duration: 35
+
+    Phase:
+        spell-class: ".instant.PhaseSpell"
+        name: Phase
+        cast-item: STICK
+        range: 10
+        max-distance: 15
+        allowed-pass-thru-blocks:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 12
+            - 13
+            - 14
+            - 15
+            - 16
+            - 17
+            - 17:1
+            - 17:2
+            - 17:3
+            - 18
+            - 18:1
+            - 18:2
+            - 18:3
+            - 21
+            - 48
+            - 56
+            - 73
+            - 74
+            - 78
+            - 79
+            - 80
+            - 81
+            - 82
+            - 86
+            - 87
+            - 88
+            - 89
+            - 97
+            - 97:1
+            - 110
+            - 4
+            - 121
+            - 129
+        cost:
+            - mana 50
+        str-cost: 50 Mana
+        str-cast-self: "&5Phase"
+        str-cant-phase: "&4Phase Failed"
+
+    StoneVision:
+        spell-class: ".buff.StonevisionSpell"
+        name: StoneVision
+        description: See through stone.
+        cast-item: STICK
+        range: 4
+        transparent-type: 1
+        unobfuscate: false
+        duration: 20
+        cost:
+            - mana 50
+        str-cost: 50 Mana
+        str-cast-self: "&5StoneVision"
+        str-fade: "&4StoneVision Ended"
+
+    Corrode:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Corrode
+        cast-item: STICK
+        projectile-velocity: 0
+        projectile-gravity: 0
+        particle-name: slime
+        particle-speed: 1
+        particle-count: 250
+        particle-horizontal-spread: 2
+        particle-vertical-spread: 2
+        max-duration: 10
+        hit-radius: 6
+        hit-players: false
+        hit-non-players: false
+        hit-ground: false
+        hit-air-at-end: false
+        hit-air-during: true
+        hit-ground: false
+        spell-interval: 20
+        stop-on-hit-entity: false
+        stop-on-hit-ground: false
+        spell: xCorrode
+        cost:
+            - mana 100
+        str-cost: 100 Mana
+        str-cast-self: "&5Corrode"
+
+    xCorrode:
+        spell-class: ".targeted.AreaEffectSpell"
+        horizontal-radius: 6
+        vertical-radius: 6
+        point-blank: true
+        fail-if-no-targets: true
+        target-players: true
+        target-non-players: true
+        spells:
+            - 5ArmourHarm
+
+    Biolith:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Biolith
+        cast-item: STICK
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: witchMagic
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 15
+        max-duration: 10
+        hit-radius: 1
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        effects:
+          casterparticles:
+            position: target
+            effect: bluesparkle
+        spell: xBiolith
+        cost:
+            - mana 50
+        str-cost: 50 Mana
+        str-cast-self: "&5Biolith"
+
+    xBiolith:
+        spell-class: ".TargetedMultiSpell"
+        name: xBiolith
+        require-entity-target: true
+        target-players: true
+        spells:
+            - target200slow5
+            - targeted200resist2

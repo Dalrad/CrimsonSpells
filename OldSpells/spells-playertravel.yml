@@ -1,0 +1,47 @@
+spawnEmeraldPassive:
+    spell-class: ".PassiveSpell"
+    triggers:
+        - leftclickblocktype grass
+    cast-time: 30
+    spells:
+        - emeraldSpawn
+    str-modifier-failed: "You must cast this at the ground beneath you."
+    modifiers:
+        - pitchabove 70 required
+        - holding emerald required
+emeraldSpawn:
+    spell-class: ".ExternalCommandSpell"
+    command-to-execute:
+        - spawn
+Mark:
+    spell-class: ".ExternalCommandSpell"
+    command-to-execute:
+        - sethome compass1
+    cost:
+        - compass 1
+
+PlanuHeath:
+    spell-class: ".instant.GateSpell"
+    name: PlanuHeath
+    description: Teleport to Planu Heath.
+    cast-item: emerald
+    can-cast-by-command: false
+    can-cast-with-item: true
+    bindable: false
+    cast-time: 15
+    world: world
+    coordinates: -8,44,-8
+    interrupt-on-cast: false
+    interrupt-on-damage: true
+    interrupt-on-move: true
+    str-cast-self: "&aYou appear in the centre of Planu Heath."
+    str-cast-others: "%a appears!"
+    str-cast-interrupted: "&4You were interrupted."
+    str-gate-failed: "&4Nothing happens."
+
+Recall:
+    spell-class: ".ExternalCommandSpell"
+    command-to-execute:
+        - home compass1
+    cost:
+        - gold_block 1

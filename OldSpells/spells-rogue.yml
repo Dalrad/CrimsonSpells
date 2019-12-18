@@ -1,0 +1,276 @@
+
+    Steal:
+        spell-class: ".targeted.DrainlifeSpell"
+        name: Steal
+        description: Steal experience from your target.
+        cast-item: shears
+        bindable: true
+        require-cast-item-on-command: false
+        range: 1
+        take-type: experience
+        take-amt: 100
+        give-type: experience
+        give-amt: 100
+        animation-speed: 2
+        ignore-armor: true
+        obey-los: true
+        can-target: players
+        check-plugins: false
+        cost:
+            - mana 1
+        str-cost: 1 mana
+        target-modifiers:
+        str-cast-self: "&8Steal"
+        str-no-target: "&4No target"
+    Sprint:
+        spell-class: ".PassiveSpell"
+        name: sprint
+        triggers: 
+            - sprint
+        chance: 100
+        cast-without-target: true
+        spells:
+            - roguespeed
+    roguespeed:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: roguespeed
+        type: 1
+        strength: 1
+        duration: 200
+        targeted: false
+    Shadowstep:
+        spell-class: ".targeted.ShadowstepSpell"
+        name: Shadowstep
+        cast-item: STICK
+        effects:
+            - caster spawner
+            - target spawner
+        target-players: true
+        obey-los: true
+        range: 20
+        cost:
+            - mana 25
+        str-cost: 25 Mana
+        str-cast-self: "&8Shadowstep"
+        str-no-target: "&4No Target"
+        str-no-landing-spot: Cannot shadowstep there.
+    Leap:
+        spell-class: ".instant.LeapSpell"
+        name: Leap
+        description: Leap forward.
+        cast-item: STICK
+        cooldown: 5
+        forward-velocity: 30
+        upward-velocity: 15
+        cancel-damage: true
+        cost:
+            - hunger 2
+        str-cost: You're too tired to leap.
+        modifiers:
+             - wearing 310 addpower -0.09
+             - wearing 311 addpower -0.09
+             - wearing 312 addpower -0.09
+             - wearing 313 addpower -0.09
+             - wearing 306 addpower -0.04
+             - wearing 307 addpower -0.04
+             - wearing 308 addpower -0.04
+             - wearing 309 addpower -0.04
+             - wearing 314 addpower -0.04
+             - wearing 315 addpower -0.04
+             - wearing 316 addpower -0.04
+             - wearing 317 addpower -0.04
+        str-cast-self: "&8Leap"
+        str-cast-others:
+    Stealth:
+        spell-class: ".buff.StealthSpell"
+        name: Stealth
+        description: Become invisible to monsters.
+        cast-item: STICK
+        duration: 20
+        cost:
+            - mana 50
+        str-cost: 50 Mana
+        str-cast-self: "&aStealth"
+        str-fade: "&4Stealth"
+    SuperStealth:
+        spell-class: ".buff.StealthSpell"
+        name: Stealth
+        description: Become invisible to monsters.
+        cast-item: STICK
+        duration: 9999999
+        cost:
+            - mana 0
+        str-cost: 0 Mana
+        str-cast-self: "&8Stealth"
+        str-fade: "&8&oStealth"
+
+    Hide:
+        spell-class: ".buff.InvisibilitySpell"
+        name: Hide
+        spell-icon: 2266
+        description: Makes you invisible to players and monsters.
+        cast-item: STICK
+        toggle: true
+        prevent-pickups: true
+        cancel-on-take-damage: true
+        cancel-on-give-damage: true
+        cancel-on-death: true
+        cancel-on-logout: true
+        cancel-on-spell-cast: true
+        modifiers:
+            - lightlevelbelow 6 required
+            - inblock 8,9 denied
+        cost:
+            - mana 25
+        use-cost:
+            - mana 10
+        use-cost-interval: 2
+        str-cost: 25  Mana and 10 Mana every few seconds.
+        str-cast-self: "&8Hide"
+        str-fade: "&8&oHide"
+    Ambush:
+        spell-class: ".targeted.PainSpell"
+        name: Ambush
+        cooldown: 3
+        damage: 14
+        range: 1
+        ignore-armor: true
+        obey-los: true
+        target-players: true
+        modifiers:
+            - buffactive Hide required
+        check-plugins: true
+        cost:
+            - hunger 2
+        str-cast-self: "&8Ambush"
+
+    Eviscerate:
+        spell-class: ".TargetedMultiSpell"
+        name: Eviscerate
+        cooldown: 5
+        check-individual-cooldowns: false
+        require-entity-target: true
+        target-players: true
+        range: 1
+        cost:
+            - mana 75
+        spells:
+            - extremehunger
+            - DELAY 2
+            - 4harm
+            - DELAY 2
+            - weakness
+        str-cast-self: "&8Eviscerate"
+    Disengage:
+        spell-class: ".instant.LeapSpell"
+        name: Disengage
+        description: Leap backwards.
+        cast-item: STICK
+        cooldown: 3
+        forward-velocity: -35
+        upward-velocity: 6
+        cancel-damage: false
+        cost:
+            - hunger 1
+        modifiers:
+             - wearing 310 addpower -0.09
+             - wearing 311 addpower -0.09
+             - wearing 312 addpower -0.09
+             - wearing 313 addpower -0.09
+             - wearing 306 addpower -0.04
+             - wearing 307 addpower -0.04
+             - wearing 308 addpower -0.04
+             - wearing 309 addpower -0.04
+             - wearing 314 addpower -0.04
+             - wearing 315 addpower -0.04
+             - wearing 316 addpower -0.04
+             - wearing 317 addpower -0.04
+        str-cost: You're too tired to disengage.
+        str-cast-self: "&8&oDisengage"
+        str-cast-others:
+    Jump:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: Jump
+        type: 8
+        strength: 1
+        duration: 400
+        targeted: false
+        cooldown: 80
+        cost:
+            - mana 50
+    Hide:
+        spell-class: ".buff.StealthSpell"
+        name: Hide
+        modifiers:
+            - lightlevelbelow 6 required
+            - inblock 8,9 denied
+        cost:
+            - mana 25
+        use-cost:
+            - mana 10
+        cancel-on-death: true
+        cancel-on-take-damage: true
+        cancel-on-give-damage: true
+        cancel-on-logout: true
+        use-cost-interval: 2
+        str-cost: 25 Mana and 10 mana per 2 seconds.
+        str-cast-self: "&8Hide"
+        str-fade: "&8&oHide"
+    HideC:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: HideC
+        modifiers:
+            - lightlevelbelow 6 required
+        type: 14
+        strength: 1
+        duration: 50
+        targeted: false
+        cooldown: 0
+        cost:
+            - mana 0
+    HideInvis:
+        spell-class: ".PassiveSpell"
+        modifiers:
+            - buffactive Hide required
+            - lightlevelbelow 6 required
+        triggers:
+            - ticks 10
+        chance: 100
+        cooldown: 0
+        spells:
+            - HideC
+    HideLight:
+        spell-class: ".PassiveSpell"
+        modifiers:
+            - buffactive Hide required
+            - lightlevelbelow 6 denied
+        triggers:
+            - ticks 10
+        chance: 100
+        cooldown: 0
+        spells:
+            - StealthHideR
+            - HideHarm
+    HideR:
+        spell-class: ".targeted.CleanseSpell"
+        name: HideR
+        spell-icon: nether_star
+        description: Remove negative affects from yourself.
+        cast-item: book
+        cooldown: 0
+        remove:
+          - 14
+        target-self: true
+        beneficial: true
+        str-cost:
+        str-cast-self:
+    HideHarm:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: HideHarm
+        type: 20
+        strength: 0
+        duration: 40
+        targeted: false
+        cooldown: 0
+        cost:
+            - mana 0

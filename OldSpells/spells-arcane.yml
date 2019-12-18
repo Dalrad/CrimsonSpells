@@ -1,0 +1,252 @@
+    wintivalstar:
+        spell-class: ".instant.TimeSpell"
+        name: wintivalstar
+        cast-item: "nether_star|&3Wintival's__Star"
+        description: Changes the time to night.
+        can-cast-by-command: false
+        can-cast-with-item: true
+        str-cost: free
+        cooldown: 1200
+        modifiers:
+            - biome TAIGA,FROZEN_RIVER,FROZEN_OCEAN,ICE_PLAINS,ICE_MOUNTAINS,TAIGA_HILLS required
+        time-to-set: 15000
+        str-announce: "&dThe moon has suddenly appeared in the sky!"
+
+    HandOfDecayAOE:
+        spell-class: ".targeted.AreaEffectSpell"
+        horizontal-radius: 5
+        vertical-radius: 5
+        point-blank: true
+        target-players: true
+        fail-if-no-targets: true
+        spells:
+            - particleprojectile_frostthrower_damage
+            - makeslow
+            - fatigue
+            - shorthaze
+            - hunger
+            - witherselfDecay
+
+
+    particleprojectile_frostthrower_damage:
+        spell-class: ".targeted.PainSpell"
+        damage: 6
+        range: 100
+        ignore-armor: true
+        obey-los: true
+        target-players: true
+        check-plugins: true
+        str-no-target: ""
+
+    DoomSelf:
+        spell-class: ".targeted.PainSpell"
+        name: DoomSelf
+        cast-item: 351
+        description: Kills your target.
+        damage: 200
+        range: 5
+        ignore-armor: true
+        obey-los: false
+        target-players: true
+        target-self: true
+        cost:
+            - mana 0
+        str-cost: 0 Mana.
+        str-cast-self: "&4&lYou doom yourself"
+        str-cast-others:
+    TheUndyingScepter:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: TheUndyingScepter
+        cast-item: "352|&8&lThe__Undying__Scepter"
+        bindable: false
+        can-cast-by-command: false
+        ignore-grant-perms: false
+        ignore-cast-perms: false
+        particle-name: blockcrack_173_0
+        hit-players: true
+        max-distance: 500
+        particle-count: 100
+        particle-speed: 0
+        particle-velocity: 9
+        spell: StaffEff
+        effects:
+            - caster sound entity.ghast.scream 3.0 0.0
+            - caster sound entity.ghast.scream 3.0 0.0
+            - caster sound entity.ghast.scream 3.0 0.0
+            - caster sound entity.zombie.say 3.0 0.0
+            - caster sound entity.zombie.say 3.0 0.0
+            - caster sound entity.zombie.death 3.0 0.0
+        cost:
+            - mana 50
+        str-cost: 50 mana
+
+    StaffEFF:
+        spell-class: ".targeted.AreaEffectSpell"
+        horizontal-radius: 5
+        vertical-radius: 5
+        point-blank: true
+        target-players: true
+        fail-if-no-targets: true
+        spells:
+            - UNw
+            - UNwe
+            - UNb
+            - UNdrain
+
+    staffdmg:
+        spell-class: ".targeted.PainSpell"
+        damage: 0
+        range: 100
+        ignore-armor: true
+        obey-los: true
+        target-players: true
+        check-plugins: true
+        str-no-target: ""
+    HawthornP:
+        spell-class: ".PassiveSpell"
+        name: HawthornP
+        description:
+        triggers:
+            - givedamage 268:*
+        chance: 100
+        spells:
+            - Hawthorn1
+            - Hawthorn2
+        modifiers:
+            - buffactive HawthornToggle required
+        str-cast-self: "&cYou stake a vampire."
+        effects:
+          Flame1:
+            position: target
+            effect: particles
+            particle-name: flame
+            horiz-spread: 0.1
+            vert-spread: 0.2
+            speed: 0.5
+            count: 30
+            y-offset: 0.5
+          sound:
+            position: target
+            effect: sound
+            sound: block.fire.ambient
+            volume: 5
+            pitch: 2
+          sound:
+            position: target
+            effect: sound
+            sound: block.fire.ambient
+            volume: 5
+            pitch: 0.1
+    Hawthorn1:
+        spell-class: ".targeted.CombustSpell"
+        obey-los: false
+        fire-ticks: 1000
+        fire-tick-damage: 9999
+        prevent-immunity: true
+        target-players: false
+        check-plugins: true
+    Hawthorn2:
+        spell-class: ".ExternalCommandSpell"
+        name: Hawthorn2
+        enabled: true
+        description:
+        cast-item:
+        can-cast-by-command: true
+        can-cast-with-item: true
+        command-to-execute:
+            - "warp Stake1"
+        temporary-permissions:
+            - "essentials.warps.Stake1"
+        require-player-target: true
+        execute-as-target-instead: true
+        obey-los: false
+        range: 50
+        cost:
+            - mana 0
+        str-cost: 0
+        str-cast-self: "&4You stake a vampire"
+        str-cast-target: "&4You have been staked"
+        str-cant-use-command: They can't dream
+    HawthornToggle:
+        spell-class: ".buff.DummySpell"
+        duration: 0
+        str-cast-self: "&4On"
+        str-fade: "&8Off"
+    Lichbane:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Lichbane
+        cast-item: "267|&6Lichbane"
+        modifiers:
+            - buffactive LichbaneToggle required
+        bindable: false
+        can-cast-by-command: false
+        ignore-grant-perms: true
+        ignore-cast-perms: true
+        projectile-gravity: 0
+        particle-name: blockcrack_89_0
+        hit-players: false
+        stop-on-hit-entity: false
+        particle-vertical-spread: 0.6
+        max-distance: 10
+        stop-on-hit-ground: false
+        hit-non-players: true
+        can-target: zombies,skeletons,pigzombies
+        particle-horizontal-spread: 0.6
+        particle-count: 50
+        particle-speed: 0
+        particle-velocity: 5
+        spell: LichbaneMulti
+        effects:
+            - caster sound entity.elder_guardian.curse 1.0 2.0
+            - caster sound entity.elder_guardian.curse 1.0 2.0
+        cost:
+            - mana 50
+        str-cost: 50 mana
+
+    Lichbanedmg:
+        spell-class: ".targeted.PainSpell"
+        damage: 20
+        range: 1
+        can-target: zombies,skeletons,pigzombies,
+        ignore-armor: true
+        obey-los: true
+        target-players: false
+        check-plugins: true
+        str-no-target: ""
+
+    LichbanePassiv:
+        spell-class: ".PassiveSpell"
+        triggers:
+            - rightclick 267:*|&6Lichbane
+        chance: 100
+        cooldown: 0
+        spells:
+            - Lichbane
+        cost:
+            - mana 50
+        str-cost: 50 mana
+
+    LichBaneFire:
+        spell-class: ".targeted.CombustSpell"
+        obey-los: false
+        fire-ticks: 100
+        can-target: zombies,skeletons,pigzombies
+        fire-tick-damage: 2
+        prevent-immunity: true
+        target-players: false
+        check-plugins: false
+    LichBaneMulti:
+        spell-class: ".TargetedMultiSpell"
+        cooldown: 0
+        check-individual-cooldowns: false
+        target-players: false
+        cost:
+        str-cost:
+        spells:
+            - LichBaneDmg
+            - LichBaneFire
+    LichbaneToggle:
+        spell-class: ".buff.DummySpell"
+        duration: 0
+        str-cast-self: "&eOn"
+        str-fade: "&6Off"

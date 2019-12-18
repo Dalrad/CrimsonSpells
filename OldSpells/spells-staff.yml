@@ -1,0 +1,272 @@
+#################
+# Emoting Spells#
+#################
+
+    showanger:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: showanger
+        cast-item: 351
+        projectile-velocity: 0.1
+        projectile-gravity: 0.01
+        tick-interval: 5
+        special-effect-interval: 2
+        particle-name: angryVillager
+        particle-speed: 0
+        particle-count: 10
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 50
+        hit-radius: 2
+        hit-players: false
+        hit-non-players: false
+        hit-ground: false
+        hit-air: false
+        stop-on-hit-entity: true
+        spell: 4harm
+        effects:
+            - caster sound random.pop 1.0 2.0
+
+    showlove:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: ShowLove
+        cast-item: "351:9"
+        projectile-velocity: 0.1
+        projectile-gravity: 0.01
+        tick-interval: 5
+        special-effect-interval: 2
+        particle-name: heart
+        particle-speed: 0
+        particle-count: 10
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 50
+        hit-radius: 1.0
+        hit-players: false
+        hit-non-players: false
+        hit-ground: false
+        hit-air: false
+        stop-on-hit-entity: true
+        spell: heald
+        effects:
+            - caster sound random.pop 1.0 2.0
+    forcepushd:
+        spell-class: ".instant.ForcepushSpell"
+        name: forcepushd
+        description: Push back your enemies.
+        cast-item: 351
+        range: 20
+        pushback-force: 30
+        additional-vertical-force: 0
+        max-vertical-force: 1
+        target-players: true
+        target-self: true
+
+    forcepulld:
+        spell-class: ".instant.ForcepushSpell"
+        name: forcepulld
+        description: Pull living things towards you.
+        cast-item: 351
+        range: 30
+        pushback-force: -40
+        additional-vertical-force: 5
+        max-vertical-force: 10
+        target-players: true
+        str-cast-self: You pull something!
+
+    forcetossd:
+        spell-class: ".targeted.ForcetossSpell"
+        name: forcetossd
+        description: Magically throw an enemy into the air.
+        cast-item: 351
+        range: 25
+        damage: 0
+        horizontal-force: 30
+        vertical-force: 15
+        obey-los: true
+        target-players: true
+        check-plugins: true
+        str-cost: free
+        str-no-target: No target.
+
+    forcebombd:
+        spell-class: ".targeted.ForcebombSpell"
+        name: Forcebomb
+        spell-icon: record_4
+        description: Push back your enemies.
+        cast-item: 351
+        range: 20
+        radius: 10
+        pushback-force: 30
+        additional-vertical-force: 15
+        max-vertical-force: 20
+        target-players: true
+        dont-target-caster: true
+
+    lightningd:
+        spell-class: ".targeted.LightningSpell"
+        name: Lightningd
+        description: Call down lightning.
+        cast-item: 351
+        range: 50
+        additional-damage: 10
+        no-damage: false
+        require-entity-target: false
+        obey-los: true
+        target-players: true
+        check-plugins: false
+
+    purged:
+        spell-class: ".instant.PurgeSpell"
+        name: Purged
+        description: Kill all monsters and animals around you.
+        cast-item: "351:9"
+        range: 20
+        str-cast-self: Things around you die.
+
+
+################
+# Deity Emotes #
+################
+
+    herenetharna:
+        spell-class: ".instant.DummySpell"
+        name: HereNetharna
+        description: Show your presence.
+        cast-item: "351:1"
+        #modifiers:
+        #    - biome HELL,PLAINS,EXTREME_HILLS required
+        effects:
+            - caster fireworks yes yes 4 FF0000 b30000
+
+    AkwalFlash:
+        spell-class: ".instant.DummySpell"
+        name: AkwalFlash
+        description: Show your presence.
+        cast-item: "351:4"
+        #modifiers:
+        #     - biome OCEAN,RIVER,BEACH,PLAINS,EXTREME_HILLS required
+        effects:
+            - caster fireworks yes yes 4 00b3b3 00ffff
+
+    HereAkwal:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: HereAkwal
+        #modifiers:
+        #     - biome OCEAN,RIVER,BEACH,PLAINS,EXTREME_HILLS required
+        cast-item: "351:4"
+        projectile-velocity: 0
+        projectile-gravity: 0
+        particle-name: dripWater
+        particle-speed: 1
+        particle-count: 150
+        particle-horizontal-spread: 1
+        particle-vertical-spread: 1
+        max-duration: 10
+        hit-radius: 1
+        hit-players: false
+        hit-non-players: false
+        hit-ground: false
+        hit-air-at-end: false
+        hit-air-during: true
+        hit-ground: false
+        spell-interval: 20
+        stop-on-hit-entity: false
+        stop-on-hit-ground: false
+        spell: heald
+        special-effect-interval: 10
+        effects:
+            - special sound liquid.splash 3.0 0.0
+
+    herewintival:
+        spell-class: ".instant.DummySpell"
+        name: HereWintival
+        description: Show your presence.
+        cast-item: "351:12"
+        #modifiers:
+        #- biome COLD_TAIGA,COLD_TAIGA_HILLS,COLD_TAIGA_MOUNTAINS,COLD_BEACH,FROZEN_RIVER,FROZEN_OCEAN,ICE_PLAINS,ICE_MOUNTAINS,PLAINS,EXTREME_HILLS required
+        effects:
+            - caster fireworks yes yes 4 eeeeee fcfcfc
+
+    herewildaven:
+        spell-class: ".instant.DummySpell"
+        name: HereWildaven
+        description: Show your presence.
+        cast-item:
+          #modifiers:
+          #- biome FOREST,FOREST_HILLS,JUNGLE,JUNGLE_HILLS,JUNGLE_EDGE,JUNGLE_MOUNTAINS,JUNGLE_EDGE_MOUNTAINS,ROOFED_FOREST,ROOFED_FOREST_MOUNTAINS,FLOWER_FOREST,BIRCH_FOREST,BIRCH_FOREST_HILLS,BIRCH_FOREST_MOUNTAINS,BIRCH_FOREST_HILLS_MOUNTAINS,PLAINS,EXTREME_HILLS required
+        effects:
+            - caster fireworks yes yes 4 00ff00 00b300
+
+    heredeserma:
+        spell-class: ".instant.DummySpell"
+        name: HereDeserma
+        description: Show your presence.
+        cast-item: "351:11"
+        #modifiers:
+        #     - biome DESERT,DESERT_MOUNTAINS,DESERT_HILLS,SAVANNA,SAVANNA_PLATEAU,SAVANNA_MOUNTAINS,SAVANNA_PLATEAU_MOUNTAINS,PLAINS,EXTREME_HILLS required
+        effects:
+            - caster fireworks yes yes 4 b3b300 e6e600
+
+    herecavilon:
+        spell-class: ".instant.DummySpell"
+        name: HereCavilon
+        description: Show your presence.
+        cast-item: "351:8"
+        effects:
+            - caster fireworks yes yes 4 808080 323232
+
+    herezelphair:
+        spell-class: ".instant.DummySpell"
+        name: HereZelphair
+        description: Show your presence.
+        cast-item: "351:7"
+        effects:
+            - caster fireworks yes yes 4 ebebff ffffff
+
+    levitated:
+        spell-class: ".targeted.LevitateSpell"
+        name: levitated
+        description: Cause your target to fly through the air.
+        cast-item: "351:7"
+        tick-rate: 1
+        duration: 99999
+        range: 50
+        target-players: true
+        cancel-on-item-switch: true
+        str-cast-self: You are levitating %t!
+        str-cast-target: You feel a gripping force around you
+
+    Ruinx:
+        spell-class: ".targeted.DestroySpell"
+        horiz-radius: 2
+        vert-radius: 2
+        velocity: 0.3
+        velocity-type: random
+
+    Discover:
+        spell-class: ".targeted.AreaEffectSpell"
+        name: Discover
+        description: Strike lightning upon all nearby enemies.
+        cast-item: 280
+        horizontal-radius: 6
+        vertical-radius: 6
+        max-targets: 100
+        point-blank: false
+        spell-source-in-center: false
+        can-target: players,nonplayers,invisibles,monsters,animals
+        fail-if-no-targets: true
+        spells:
+            - Startleeff1
+        cooldown: 15
+        cost:
+            - Mana 5
+        str-cost: 5 Mana
+        str-cast-self: You discover the hidden.
+
+    item-serialise:
+        spell-class: ".command.ItemSerializeSpell"
+        always-granted: true
+        incantations:
+            - /serialise
+            - /serialize
+        indentation: 2

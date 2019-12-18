@@ -1,0 +1,8 @@
+    WindGlide:
+        spell-class: ".buff.WindglideSpell"
+        velocity: 10
+        height: 0
+        cancel-on-collision: false
+        block-collision-dmg: false
+        collision-spell:
+        spell:

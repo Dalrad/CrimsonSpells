@@ -1,0 +1,485 @@
+    Barrier:
+        spell-class: ".instant.WallSpell"
+        name: Barrier
+        description: Creates a temporary wall of glass to block your enemies.
+        cast-item: STICK
+        range: 2
+        wall-width: 10
+        wall-height: 5
+        wall-type: 166
+        wall-duration: 10
+        cost:
+            - mana 50
+        str-cost: 50 Mana.
+    Mesmerise:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Mesmerise
+        projectile-velocity: 0
+        projectile-gravity: 0
+        particle-name: reddust
+        particle-speed: 1
+        particle-count: 250
+        particle-horizontal-spread: 1.5
+        particle-vertical-spread: 1.5
+        max-duration: 10
+        hit-radius: 6
+        hit-players: false
+        hit-non-players: false
+        hit-ground: false
+        hit-air-at-end: false
+        hit-air-during: true
+        hit-ground: false
+        spell-interval: 20
+        stop-on-hit-entity: false
+        stop-on-hit-ground: false
+        cost:
+            - mana 50
+        spell: mesmeriseeffect
+
+    mesmeriseeffect:
+        spell-class: ".targeted.AreaEffectSpell"
+        horizontal-radius: 6
+        vertical-radius: 6
+        point-blank: true
+        target-players: true
+        target-non-players: true
+        target-invisible-players: false
+        fail-if-no-targets: false
+        max-targets: 10
+        spell-source-in-center: true
+        spells:
+              - shortslow
+              - heavyhaze
+    Flare:
+        spell-class: ".buff.DummySpell"
+        duration: 1
+        cooldown: 15
+        shared-cooldowns:
+            - WildavenFlare 3
+            - AkwalFlare 3
+            - MycelyixFlare 3
+            - DesermaFlare 3
+            - WintivalFlare 3
+            - HerbertFlare 3
+            - CavilonFlare 3
+            - ZeolixFlare 3
+            - Zelphlare 3
+            - AuranFlare 3
+            - PlanuFlare 3
+            - NetharnaFlare 3
+        effects:
+          Fairy1:
+            position: caster
+            effect: fireworks
+            flicker: true
+            trail: true
+            type: 1
+            flight: 2
+            colors: ffff00
+            fade-colors: de8305
+          Fairy2:
+            position: caster
+            effect: fireworks
+            flicker: true
+            trail: true
+            type: 1
+            flight: 2
+            colors: fe28a2
+            fade-colors: b666d2
+        cost:
+          - mana 25
+        str-cost: 25 Mana
+        str-cast-self: "&dYou send an impressive array of fireworks into the sky."
+        str-cast-others: "&dYou see flashes of colorful lights in the sky."
+    Dream:
+        spell-class: ".ExternalCommandSpell"
+        name: Dream
+        enabled: true
+        description: Send someone into a Dream.
+        cast-item: STICK
+        can-cast-by-command: true
+        can-cast-with-item: true
+        command-to-execute:
+            - "warp dream"
+        command-to-execute-later:
+            - "back"
+        command-delay: 300
+        temporary-permissions: 
+            - "essentials.back"
+            - "essentials.warps.dream"
+        require-player-target: true
+        execute-as-target-instead: true
+        obey-los: true
+        range: 20
+        cost:
+            - mana 100
+        str-cost: 100 Mana.
+        str-cast-self: You make someone Dream.
+        str-cant-use-command: They can't dream
+    Multiply:
+        spell-class: ".MultiSpell"
+        description:
+        name: Multiply
+        cast-item: LEATHER
+        check-individual-cooldowns: false
+        check-individual-modifiers: false
+        cooldown: 120
+        cost:
+            - mana 150
+        str-cost: "150 mana"
+        str-cast-self: "&dYou conjure multiple illusions of yourself."
+        str-cast-others: "%a &dmultiplies!"
+        spells:
+            - MultiplyMob
+            - MultiplyMob
+            - MultiplyMob
+            - MultiplyMob
+            - MultiplyMob
+            - MultiplyMob
+            - MultiplyMob
+            - MultiplyMob
+            - MultiplyMob
+            - MultiplyMob
+            - MultiplyDisguise
+        effects:
+          SOUND:
+            position: caster
+            effect: sound
+            sound: block.portal.trigger
+            volume: 10
+            pitch: 1.5
+    MultiplyMob:
+        spell-class: ".targeted.SpawnMonsterSpell"
+        name: MultiplyMob
+        location: caster
+        entity-type: wolf
+        tamed: false
+        duration: 250
+        range: 1
+        potion-effects:
+        attributes:
+          - "generic.movementspeed 0.5 add"
+          - "generic.attackdamage -1 add"
+    MultiplyDisguise:
+        spell-class: ".ExternalCommandSpell"
+        name: MultiplyDisguise
+        enabled: true
+        description:
+        cooldown: 10
+        can-cast-by-command: true
+        can-cast-with-item: false
+        command-to-execute: 
+            - "disguiseradius wolf 2 player %a"
+        command-to-execute-later:
+        command-delay: 0
+        temporary-permissions: 
+            - "libsdisguises.disguiseradius.*"
+        temporary-op: false
+        execute-on-console-instead: false
+        require-player-target: false
+        execute-as-target-instead: false
+        obey-los: false
+        range: 2
+        cost:
+            - mana 0
+        str-cost:
+        str-cast-self:
+        str-cast-others:
+        str-cant-use-command: "&4You don't have permission to do that."
+    MultiplyDisguise:
+        spell-class: ".ExternalCommandSpell"
+        name: MultiplyDisguise
+        enabled: true
+        description:
+        cooldown: 10
+        can-cast-by-command: true
+        can-cast-with-item: false
+        command-to-execute: 
+            - "disguiseradius wolf 2 player %a"
+        command-to-execute-later:
+        command-delay: 0
+        temporary-permissions: 
+            - "libsdisguises.disguiseradius.*"
+        temporary-op: false
+        execute-on-console-instead: false
+        require-player-target: false
+        execute-as-target-instead: false
+        obey-los: false
+        range: 2
+        cost:
+            - mana 0
+        str-cost:
+        str-cast-self:
+        str-cast-others:
+        str-cant-use-command: "&4You don't have permission to do that."
+    lifewalkB:
+        spell-class: ".buff.LifewalkSpell"
+        name: LifewalkB
+        cast-item: STICK
+        duration: 20
+        tick-interval: 15
+        radius: 5
+        red-flower-chance: 20
+        yellow-flower-chance: 20
+        sapling-chance: 15
+        tallgrass-chance: 30
+        fern-chance: 20
+        effects:
+          targetparticles:
+            position: caster
+            effect: greensparkle
+        cost:
+            - mana 100
+        str-cost: 100 Mana
+        str-cast-self: "&5Lifewalk"
+    BarrierSee:
+        spell-class: ".PassiveSpell"
+        modifiers:
+        triggers:
+        - spellcast Barrier
+        - spellcast Forcefield
+        chance: 100
+        cooldown: 0
+        spells:
+            - BarrierVision
+    BarrierVision:
+        spell-class: ".buff.StonevisionSpell"
+        name: BarrierVision
+        description: See through stone.
+        cast-item: STICK
+        range: 4
+        transparent-type: BARRIER
+        unobfuscate: false
+        duration: 20
+        cost:
+            - mana 0
+        str-cost: 0 Mana
+        str-cast-self: ""
+        str-fade: ""
+    Portal:
+        spell-class: ".instant.PortalSpell"
+        name: Portal
+        mark-spell: "Telemark"
+        duration: 600
+        teleport-cooldown: 1
+        min-distance: 1
+        max-distance: 5000
+        allow-return: true
+        teleport-cost:
+            - mana 10
+        charge-cost-to-teleporter: false
+        effect-interval: 5
+        effects:
+          eff1:
+            position: special
+            effect: effectlib
+            effectlib:
+                class: VortexEffect
+                particle: REDSTONE
+                color: 9C33FF
+                radius: 3
+                circles: 5
+                radials: 16
+                helixes: 10
+                grow: 0
+                particles: 50
+                iterations: 15
+                period: 1
+          eff2:
+            position: special
+            effect: effectlib
+            effectlib:
+                class: VortexEffect
+                particle: REDSTONE
+                color: D68910
+                radius: 3
+                circles: 5
+                radials: 16
+                helixes: 10
+                grow: 0
+                particles: 50
+                iterations: 15
+                period: 1
+          eff3:
+            position: special
+            effect: effectlib
+            effectlib:
+                class: VortexEffect
+                particle: END_ROD
+                radius: 2.8
+                circles: 5
+                radials: 16
+                helixes: 6
+                grow: 0
+                particles: 50
+                speed: 0.01
+                iterations: 15
+                period: 1
+          eff4:
+            position: special
+            effect: effectlib
+            effectlib:
+                class: VortexEffect
+                particle: END_ROD
+                radius: 2.5
+                circles: 5
+                radials: 16
+                helixes: 6
+                grow: 0
+                particles: 50
+                speed: 0.01
+                iterations: 15
+                period: 1
+          eff5:
+            position: special
+            effect: effectlib
+            effectlib:
+                class: VortexEffect
+                particle: END_ROD
+                radius: 2.2
+                circles: 5
+                radials: 16
+                helixes: 6
+                grow: 0
+                particles: 50
+                speed: 0.01
+                iterations: 15
+                period: 1
+          eff6:
+            position: special
+            effect: effectlib
+            effectlib:
+                class: VortexEffect
+                particle: END_ROD
+                radius: 1.9
+                circles: 5
+                radials: 16
+                helixes: 6
+                grow: 0
+                particles: 50
+                speed: 0.01
+                iterations: 15
+                period: 1
+          eff7:
+            position: special
+            effect: effectlib
+            effectlib:
+                class: VortexEffect
+                particle: END_ROD
+                radius: 1.6
+                circles: 5
+                radials: 16
+                helixes: 6
+                grow: 0
+                particles: 50
+                speed: 0.01
+                iterations: 15
+                period: 1
+          eff8:
+            position: special
+            effect: effectlib
+            effectlib:
+                class: VortexEffect
+                particle: END_ROD
+                radius: 1.2
+                circles: 5
+                radials: 16
+                helixes: 6
+                grow: 0
+                particles: 50
+                speed: 0.01
+                iterations: 15
+                period: 1
+          eff9:
+            position: special
+            effect: effectlib
+            effectlib:
+                class: VortexEffect
+                particle: END_ROD
+                radius: 0.7
+                circles: 5
+                radials: 16
+                helixes: 6
+                grow: 0
+                particles: 50
+                speed: 0.02
+                iterations: 15
+                period: 1
+          SOUNDFairy:
+            position: special
+            effect-interval: 25
+            effect: sound
+            sound: block.portal.ambient
+            volume: 1
+            pitch: 2
+        cost:
+            - mana 100
+        str-cost: 100 mana, 1 Gold Ingot, 1 Redstone Dust.
+        str-no-mark: "You have not marked a location to make a portal to."
+        str-too-close: "You are too close to your marked location."
+        str-too-far: "You are too far away from your marked location."
+    Telemark:
+        spell-class: ".instant.MarkSpell"
+        name: Telemark
+        description: Remember a location for later recall.
+        cast-item: 347
+        bindable: false
+        can-cast-by-command: false
+        can-cast-with-item: true
+        permanent-marks: true
+        cost:
+            - mana 0
+        str-cost: 1 Clock
+        str-cast-self: Location remembered.
+        effects:
+          SOUNDFairy:
+            position: special
+            effect-interval: 10
+            effect: sound
+            sound: random.click
+            volume: 1
+            pitch: 1
+          SOUNDFairyrw:
+            position: special
+            effect-interval: 5
+            effect: sound
+            sound: random.click
+            volume: 1
+            pitch: 1.5
+    Startle:
+        spell-class: ".MultiSpell"
+        name: Startle
+        cooldown: 0
+        target-players: true
+        check-individual-cooldowns: false
+        spells:
+            - StartleEff1
+        cost:
+            - mana 50
+        str-cost: 50 Mana.
+
+    Startleeff1:
+        spell-class: ".buff.DummySpell"
+        duration: 0.6
+        effects:
+          Vessel12:
+            position: orbit
+            orbit-radius: 0.6
+            orbit-seconds-per-revolution: 1.0
+            orbit-tick-interval: 1
+            orbit-y-offset: 1.0
+            orbit-counter-clockwise: true
+            effect: particles
+            particle-name: smoke
+            horiz-spread: 0.00
+            vert-spread: 0.1
+            speed: 0
+            count: 1
+            y-offset: 0
+          Vessel22:
+            position: buff
+            effect-interval: 25
+            effect: sound
+            sound: entity.wolf.howl
+            volume: 10
+            pitch: 2

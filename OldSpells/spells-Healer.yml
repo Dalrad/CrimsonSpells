@@ -1,0 +1,491 @@
+    Rejuvenate:
+        spell-class: ".targeted.AreaEffectSpell"
+        name: Rejuvenate
+        cast-item: RED_ROSE
+        bindable: true
+        can-cast-by-command: true
+        horizontal-radius: 10
+        vertical-radius: 10
+        point-blank: true
+        fail-if-no-targets: true
+        target-players: true
+        target-non-players: false
+        effects:
+          casterpositive:
+            position: caster
+            effect: particles
+            particle-name: fireworksSpark
+            horiz-spread: 2
+            vert-spread: 2
+            speed: 0.1
+            count: 40
+            y-offset: 0.5
+            render-distance: 15
+        spells:
+            - xHeal
+        cost:
+            - mana 100
+        str-cast-self: "&5Rejuvenate"
+
+    Hea:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Hea
+        cast-item: STICK
+        can-cast-by-command: true
+        can-cast-with-item: true
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: spell
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 15
+        max-duration: 10
+        hit-radius: 1
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        effects:
+          casterparticles:
+            position: target
+            effect: bluesparkle
+          targetparticles:
+            position: caster
+            effect: particles
+            particle-name: fireworksSpark
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0.5
+            count: 50
+            y-offset: 2
+            render-distance: 15
+        spell: xHeal
+        cost:
+            - RED_ROSE 1
+            - mana 50
+        str-cast-self: "&5Heal"
+        str-no-target: "&4No target."
+        str-max-health: "&4%t already at Full Health."
+    Restore:
+        spell-class: ".targeted.HealSpell"
+        name: Restore
+        description: Heals a target player.
+        cast-item: STICK
+        heal-amount: 40
+        cancel-if-full: true
+        obey-los: true
+        range: 30
+        cost:
+            - RED_ROSE 1
+            - mana 75
+        str-cost: 75 Mana
+        str-cast-self: You have healed %t.
+        str-cast-target: Someone has healed you.
+        str-no-target: No target to heal.
+        str-max-health: "%t is already at max health."
+
+    xHeal:
+        spell-class: ".targeted.HealSpell"
+        heal-amount: 80
+        cancel-if-full: true
+        can-target: players
+        obey-los: true
+        range: 30
+    xHealC:
+        spell-class: ".targeted.HealSpell"
+        heal-amount: 80
+        cancel-if-full: true
+        can-target: players
+        obey-los: true
+        range: 30
+
+    Devote:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Devote
+        cast-item: STICK
+        can-cast-by-command: true
+        can-cast-with-item: true
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: spell
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 15
+        max-duration: 10
+        hit-radius: 1
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        effects:
+          casterparticles:
+            position: target
+            effect: bluesparkle
+          targetparticles:
+            position: caster
+            effect: particles
+            particle-name: fireworksSpark
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0.5
+            count: 50
+            y-offset: 2
+            render-distance: 15
+        cost:
+            - mana 50
+        spell: xDevote
+        str-cast-self: "&5Devote"
+
+    xDevote:
+        spell-class: ".targeted.DrainlifeSpell"
+        range: 50
+        take-type: mana
+        take-amt: -100
+        give-type: mana
+        give-amt: -100
+        show-spell-effect: false
+        animation-speed: 2
+        instant: true
+        ignore-armor: true
+        obey-los: true
+        target-players: true
+        check-plugins: false
+
+    Wish:
+        spell-class: ".instant.ManaSpell"
+        name: Wish
+        can-cast-by-command: true
+        can-cast-with-item: true
+        description: Restores mana.
+        mana: 50
+        cost:
+            - levels 5
+        cooldown: 5
+
+    Heal:
+        spell-class: ".instant.PrayerSpell"
+        name: Heal
+        description: Heals yourself.
+        cast-item: YELLOW_ROSE
+        amount-healed: 40
+        cost:
+            - YELLOW_ROSE 1
+            - mana 50
+        str-cost: 1 dandelion and 50 Mana.
+        str-cast-self: "&5Heal"
+        str-at-full-health: "&4Already at full health."
+
+    telekinesis:
+        spell-class: ".targeted.TelekinesisSpell"
+        name: Telekinesis
+        description: Manipulate switches and buttons remotely.
+        cast-item: STICK
+        range: 40
+        cost:
+            - mana 25
+        str-cost: 25 Mana
+        str-no-target: You must target a switch or button.
+
+    Sacredshield:
+        spell-class: ".buff.InvulnerabilitySpell"
+        name: SacredShield
+        description: Keeps you safe from some forms of damage.
+        cast-item: STICK
+        shared-cooldowns:
+            - Wrath 20
+        damage-causes:
+            - entity attack
+            - projectile
+            - entity explosion
+            - block explosion
+        duration: 20
+        cooldown: 30
+        cost:
+            - mana 120
+        duration: 20
+        num-uses: 25
+        use-cost:
+            - mana 5
+        str-cost: 120 Mana
+        str-cast-self: You feel protected.
+        str-cast-others: "%a has a Sacred Shield."
+        str-fade: Your Sacred Shield fades.
+    reflect:
+        spell-class: ".buff.ReflectSpell"
+        name: reflect
+        description: Reflect spells cast at you for a short time.
+        cast-item: STICK
+        duration: 15
+        cooldown: 30
+        num-uses: 5
+        cost:
+            - Mana 50
+        str-cost: 50 Mana
+        str-cast-self: You feel a magical barrier surround you.
+        str-cast-others: "A magical barrier surrounds %a."
+        str-fade: Your magical barrier fades.
+    Cure:
+        spell-class: ".targeted.CleanseSpell"
+        name: Cure
+        spell-icon: nether_star
+        description: Remove some negative affects.
+        cast-item: STICK
+        remove:
+          - 19
+          - 4
+          - 2
+          - 9
+          - 15
+          - 18
+          - 20
+        target-self: true
+        beneficial: true
+        cost:
+            - mana 50
+        str-cost: 50 mana
+        str-cast-self: You remove negative effects.
+    Antidote:
+        spell-class: ".targeted.CleanseSpell"
+        name: Antidote
+        spell-icon: nether_star
+        description: Cure poison in someone else.
+        cast-item: STICK
+        remove:
+          - 4
+          - 2
+          - 9
+          - 15
+          - 18
+          - 20
+          - 19
+        target-self: false
+        beneficial: true
+        cost:
+            - mana 30
+        str-cost: 30 mana
+        str-cast-others:
+        str-cast-self: Your target is no longer poisoned.
+    Convalescence:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: Convalescence
+        description: Regenerate.
+        shared-cooldowns:
+            - Wrath 20
+        cast-item: 280
+        type: 10
+        strength: 2
+        duration: 300
+        targeted: false
+        cost:
+            - mana 50
+        str-cost: 50 Mana
+    Extract:
+        spell-class: ".instant.ConjureSpell"
+        name: Extract
+        cooldown: 15
+        items:
+            - LifeEssence
+        add-to-inventory: true
+        cost:
+            - levels 10
+            - Mana 150
+            - 374 1
+            - Health 20
+        str-cost: 10 Health, 10 Experience Levels, 25 Mana, and one bottle.
+        str-cast-self: "&fYou extract life essence from yourself."
+        effects:
+          ExtractEff:
+            position: caster
+            effect: particles
+            particle-name: totem
+            horiz-spread: 0.1
+            vert-spread: 0.1
+            speed: 0.3
+            count: 50
+            y-offset: 1.0
+          ExtractEff2:
+            position: caster
+            effect: sound
+            sound: block.enchantment_table.use
+            volume: 5
+            pitch: 1.5
+    RaiseCure:
+        spell-class: ".targeted.CleanseSpell"
+        name: RaiseCure
+        remove:
+          - 4
+          - 2
+          - 9
+          - 15
+          - 18
+          - 20
+          - 19
+          - 8
+        target-self: false
+        beneficial: true
+    DeathCureMulti:
+        spell-class: ".MultiSpell"
+        description: Summons a Fairy
+        name: DeathCureMulti
+        spells:
+            - DeathCureEff
+            - DELAY 20
+            - DeathCureEff
+            - DELAY 20
+            - DeathCureEff
+            - DELAY 20
+            - DeathCureEff
+            - DELAY 20
+            - DeathCureEff
+            - DELAY 20
+            - DeathCureEff
+            - DELAY 20
+            - DeathCureEff
+            - DELAY 20
+            - DeathCureEff
+            - DELAY 20
+            - DeathCureEff
+            - DELAY 20
+            - DeathCureEff
+            - DELAY 20
+            - DeathCureEff2
+            - RaiseCure
+    DeathCureEff:
+        spell-class: ".targeted.DummySpell"
+        obey-los: true
+        effects:
+          ExtractEff:
+            position: line
+            effect: particles
+            particle-name: EndRod
+            horiz-spread: 0.1
+            vert-spread: 0.1
+            distance-between: 0.2
+            speed: 0.004
+            count: 15
+            y-offset: 1.0
+    DeathCureEff2:
+        spell-class: ".targeted.DummySpell"
+        obey-los: true
+        effects:
+          ExtractEff:
+            position: line
+            effect: particles
+            particle-name: EndRod
+            horiz-spread: 0.1
+            vert-spread: 0.1
+            distance-between: 0.2
+            speed: 0.004
+            count: 15
+            y-offset: 1.0
+          DeathCureSound:
+            position: line
+            effect-interval: 5
+            effect: sound
+            sound: entity.experience_orb.pickup
+            volume: 5
+            pitch: 1.8
+    DeathCureGlow:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: DeathCureGlow
+        type: 24
+        strength: 10
+        duration: 200
+        targeted: false
+    Remedy:
+        spell-class: ".targeted.DummySpell"
+        variable-mods-cast:
+              - Deaths -1
+        cast-time: 200
+        cooldown: 600
+        interrupt-on-cast: false
+        interrupt-on-damage: true
+        can-target: players
+        interrupt-on-move: true
+        range: 5
+        str-cost: 1 Life Essence and 200 Mana
+        str-cast-start: "&fYou begin healing someone."
+        str-interrupted: "&7Your curing is interrupted."
+        always-activate: false
+        cost:
+            - LifeEssence 1
+            - Mana 200
+    Remedy2:
+        spell-class: ".targeted.DummySpell"
+        variable-mods-cast:
+              - Deaths -1
+        cast-time: 200
+        interrupt-on-cast: false
+        interrupt-on-damage: true
+        can-target: players
+        interrupt-on-move: true
+        range: 5
+        str-cost: 1 Life Essence and 200 Mana
+        str-cast-start: "&fYou begin healing someone."
+        str-interrupted: "&7Your curing is interrupted."
+        always-activate: false
+        cost:
+            - LifeEssence 1
+            - Mana 200
+    DeathsLoss:
+        spell-class: ".PassiveSpell"
+        triggers:
+            - spelltargeted DeathCureEff2
+        chance: 100
+        cast-without-target: true
+        spells:
+              - DeathLoseLevel
+    DeathLoseLevel:
+        spell-class: ".instant.DummySpell"
+        variable-mods-cast:
+              - Deaths -1
+    DeathCurePassive:
+        spell-class: ".PassiveSpell"
+        triggers:
+            - spelltargeted Remedy
+        chance: 100
+        cast-without-target: true
+        spells:
+            - DeathCureBuffSound1
+            - DeathCureGlow
+    DeathCurePassive2:
+        spell-class: ".PassiveSpell"
+        triggers:
+            - spellcast Remedy
+        chance: 100
+        cast-without-target: true
+        spells:
+            - DeathCureMulti
+    DeathCureBuffSound1:
+        spell-class: ".buff.DummySpell"
+        duration: 10
+        effects:
+          DeathCureSound:
+            position: buff
+            effect-interval: 5
+            effect: sound
+            sound: block.enchantment_table.use
+            volume: 5
+            pitch: 1.8
+          DeathCureEff1:
+            position: orbit
+            orbit-radius: 0.4
+            orbit-seconds-per-revolution: 1.5
+            orbit-tick-interval: 1
+            orbit-y-offset: 1.5
+            orbit-counter-clockwise: false
+            effect: particles
+            particle-name: fireworksSpark
+            horiz-spread: 0.2
+            vert-spread: 0.1
+            speed: 0
+            count: 2
+            y-offset: 0

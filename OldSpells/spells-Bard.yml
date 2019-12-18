@@ -1,0 +1,337 @@
+Beat1:
+    spell-class: ".buff.DummySpell"
+    duration: 100
+    effects:
+      BeatSound1:
+        position: buff
+        effect-interval: 10
+        effect: sound
+        sound: block.note.flute
+        volume: 10
+        pitch: 1
+      BeatSound2:
+        position: buff
+        effect-interval: 35
+        effect: sound
+        sound: block.note.flute
+        volume: 10
+        pitch: 0.4
+      BeatSound3:
+        position: buff
+        effect-interval: 38
+        effect: sound
+        sound: block.note.flute
+        volume: 10
+        pitch: 1.6
+      BeatSound4:
+        position: buff
+        effect-interval: 50
+        effect: sound
+        sound: block.note.xylophone
+        volume: 10
+        pitch: 1
+      BeatSound5:
+        position: buff
+        effect-interval: 75
+        effect: sound
+        sound: block.note.xylophone
+        volume: 10
+        pitch: 1.6
+      BeatSound6:
+        position: buff
+        effect-interval: 40
+        effect: sound
+        sound: block.note.xylophone
+        volume: 10
+        pitch: 0.3
+      BeatSound7:
+        position: buff
+        effect-interval: 25
+        effect: sound
+        sound: block.note.chime
+        volume: 10
+        pitch: 1
+      BeatSound8:
+        position: buff
+        effect-interval: 20
+        effect: sound
+        sound: block.note.chime
+        volume: 10
+        pitch: 0.5
+      BeatSound9:
+        position: buff
+        effect-interval: 10
+        effect: sound
+        sound: block.note.basedrum
+        volume: 10
+        pitch: 0.1
+      BeatSound10:
+        position: buff
+        effect-interval: 50
+        effect: sound
+        sound: block.note.basedrum
+        volume: 10
+        pitch: 1
+      BeatSound11:
+        position: buff
+        effect-interval: 85
+        effect: sound
+        sound: block.note.bass
+        volume: 10
+        pitch: 2
+      BeatSound12:
+        position: buff
+        effect-interval: 5
+        effect: sound
+        sound: block.note.bass
+        volume: 10
+        pitch: 0.7
+Beat2:
+    spell-class: ".buff.DummySpell"
+    duration: 100
+    effects:
+      BeatSound2:
+        position: buff
+        effect-interval: 5
+        effect: sound
+        sound: block.note.chime
+        volume: 10
+        pitch: 2
+      BeatSound2:
+        position: buff
+        effect-interval: 10
+        effect: sound
+        sound: block.note.chime
+        volume: 10
+        pitch: 0.8
+Beatmmf:
+    spell-class: ".buff.DummySpell"
+    duration: 100
+    effects:
+      BeatSound2:
+        position: buff
+        effect-interval: 10
+        effect: sound
+        sound: block.waterlily.place
+        volume: 10
+        pitch: 1
+      BeatSound3:
+        position: buff
+        effect-interval: 10
+        effect: sound
+        sound: entity.villager.yes
+        volume: 10
+        pitch: 1
+BeatTog:
+    spell-class: ".MultiSpell"
+    cooldown: 30
+    check-individual-cooldowns: false
+    cost:
+        - REDSTONE 5
+    str-cost: 5 redstone dust
+    spells:
+        - Beat4
+        - DELAY 10
+        - Beat5
+Beat4:
+    spell-class: ".buff.DummySpell"
+    duration: 100
+    effects:
+      BeatSound:
+        position: buff
+        effect-interval: 10
+        effect: sound
+        sound: block.note.bell
+        volume: 10
+        pitch: 1
+      BeatSound1:
+        position: buff
+        effect-interval: 25
+        effect: sound
+        sound: block.note.bell
+        volume: 10
+        pitch: 0.5
+      BeatSound2:
+        position: buff
+        effect-interval: 35
+        effect: sound
+        sound: block.note.bell
+        volume: 10
+        pitch: 1.5
+Beat5:
+    spell-class: ".buff.DummySpell"
+    duration: 100
+    effects:
+      BeatSound:
+        position: buff
+        effect-interval: 10
+        effect: sound
+        sound: block.note.bass
+        volume: 10
+        pitch: 1
+      BeatSound1:
+        position: buff
+        effect-interval: 25
+        effect: sound
+        sound: block.note.bass
+        volume: 10
+        pitch: 0.5
+BeatTog2:
+    spell-class: ".MultiSpell"
+    cooldown: 30
+    check-individual-cooldowns: false
+    cost:
+        - REDSTONE 5
+    str-cost: 5 redstone dust
+    spells:
+        - SpellSong1
+        - DELAY 10
+        - SpellSong2
+SpellSong1:
+    spell-class: ".buff.DummySpell"
+    duration: 5
+    effects:
+      BeatSound1:
+        position: buff
+        effect-interval: 2
+        effect: sound
+        sound: block.note.flute
+        volume: 2
+        pitch: 0.5
+SpellSong2:
+    spell-class: ".buff.DummySpell"
+    duration: 100
+    effects:
+      BeatSound1:
+        position: buff
+        effect-interval: 2
+        effect: sound
+        sound: block.note.bass
+        volume: 10
+        pitch: 0.7
+SpellSong3:
+    spell-class: ".buff.DummySpell"
+    duration: 1
+    effects:
+      BeatSound1:
+        position: buff
+        effect-interval: 5
+        effect: sound
+        sound: block.note.bass
+        volume: 10
+        pitch: 0.7
+Beat6:
+    spell-class: ".buff.DummySpell"
+    duration: 100
+    effects:
+      BeatSound:
+        position: buff
+        effect-interval: 5
+        effect: sound
+        sound: block.note.bell
+        volume: 10
+        pitch: 1
+      BeatSound1:
+        position: buff
+        effect-interval: 15
+        effect: sound
+        sound: block.note.bell
+        volume: 10
+        pitch: 0.5
+      BeatSound2:
+        position: buff
+        effect-interval: 25
+        effect: sound
+        sound: block.note.bell
+        volume: 10
+        pitch: 1.5
+Beat7:
+    spell-class: ".buff.DummySpell"
+    duration: 100
+    effects:
+      BeatSound1:
+        position: buff
+        effect-interval: 5
+        effect: sound
+        sound: block.note.flute
+        volume: 10
+        pitch: 1
+      BeatSound2:
+        position: buff
+        effect-interval: 30
+        effect: sound
+        sound: block.note.flute
+        volume: 10
+        pitch: 0.4
+      BeatSound3:
+        position: buff
+        effect-interval: 34
+        effect: sound
+        sound: block.note.flute
+        volume: 10
+        pitch: 1.6
+      BeatSound4:
+        position: buff
+        effect-interval: 45
+        effect: sound
+        sound: block.note.xylophone
+        volume: 10
+        pitch: 1
+      BeatSound5:
+        position: buff
+        effect-interval: 70
+        effect: sound
+        sound: block.note.xylophone
+        volume: 10
+        pitch: 1.6
+      BeatSound6:
+        position: buff
+        effect-interval: 35
+        effect: sound
+        sound: block.note.xylophone
+        volume: 10
+        pitch: 0.3
+      BeatSound7:
+        position: buff
+        effect-interval: 20
+        effect: sound
+        sound: block.note.chime
+        volume: 10
+        pitch: 1
+      BeatSound8:
+        position: buff
+        effect-interval: 15
+        effect: sound
+        sound: block.note.chime
+        volume: 10
+        pitch: 0.5
+      BeatSound9:
+        position: buff
+        effect-interval: 5
+        effect: sound
+        sound: block.note.basedrum
+        volume: 10
+        pitch: 0.1
+      BeatSound10:
+        position: buff
+        effect-interval: 45
+        effect: sound
+        sound: block.note.basedrum
+        volume: 10
+        pitch: 1
+      BeatSound11:
+        position: buff
+        effect-interval: 80
+        effect: sound
+        sound: block.note.bass
+        volume: 10
+        pitch: 2
+      BeatSound12:
+        position: buff
+        effect-interval: 5
+        effect: sound
+        sound: block.note.bass
+        volume: 10
+        pitch: 0.7
+
+

@@ -1,0 +1,520 @@
+    FreeZombie:
+        spell-class: ".targeted.SpawnMonsterSpell"
+        name: Spawn Zombie
+        cast-item: ROTTEN_FLESH
+        bindable: false
+        can-cast-by-command: false
+        location: target
+        entity-type: zombie
+        tamed: false
+        range: 5
+        cost:
+            - mana 50
+            - ROTTEN_FLESH 1
+        effects:
+          Spawn Effect:
+            position: target
+            effect: spawn
+          Spawn Sound:
+            position: target
+            effect: sound
+            sound: random.pop
+        str-cost: 25 Mana and holding a Rotten Flesh.
+        str-cast-self: "&dA zombie appears!"
+        str-cast-others: "&dA zombie appears!"
+
+    Undead:
+        spell-class: ".targeted.HealSpell"
+        name: Undead
+        cast-item: STICK
+        heal-amount: 70
+        cancel-if-full: true
+        can-target: zombies,skeletons
+        obey-los: true
+        range: 15
+        effects:
+          snowshovel:
+            position: target
+            effect: particles
+            particle-name: snowshovel
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0.1
+            count: 50
+            y-offset: 0.5
+            render-distance: 15
+          snowballpoof:
+            position: caster
+            effect: particles
+            particle-name: snowballpoof
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0.1
+            count: 50
+            y-offset: 0.5
+            render-distance: 15
+        cost:
+            - mana 50
+        str-cost: 50 Mana
+        str-cast-self: "&5Undead"
+
+    IceSpike:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: IceSpike
+        cast-item: STICK
+        can-cast-by-command: false
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: snowshovel
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 15
+        max-duration: 10
+        hit-radius: 2
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        effects:
+          casterparticles:
+            position: caster
+            effect: particles
+            particle-name: snowballpoof
+            horiz-spread: 2
+            vert-spread: 2
+            speed: 0.2
+            count: 10
+            y-offset: 0.5
+            render-distance: 15
+        spell: xIceSpike
+        cost:
+            - mana 40
+        str-cost: 40 Mana
+        str-cast-self: "&5IceSpike"
+
+    xIceSpike:
+        spell-class: ".targeted.GeyserSpell"
+        range: 20
+        damage: 12
+        velocity: 1
+        animation-speed: 1
+        geyser-height: 5
+        geyser-type: 79
+        ignore-armor: false
+        obey-los: true
+        target-players: true
+        check-plugins: false
+        effects:
+          snowshovel:
+            position: target
+            effect: particles
+            particle-name: snowshovel
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0.1
+            count: 50
+            y-offset: 0.5
+            render-distance: 15
+          snowballpoof:
+            position: target
+            effect: particles
+            particle-name: snowballpoof
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0.1
+            count: 50
+            y-offset: 0.5
+            render-distance: 15
+
+    Ice:
+        spell-class: ".targeted.TransmuteSpell"
+        name: Ice
+        range: 5
+        transmutable-types: [ 8,9 ]
+        transmute-type: 79
+        transmute-data: 0
+        cost:
+            - mana 20
+        str-cost: 20 Mana
+        str-cast-self: "&5Ice"
+
+    WintivalGift:
+        spell-class: ".instant.ConjureSpell"
+        name: WintivalGift
+        description: Ask Wintival for something.
+        cast-item: IRON_INGOT
+        bindable: false
+        can-cast-by-command: false
+        cooldown: 1200
+        items:
+            - 78 1 10%
+            - 79 1-5 10%
+            - 80 1-5 10%
+            - 35:1 1-2 10%
+            - 265 1 20%
+            - 264 1 2%
+            - 383:54 1 2%
+            - 383:51 1 2%
+        add-to-inventory: false
+        cost:
+            - IRON_INGOT 1
+        str-cost: 1 Iron Ingot
+        str-cast-self: "&5Things appear!"
+
+    Snow:
+        spell-class: ".ExternalCommandSpell"
+        name: Snow
+        enabled: true
+        cast-item: SNOW
+        bindable: false
+        can-cast-by-command: false
+        can-cast-with-item: true
+        command-to-execute:
+            - "snow 5"
+        command-delay: 0
+        temporary-op: true
+        require-player-target: false
+        execute-as-target-instead: false
+        block-chat-output: true
+        obey-los: false
+        range: 5
+        cost:
+            - mana 50
+        str-cost: 50 Mana.
+        str-cast-self: "&5Snow"
+
+    night:
+        spell-class: ".instant.TimeSpell"
+        name: Night
+        spell-icon: 347
+        description: Changes the time to night.
+        str-cost: free
+        time-to-set: 15000
+        str-announce: "&dThe moon has suddenly appeared in the sky!"
+    WintivalReturn:
+        spell-class: ".instant.TimeSpell"
+        name: WintivalReturn
+        spell-icon: 347
+        description: Changes the time to night.
+        str-cost: free
+        time-to-set: 15000
+        str-announce: "&bThe Moon rises in the sky, and it glows with a deep twilight blue."
+    moon:
+        spell-class: ".instant.RitualSpell"
+        name: Moon
+        spell-icon: 90
+        description: Changes the time to Night. This ritual requires 2 participants.
+        cooldown: 480
+        incantations:
+            - "bring unto us the rite of the night"
+        ritual-duration: 150
+        req-participants: 3
+        need-spell-to-participate: true
+        charge-reagents-immediately: false
+        set-cooldown-immediately: false
+        set-cooldown-for-all: true
+        spell: night
+        str-cast-self: "&dYou begin the Moon Ritual."
+        str-cast-others: "&d%a has begun a Moon ritual."
+        str-ritual-joined: "&dThe sun begins to fade."
+        str-ritual-interrupted: "&cThe sun glows brightly!"
+        str-ritual-fail: "&cThe sun glows brightly!"
+
+    FrostWalk:
+        spell-class: ".buff.FrostwalkSpell"
+        name: FrostWalk
+        description: Lets you walk on water.
+        duration: 30
+        cast-item: STICK
+        size: 3
+        leave-frozen: false
+        cost:
+            - mana 20
+        use-cost:
+            - mana 4
+        use-cost-interval: 1
+        str-cost: 10 Mana to activate and then 2 mana per block walked.
+        str-cast-self: "&5FrostWalk"
+        str-fade: "&4FrostWalk Ended"
+
+    Fr:
+        spell-class: ".instant.FreezeSpell"
+        name: Fr
+        cast-item: STICK
+        can-cast-by-command: false
+        snowballs: 25
+        horizontal-spread: 10
+        vertical-spread: 5
+        damage: 6
+        slow-amount: 5
+        slow-duration: 200
+        target-players: true
+        cost:
+            - mana 60
+        str-cost: 60 Mana
+        str-cast-self: "&5Freeze"
+    Freeze:
+        spell-class: ".instant.FreezeSpell"
+        name: Freeze
+        cast-item: STICK
+        can-cast-by-command: true
+        snowballs: 25
+        horizontal-spread: 10
+        vertical-spread: 5
+        damage: 6
+        slow-amount: 5
+        slow-duration: 200
+        target-players: true
+        cost:
+            - mana 60
+        str-cost: 60 Mana
+        str-cast-self: "&5Freeze"
+    FreezeCannon:
+        spell-class: ".instant.FreezeSpell"
+        name: FreezeCannon
+        cast-item: STICK
+        can-cast-by-command: true
+        snowballs: 50
+        horizontal-spread: 5
+        vertical-spread: 2
+        damage: 20
+        slow-amount: 5
+        slow-duration: 200
+        target-players: true
+        cost:
+            - mana 60
+        str-cost: 60 Mana
+        str-cast-self: "&5Freeze"
+    FreezeSingle:
+        spell-class: ".instant.FreezeSpell"
+        name: FreezeSingle
+        cast-item: STICK
+        can-cast-by-command: true
+        snowballs: 1
+        horizontal-spread: 0
+        vertical-spread: 0
+        damage: 1
+        slow-amount: 1
+        slow-duration: 50
+        target-players: true
+        cost:
+            - mana 60
+        str-cost: 60 Mana
+        str-cast-self: "&5Freeze"
+
+    IceTomb:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: IceTomb
+        cast-item: STICK
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: snowshovel
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 20
+        max-duration: 10
+        hit-radius: 2
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        effects:
+          casterparticles:
+            position: caster
+            effect: particles
+            particle-name: snowballpoof
+            horiz-spread: 2
+            vert-spread: 2
+            speed: 0.2
+            count: 10
+            y-offset: 0.5
+            render-distance: 15
+        spell: xicetomb
+        cost:
+            - mana 25
+        str-cost: 25 Mana
+        str-cast-self: "&5Ice Tomb"
+
+    xicetomb:
+        spell-class: ".targeted.EntombSpell"
+        name: xIceTomb
+        damage: 1
+        obey-los: true
+        target-players: true
+        tomb-block-type: 79
+        tomb-duration: 10
+
+    snowtomb:
+        spell-class: ".targeted.EntombSpell"
+        name: SnowTomb
+        cast-item: STICK
+        range: 5
+        damage: 1
+        obey-los: false
+        target-players: false
+        target-self: true
+        tomb-block-type: 80
+        tomb-duration: 10
+        cost:
+            - mana 25
+        str-cost: 25 Mana
+        str-cast-self: "&5Snow Tomb"
+
+    Blizzard:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Blizzard
+        cast-item: STICK
+        projectile-velocity: 0
+        projectile-gravity: 0
+        particle-name: snowshovel
+        particle-speed: 1
+        particle-count: 50
+        particle-horizontal-spread: 1.5
+        particle-vertical-spread: 1.5
+        max-duration: 10
+        hit-radius: 6
+        hit-players: false
+        hit-non-players: false
+        hit-ground: false
+        hit-air-at-end: false
+        hit-air-during: true
+        hit-ground: false
+        spell-interval: 20
+        stop-on-hit-entity: false
+        stop-on-hit-ground: false
+        spell: xBlizzard
+        cost:
+            - mana 130
+        str-cost: 130 Mana
+        str-cast-self: "&5Blizzard"
+
+    xBlizzard:
+        spell-class: ".targeted.AreaEffectSpell"
+        horizontal-radius: 6
+        vertical-radius: 6
+        point-blank: true
+        fail-if-no-targets: true
+        target-players: true
+        target-non-players: true
+        max-targets: 4
+        spells:
+            - xicetomb
+            - 4Harm
+            - target200slow3
+
+    Glaciate:
+        spell-class: ".MultiSpell"
+        name: Glaciate
+        cast-item: STICK
+        target-players: true
+        range: 10
+        check-individual-cooldowns: false
+        spells:
+            - target200slow2
+        effects:
+          snowshovel:
+            position: caster
+            effect: particles
+            particle-name: snowshovel
+            horiz-spread: 3
+            vert-spread: 3
+            speed: 0.1
+            count: 50
+            y-offset: 0.5
+            render-distance: 15
+          snowballpoof:
+            position: caster
+            effect: particles
+            particle-name: snowballpoof
+            horiz-spread: 3
+            vert-spread: 3
+            speed: 0.1
+            count: 50
+            y-offset: 0.5
+            render-distance: 15
+        cost:
+            - mana 100
+        str-cost: 100 Mana
+        str-cast-self: "&5Glaciate"
+
+    Icewall:
+        spell-class: ".instant.WallSpell"
+        name: Icewall
+        cast-item: STICK
+        range: 15
+        wall-width: 5
+        wall-height: 4
+        wall-type: 79
+        wall-duration: 12
+        effects:
+          snowshovel:
+            position: caster
+            effect: particles
+            particle-name: snowshovel
+            horiz-spread: 3
+            vert-spread: 3
+            speed: 0.1
+            count: 50
+            y-offset: 0.5
+            render-distance: 15
+          snowballpoof:
+            position: caster
+            effect: particles
+            particle-name: snowballpoof
+            horiz-spread: 3
+            vert-spread: 3
+            speed: 0.1
+            count: 50
+            y-offset: 0.5
+            render-distance: 15
+        cost:
+            - mana 40
+        str-cost: 40 Mana
+        str-cast-self: "&5Ice Wall"
+
+    NightHelper:
+        spell-class: ".MultiSpell"
+        name: NightHelper
+        cast-item: STICK
+        can-cast-by-command: true
+        check-individual-cooldowns: false
+        cast-random-spell-instead: true
+        range: 15
+        modifiers:
+            - night required
+        spells:
+            - SpawnZombie
+            - SpawnSkeleton
+        effects:
+          snowshovel:
+            position: caster
+            effect: particles
+            particle-name: snowshovel
+            horiz-spread: 3
+            vert-spread: 3
+            speed: 0.1
+            count: 50
+            y-offset: 0.5
+            render-distance: 15
+          snowballpoof:
+            position: caster
+            effect: particles
+            particle-name: snowballpoof
+            horiz-spread: 3
+            vert-spread: 3
+            speed: 0.1
+            count: 50
+            y-offset: 0.5
+            render-distance: 15
+        cost:
+            - mana 80
+        str-cost: 80 mana
+        str-cast-self: "&5Night Helper"

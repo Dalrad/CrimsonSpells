@@ -1,0 +1,538 @@
+BloodGain:
+    spell-class: ".PassiveSpell"
+    triggers:
+          - Death
+    spells:
+          - DeathGainLevel
+BloodGainLevel:
+    spell-class: ".instant.DummySpell"
+    variable-mods-cast:
+          - Deaths +1
+VampireStakeDeath:
+    spell-class: ".targeted.DummySpell"
+    variable-mods-cast:
+          - Deaths +1
+VampireAdminDisable:
+    spell-class: ".buff.DummySpell"
+    duration: 999999
+VampirePassive1:
+    spell-class: ".PassiveSpell"
+    triggers:
+        - ticks 10
+    spells:
+        - VampireCombust
+        - BurnHarm
+    modifiers:
+        - day required
+        - outside required
+        - storm denied
+        - wearing leather_helmet|&4Vampire_Cowl denied
+        - wearing leather_helmet|&4Cowl_of_the_Vampire_Queen denied
+        - wearing leather_helm|&4Cowl_of_a_Vampire_Queen denied
+        - wearing leather_helmet|&4Cowl_of_a_Vampire_Monarch denied
+        - wearing leather_chestplate|&4Coat_of_a_Vampire_Queen denied
+        - wearing leather_chestplate|&4Coat_of_a_Vampire_Monarch denied
+        - wearing leather_chestplate|&4Vampire__Robes denied
+        - wearingprecise VampireKnightMask denied
+        - wearingprecise VampireGuise denied
+        - buffactive VampireAdminDisable denied
+VampirePassive1-2:
+    spell-class: ".PassiveSpell"
+    triggers:
+        - Sprint
+    spells:
+        - VampireSpeed
+    modifiers:
+        - night required
+        - buffactive VampireAdminDisable denied
+    shared-cooldowns:
+        - Sprint 20
+        - roguespeed 20
+VampirePassive1-3:
+    spell-class: ".PassiveSpell"
+    triggers:
+        - ticks 20
+    spells:
+        - VampireSight
+    modifiers:
+        - lightlevelabove 10 denied
+        - buffactive VampireAdminDisable denied
+VampirePassive1-4:
+    spell-class: ".PassiveSpell"
+    triggers:
+        - ticks 20
+    spells:
+        - VampireBurnEff
+    modifiers:
+        - day required
+        - outside required
+        - storm denied
+        - buffactive VampireAdminDisable denied
+        - wearing leather_helmet|&4Vampire_Cowl denied
+        - wearing leather_helmet|&4Cowl_of_the_Vampire_Queen denied
+        - wearing leather_helm|&4Cowl_of_a_Vampire_Queen denied
+        - wearing leather_helmet|&4Cowl_of_a_Vampire_Monarch denied
+        - wearing leather_chestplate|&4Coat_of_a_Vampire_Queen denied
+        - wearing leather_chestplate|&4Coat_of_a_Vampire_Monarch denied
+        - wearing leather_chestplate|&4Vampire__Robes denied
+        - wearingprecise VampireKnightMask denied
+        - wearingprecise VampireGuise denied
+VampirePassiveRobes:
+    spell-class: ".PassiveSpell"
+    triggers:
+        - ticks 10
+    spells:
+        - VampireSlowness
+    modifiers:
+        - day required
+        - outside required
+        - storm denied
+        - buffactive VampireAdminDisable denied
+        - wearing leather_helmet|&4Vampire_Cowl continue
+        - wearing leather_helmet|&4Cowl_of_the_Vampire_Queen continue
+        - wearing leather_helmet|&4Cowl_of_a_Vampire_Queen continue
+        - wearing leather_helmet|&4Cowl_of_a_Vampire_Monarch continue
+        - wearing leather_chestplate|&4Coat_of_a_Vampire_Queen continue
+        - wearing leather_chestplate|&4Coat_of_a_Vampire_Monarch continue
+        - wearing leather_chestplate|&4Vampire_Robes continue
+VampirePassiveHunger:
+    spell-class: ".PassiveSpell"
+    cooldown: 160
+    triggers:
+        - ticks 4000
+    chance: 10
+    spells:
+        - VampirePassiveHunger1
+    modifiers:
+        - buffactive VampireAdminDisable denied
+VampirePassiveHunger2:
+    spell-class: ".PassiveSpell"
+    triggers:
+        - spellcast VampireHunger
+    chance: 100
+    spells:
+        - VampireHungerTake
+    modifiers:
+        - buffactive VampireAdminDisable denied
+VampirePassiveHunger3:
+    spell-class: ".PassiveSpell"
+    triggers:
+        - spellcast BiteSustenance
+    chance: 100
+    spells:
+        - VampireHungerClear
+    modifiers:
+        - buffactive VampireAdminDisable denied
+VampirePassiveHunger1:
+    spell-class: ".MultiSpell"
+    cooldown: 0
+    check-individual-cooldowns: false
+    cast-random-spell-instead: true
+    spells:
+        - Nospell
+        - Nospell
+        - Nospell
+        - Nospell
+        - VampireHunger
+        - Nospell
+        - Nospell
+        - Nospell
+        - Nospell
+        - Nospell
+VampireHungerTake:
+    spell-class: ".targeted.DrainlifeSpell"
+    name: VampireHungerTake
+    range: 1
+    take-type: hunger
+    take-amt: 10
+    give-type: hunger
+    give-amt: 0
+    animation-speed: 2
+    ignore-armor: true
+    obey-los: true
+    target-players: true
+    target-self: true
+    target-non-players: false
+    check-plugins: false
+    show-spell-effect: false
+VampireHungerClear:
+    spell-class: ".targeted.CleanseSpell"
+    remove:
+      - 17
+    targeted: false
+    target-players: true
+    target-self: true
+    beneficial: true
+VampireHunger:
+   spell-class: ".targeted.PotionEffectSpell"
+   type: 17
+   strength: 9
+   duration: 3000
+   targeted: false
+   str-cast-self: "&4You feel a sudden malevolent thirst"
+VampireSlowness:
+   spell-class: ".targeted.PotionEffectSpell"
+   type: 2
+   strength: 2
+   duration: 50
+   targeted: false
+VampireBurnEff:
+    spell-class: ".targeted.CleanseSpell"
+    remove:
+      - 12
+    targeted: false
+    target-players: true
+    target-self: true
+    beneficial: true
+VampireSpeed:
+   spell-class: ".targeted.PotionEffectSpell"
+   type: 1
+   strength: 3
+   duration: 200
+   targeted: false
+VampireSight:
+   spell-class: ".targeted.PotionEffectSpell"
+   type: 16
+   strength: 9
+   duration: 300
+   targeted: false
+VampireCombust:
+   spell-class: ".targeted.CombustSpell"
+   obey-los: false
+   fire-ticks: 20
+   fire-tick-damage: 1
+   prevent-immunity: true
+   target-players: false
+   target-caster: false
+   target-self: true
+   check-plugins: true
+BurnHarm:
+   spell-class: ".targeted.PainSpell"
+   damage: 1
+   name: Burnharm
+   ignore-armor: true
+   obey-los: false
+   target-players: false
+   target-self: true
+   target-non-players: false
+   check-plugins: false
+Bite:
+    spell-class: ".TargetedMultiSpell"
+    description:
+    name: Bite
+    cast-time: 20
+    interrupt-on-cast: false
+    interrupt-on-damage: false
+    interrupt-on-move: true
+    require-entity-target: true
+    check-individual-cooldowns: false
+    check-individual-modifiers: true
+    cooldown: 10
+    cost:
+        - mana 25
+    str-cost: "25 Mana"
+    str-cast-self: ""
+    str-cast-others: ""
+    range: 1
+    spells:
+        - BiteFeed
+        - VampireHungerClear
+        - BiteR1
+        - BiteSlowness
+        - BiteSlowness2
+        - BiteSustenance
+        - DELAY 5
+        - BiteFeed
+        - BiteR1
+        - BiteSlowness
+        - BiteSlowness2
+        - DELAY 5
+        - BiteFeed
+        - BiteR1
+        - BiteSlowness
+        - BiteSlowness2
+        - DELAY 5
+        - BiteFeed
+        - BiteR1
+        - BiteSlowness
+        - BiteSlowness2
+        - DELAY 5
+        - BiteFeed
+        - BiteR1
+        - BiteSlowness
+        - BiteSlowness2
+        - DELAY 5
+        - BiteFeed
+        - BiteR1
+        - BiteSlowness
+        - BiteSlowness2
+        - DELAY 5
+        - BiteFeed
+        - BiteR1
+        - BiteSlowness
+        - BiteSlowness2
+        - DELAY 5
+        - BiteFeed
+        - BiteR1
+        - BiteSlowness
+        - BiteSlowness2
+        - DELAY 5
+BiteSlowness:
+   spell-class: ".targeted.PotionEffectSpell"
+   type: 2
+   strength: 5
+   duration: 50
+   targeted: false
+BiteSustenance:
+   spell-class: ".targeted.PotionEffectSpell"
+   type: 23
+   strength: 5
+   duration: 3600
+   targeted: false
+BiteSlowness2:
+   spell-class: ".targeted.PotionEffectSpell"
+   type: 2
+   strength: 5
+   duration: 50
+   targeted: true
+BiteFeed:
+    spell-class: ".targeted.DrainlifeSpell"
+    name: BiteFeed
+    range: 1
+    take-type: health
+    take-amt: 1
+    give-type: hunger
+    give-amt: 2
+    animation-speed: 2
+    ignore-armor: true
+    obey-los: true
+    target-players: true
+    target-non-players: true
+    check-plugins: false
+    show-spell-effect: false
+    effects:
+      eff1:
+        position: target
+        effect: effectlib
+        effectlib:
+            class: BleedEffect
+            hurt: false
+            particle: BLOCK_CRACK
+            Material: Redstone
+            height: 0.5
+            color: 55
+            iterations: 1
+            period: 2
+            particles: 10
+BiteR1:
+    spell-class: ".targeted.RotateSpell"
+    random: false
+    rotation: 180
+    target-self: false
+BiteR2:
+    spell-class: ".targeted.RotateSpell"
+    random: false
+    rotation: 140
+    target-self: false
+Turn:
+    spell-class: ".instant.RitualSpell"
+    name: Turn
+    cooldown: 1000
+    ritual-duration: 200
+    req-participants: 2
+    need-spell-to-participate: false
+    charge-reagents-immediately: false
+    set-cooldown-immediately: false
+    set-cooldown-for-all: true
+    spell: TurnEff
+    str-cast-self: "&4You offer to spread the curse."
+    str-cast-others: "%a &4offers to spread the curse."
+    str-ritual-joined: "&4You take on the Vampire curse."
+    str-ritual-interrupted: "&4You have been interrupted."
+    str-ritual-fail: "&4The curse fails to spread."
+TurnEff:
+    spell-class: ".ExternalCommandSpell"
+    enabled: true
+    description:
+    can-cast-by-command: false
+    can-cast-with-item: false
+    command-to-execute:
+        - "exec u:%t a:addgroup v:Vampire"
+        - "exec u:%t a:rmgroup v:Disease"
+    command-to-execute-later: []
+    command-delay: 0
+    temporary-permissions:
+        - "bPermissions.admin"
+    command-to-block:
+        - "gt"
+    execute-on-console-instead: true
+    require-player-target: true
+    execute-as-target-instead: false
+    obey-los: true
+    range: 20
+    cost:
+        - mana 0
+    str-cost: 0 Mana
+    str-cast-self:
+    str-cant-use-command: "&4You don't have permission to do that."
+    effects:
+      eff1:
+        position: target
+        effect: effectlib
+        effectlib:
+            class: BleedEffect
+            hurt: false
+            particle: BLOCK_CRACK
+            Material: Redstone
+            height: 0.5
+            color: 55
+            iterations: 1
+            period: 2
+            particles: 10
+Seduce:
+    spell-class: ".instant.ParticleProjectileSpell"
+    projectile-velocity: 0.1
+    duration: 1
+    projectile-gravity: 1
+    power-affects-velocity: false
+    tick-interval: 1
+    special-effect-interval: 1
+    particle-name: reddust
+    particle-speed: 0.01
+    particle-count: 0
+    max-distance: 1
+    hit-players: true
+    hit-non-players: true
+    effects:
+      Sound1:
+        position: special
+        effect: sound
+        sound: entity.evocation_illager.prepare_attack
+        volume: 2
+        pitch: 1.5
+      eff1_1:
+        position: special
+        effect: effectlib
+        effectlib:
+          class: EquationEffect
+          particle: REDSTONE
+          color: 000000
+          particles: 20
+          relativeOffset: -1,2,-0
+          particles2: 5
+          duration: 1750
+          iterations: 1
+          orientPitch: false
+          cycle: true
+          xEquation: (t / 60) * cos((t / 75) ^ 0.7 + 4 * 3.1415 / 8 * t2)
+          yEquation: -2 * 10.7183^(-t / 75)
+          zEquation: (t / 60) * sin((t / 75) ^ 0.7 + 4 * 3.1415 / 8 * t2)
+      eff1_2:
+        position: special
+        effect: effectlib
+        effectlib:
+          class: EquationEffect
+          particle: REDSTONE
+          particles: 20
+          relativeOffset: -1,2,-0
+          particles2: 5
+          duration: 1750
+          iterations: 1
+          orientPitch: false
+          cycle: true
+          xEquation: (t / 60) * cos((t / 75) ^ 0.7 + 4 * 3.1415 / 8 * t2)
+          yEquation: -2 * 10.7183^(-t / 60)
+          zEquation: (t / 60) * sin((t / 75) ^ 0.7 + 4 * 3.1415 / 8 * t2)
+      eff2_1:
+        position: special
+        effect: effectlib
+        effectlib:
+          class: EquationEffect
+          particle: REDSTONE
+          color: 000000
+          particles: 20
+          relativeOffset: -1,2,-0
+          particles2: 5
+          duration: 1750
+          iterations: 1
+          orientPitch: false
+          cycle: true
+          xEquation: (t / 60) * cos(-(t / 75) ^ 0.7 - 4 * 3.1415 / 8 * t2)
+          yEquation: -2 * 10.7183^(-t / 60)
+          zEquation: (t / 60) * sin(-(t / 75) ^ 0.7 - 4 * 3.1415 / 8 * t2)
+      eff2_2:
+        position: special
+        effect: effectlib
+        effectlib:
+          class: EquationEffect
+          particle: REDSTONE
+          color: 000000
+          particles: 20
+          relativeOffset: -1,2,-0
+          particles2: 5
+          duration: 1750
+          iterations: 1
+          orientPitch: false
+          cycle: true
+          xEquation: -(t / 60) * cos((t / 75) ^ 0.7 + 4 * 3.1415 / 8 * t2)
+          yEquation: -2 * 10.7183^(-t / 60)
+          zEquation: -(t / 60) * sin((t / 75) ^ 0.7 + 4 * 3.1415 / 8 * t2)
+SeduceAOE:
+    spell-class: ".targeted.AreaEffectSpell"
+    name: SeduceAOE
+    horizontal-radius: 15
+    vertical-radius: 15
+    point-blank: true
+    target-players: true
+    fail-if-no-targets: true
+    spells:
+        - SeduceEFF
+    cooldown: 60
+    cost:
+        - Mana 75
+    str-cost:
+    str-cast-self: "&cYou seduce those nearby"
+    str-cast-others: "&cYou are seduced by &c%a."
+SeduceEff:
+    spell-class: ".targeted.PotionEffectSpell"
+    name: SeduceEff
+    type: 11
+    strength: -20
+    duration: 750
+    targeted: true
+    target-non-players: true
+Seduced:
+    spell-class: ".buff.DummySpell"
+    duration: 5
+    effects:
+      Primeffect1:
+        position: orbit
+        orbit-radius: 0.3
+        orbit-seconds-per-revolution: 0.7
+        orbit-tick-interval: 1
+        orbit-y-offset: 0
+        effect: particles
+        particle-name: damageIndicator
+        horiz-spread: 0.0001
+        vert-spread: 0.0000
+        speed: 0
+        count: 3
+        y-offset: 1.5
+SeduceP:
+    spell-class: ".PassiveSpell"
+    triggers:
+        - spelltargeted SeduceEff
+    chance: 100
+    cast-without-target: true
+    cooldown: 0
+    spells:
+        - Seduced
+SeduceP2:
+    spell-class: ".PassiveSpell"
+    triggers:
+        - spellcast Seduce
+    chance: 100
+    cast-without-target: true
+    cooldown: 0
+    spells:
+        - Seduced

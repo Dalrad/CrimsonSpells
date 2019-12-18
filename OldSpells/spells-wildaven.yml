@@ -1,0 +1,387 @@
+    WildavenKill:
+        spell-class: ".PassiveSpell"
+        triggers: 
+            - kill player
+        chance: 100
+        cooldown: 4
+        cast-without-target: true
+        spells:
+            - Mossyg
+    Mossyg:
+        spell-class: ".ExternalCommandSpell"
+        name: Mossyg
+        enabled: true
+        can-cast-by-command: true
+        can-cast-with-item: false
+        command-to-execute:
+            - "replacenear 5 2 80%2,20%48"
+
+        command-to-execute-later:
+            - "replacenear 2 98 80%98,20%98:1"
+        command-delay: 1
+        temporary-op: true
+        require-player-target: false
+        execute-as-target-instead: false
+        block-chat-output: true
+        obey-los: false
+        range: 10
+
+    Blink:
+        spell-class: ".targeted.BlinkSpell"
+        name: Blink
+        cast-item: STICK
+        range: 15
+        check-individual-cooldowns: false
+        require-entity-target: false
+        target-players: true
+        modifiers:
+            - biome FOREST,FOREST_HILLS,JUNGLE,JUNGLE_HILLS,JUNGLE_EDGE,GIANT_SPRUCE_TAIGA,JUNGLE_MOUNTAINS,JUNGLE_EDGE_MOUNTAINS,ROOFED_FOREST,ROOFED_FOREST_MOUNTAINS,FLOWER_FOREST,BIRCH_FOREST,BIRCH_FOREST_HILLS,BIRCH_FOREST_MOUNTAINS,BIRCH_FOREST_HILLS_MOUNTAINS,DARK_FOREST,TAIGA,MEGA_TAIGA required
+        cost:
+            - mana 20
+        str-cost: 20 Mana.
+        str-cast-self: "&5Blink"
+        effects:
+            - pos1 greensparkle
+            - pos2 greensparkle
+    entityblink:
+        spell-class: ".targeted.BlinkSpell"
+        pass-through-ceiling: false
+        smoke-trail: false
+        effects:
+            - pos1 greensparkle
+            - pos2 greensparkle
+
+    Logwall:
+        spell-class: ".instant.WallSpell"
+        name: Logwall
+        cast-item: STICK
+        range: 15
+        wall-width: 5
+        wall-height: 4
+        wall-type: 17
+        wall-duration: 10
+        effects:
+          targetparticles:
+            position: target
+            effect: greensparkle
+        cost:
+            - mana 40
+        str-cost: 40 Mana.
+        str-cast-self: "&5Logwall"
+
+    Food:
+        spell-class: ".instant.FoodSpell"
+        name: Food
+        cast-item: STICK
+        food: 20
+        saturation: 2.5
+        effects:
+          targetparticles:
+            position: caster
+            effect: greensparkle
+          SOUNDBurp:
+            position: caster
+            effect-interval: 50
+            delay: 10
+            effect: sound
+            sound: random.burp
+            volume: 10
+            pitch: 0.9
+          SOUNDEat:
+            position: caster
+            effect-interval: 50
+            effect: sound
+            sound: random.eat
+            volume: 10
+            pitch: 0.7
+        cost:
+            - mana 200
+        str-cost: 200 Mana
+        str-cast-self: "&5Food"
+
+
+    LeafTomb:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: LeafTomb
+        cast-item: STICK
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: happyVillager
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 15
+        max-duration: 10
+        hit-radius: 1
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        spell: xLeafTomb
+        cost:
+            - mana 25
+        str-cost: 25 Mana
+        str-cast-self: "&5LeafTomb"
+
+    xLeafTomb:
+        spell-class: ".targeted.EntombSpell"
+        damage: 1
+        obey-los: true
+        target-players: true
+        tomb-block-type: 18
+        tomb-duration: 10
+
+    LogTomb:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: LogTomb
+        cast-item: STICK
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: happyVillager
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 15
+        max-duration: 10
+        hit-radius: 1
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        spell: xLogTomb
+        cost:
+            - mana 50
+        str-cost: 50 Mana
+        str-cast-self: "&5LogTomb"
+
+    xLogTomb:
+        spell-class: ".targeted.EntombSpell"
+        damage: 1
+        obey-los: true
+        target-players: true
+        tomb-block-type: 17
+        tomb-duration: 10
+
+    Nurture:
+        spell-class: ".targeted.HealSpell"
+        name: Nurture
+        description: Heals an Animal.
+        cast-item: STICK
+        heal-amount: 70
+        cancel-if-full: true
+        can-target: animals
+        obey-los: true
+        range: 15
+        effects:
+          casterparticles:
+            position: caster
+            effect: greensparkle
+          targetparticles:
+            position: target
+            effect: greensparkle
+          casterpositive:
+            position: caster
+            effect: particles
+            particle-name: spell
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0.1
+            count: 20
+            y-offset: 0.5
+            render-distance: 15
+          targetpositive:
+            position: target
+            effect: particles
+            particle-name: fireworksSpark
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0.1
+            count: 20
+            y-offset: 0.5
+            render-distance: 15
+        cost:
+            - mana 25
+        str-cost: 25 Mana
+        str-no-target: "&4No Target."
+        str-max-health: "This animal is already at full health."
+        str-cast-self: "&5Nurture"
+
+    Stake:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Stake
+        cast-item: STICK
+        power-multiplier: 1
+        can-cast-by-command: false
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: happyVillager
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 15
+        max-duration: 10
+        hit-radius: 1
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        spell: xStake
+        cost:
+            - mana 40
+        str-cost: 40 Mana
+        str-cast-self: "&5Stake"
+
+    xStake:
+        spell-class: ".targeted.GeyserSpell"
+        damage: 7
+        velocity: 1
+        animation-speed: 2
+        geyser-height: 4
+        geyser-type: 17
+        ignore-armor: false
+        obey-los: true
+        target-players: true
+        check-plugins: false
+
+    Sustenance:
+        spell-class: ".targeted.DrainlifeSpell"
+        name: Sustenance
+        cast-item: STICK
+        range: 1
+        take-type: hunger
+        take-amt: 10
+        give-type: health
+        give-amt: 20
+        animation-speed: 2
+        ignore-armor: true
+        obey-los: true
+        target-players: false
+        target-self: true
+        check-plugins: false
+        effects:
+          greensparkle:
+            position: caster
+            effect: greensparkle
+          spell:
+            position: target
+            effect: particles
+            particle-name: spell
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0.1
+            count: 20
+            y-offset: 0.5
+            render-distance: 15
+        cost:
+            - mana 50
+        str-cost: 50 Mana
+        str-cast-self: "&5Sustenance"
+
+    Beam:
+        spell-class: ".targeted.TransmuteSpell"
+        name: Beam
+        range: 5
+        transmutable-types: [ 2,3,4,13 ]
+        transmute-type: 17
+        transmute-data: 0
+        effects:
+          greensparkle:
+            position: caster
+            effect: greensparkle
+        cost:
+            - mana 20
+        str-cost: 20 Mana
+        str-cast-self: "&5Beam"
+
+    WildavenGift:
+        spell-class: ".instant.ConjureSpell"
+        name: WildavenGift
+        description: Ask Wildaven for some gifts.
+        cast-item: IRON_INGOT
+        bindable: false
+        can-cast-by-command: false
+        cooldown: 1200
+        items:
+            - 106 2-5 10%
+            - 17 5-7
+            - 17:1 5-7 10%
+            - 17:2 5-7 10%
+            - 17:3 5-7 10%
+            - 262 1-2 10%
+            - 265 1 40%
+            - 296 1-2 10%
+            - 264 1 2%
+        add-to-inventory: false
+        cost:
+            - IRON_INGOT 1
+        str-cost: 1 Iron Ingot
+        str-cast-self: "&dThings appear!"
+    Fertilise:
+        spell-class: ".targeted.FarmSpell"
+        name: Fertilise
+        cast-item: STICK
+        radius: 5
+        growth: 5
+        targeted: false
+        cost:
+            - mana 100
+        str-cost: 100 Mana
+        effects:
+          greensparkle:
+            position: caster
+            effect: greensparkle
+        str-cast-self: "&5Fertilise"
+        str-no-target: There are no crops nearby.
+    largetree:
+        spell-class: ".targeted.TreeSpell"
+        name: LargeTree
+        spell-icon: 6
+        range: 15
+        tree-type: big tree
+        animation-speed: 20
+        str-cost:
+        str-no-target: You cannot grow a tree there.
+    Tree:
+        spell-class: ".targeted.TreeSpell"
+        name: Tree
+        spell-icon: 6
+        range: 15
+        tree-type: tree
+        animation-speed: 20
+        cost:
+            - mana 50
+            - SAPLING 1
+        str-cost: 50 Mana and 1 Oak Sapling
+        str-no-target: You cannot grow a tree there.
+    bigtree:
+        spell-class: ".instant.RitualSpell"
+        name: BigTree
+        spell-icon: 90
+        description: Create big trees where you are looking. This ritual requires 2 participants.
+        incantations:
+            - "grow a tree that looks your way and lifts the leafy arms to pray"
+        ritual-duration: 300
+        req-participants: 2
+        need-spell-to-participate: true
+        charge-reagents-immediately: true
+        set-cooldown-immediately: true
+        set-cooldown-for-all: true
+        spell: largetree
+        tick-interval: 5
+        effect-interval: 20
+        str-cost: free
+        str-cast-self: You begin a Tree summoning ritual.
+        str-cast-others: "%a has begun a Tree summoning ritual. Right-click to participate."
+        str-ritual-joined: You have joined the Tree summoning ritual.
+        str-ritual-success: The Tree summoning ritual is a success!
+        str-ritual-interrupted: The Tree summoning ritual has been interrupted.
+        str-ritual-fail: The Tree summoning ritual has failed.

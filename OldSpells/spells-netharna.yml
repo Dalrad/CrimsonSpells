@@ -1,0 +1,906 @@
+    NetharnaKill:
+        spell-class: ".PassiveSpell"
+        triggers: 
+            - kill player
+        chance: 100
+        cooldown: 4
+        cast-without-target: true
+        spells:
+            - shortcombust
+
+    Darkfire:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Darkfire
+        cast-item: STICK
+        modifiers:
+            - biome HELL power 1.5
+        projectile-velocity: 0
+        projectile-gravity: 0
+        particle-name: smoke
+        particle-speed: 1
+        particle-count: 150
+        particle-horizontal-spread: 2
+        particle-vertical-spread: 2
+        max-duration: 10
+        hit-radius: 10
+        hit-players: false
+        hit-non-players: false
+        hit-ground: false
+        hit-air-at-end: false
+        hit-air-during: true
+        hit-ground: false
+        spell-interval: 20
+        stop-on-hit-entity: false
+        stop-on-hit-ground: false
+        effects:
+          flames:
+            position: caster
+            effect: ender
+          target:
+            position: target
+            effect: bluesparkle
+        spell: xaoedarkfire
+        cost:
+            - mana 80
+        str-cost: 80 Mana
+        str-cast-self: "&5Darkfire"
+
+    xaoedarkfire:
+        spell-class: ".targeted.AreaEffectSpell"
+        horizontal-radius: 10
+        vertical-radius: 10
+        point-blank: true
+        fail-if-no-targets: true
+        target-players: true
+        target-non-players: true
+        max-targets: 4
+        spells:
+            - xDarkfire
+
+    xDarkfire:
+        spell-class: ".targeted.CleanseSpell"
+        remove:
+          - 12
+        targeted: true
+        target-players: true
+        target-self: false
+        beneficial: true
+
+    Netherbind:
+        spell-class: ".instant.MarkSpell"
+        name: Netherbind
+        description: Binds a location in the Nether for later.
+        cast-item: GHAST_TEAR
+        bindable: false
+        can-cast-by-command: false
+        can-cast-with-item: true
+        permanent-marks: true
+        modifiers:
+            - biome HELL required
+        cost:
+            - GHAST_TEAR 1
+        str-cost: 1 Ghast Tear
+        str-cast-self: "&dYou feel bound to this place."
+
+    Netherbound:
+        spell-class: ".instant.RecallSpell"
+        name: Netherbound
+        description: Sends you to your bound place in the Nether.
+        cast-item: GOLD_NUGGET
+        bindable: false
+        can-cast-by-command: false
+        can-cast-with-item: true
+        mark-spell: netherbind
+        max-range: -1
+        cast-time: 200
+        allow-cross-world: true
+        use-bed-location: false
+        cost:
+            - GOLD_NUGGET 1
+        effects:
+          exit:
+            position: pos1
+            effect: particles
+            particle-name: flame
+            horiz-spread: 0.2
+            vert-spread: 0.2
+            speed: 0.1
+            count: 50
+          enter:
+            position: pos2
+            effect: particles
+            particle-name: flame
+            horiz-spread: 0.2
+            vert-spread: 0.2
+            speed: 0.1
+            count: 50
+        str-cost: 1 Gold Nugget.
+        str-no-mark: "&cYou don't feel bound to a place in the Nether."
+        str-cast-start: "&dEmbers appear around your body."
+        str-cast-others: "&d%a disappears in a flash of embers!"
+        str-cast-done: "&dYou are suddenly in a different place!"
+        str-cast-interrupted: "&cThe embers fade away."
+    SeekingFlame1:
+        spell-class: ".MultiSpell"
+        description: Summons a Fairy
+        name: SeekingFlame1
+        cast-item: LEATHER
+        check-individual-cooldowns: false
+        check-individual-modifiers: true
+        cooldown: 0
+        cost:
+            - mana 0
+        str-cost: ""
+        str-cast-self: 
+        str-cast-others:
+        spells:
+            - Xxcombust
+            - SeekingNova
+
+    SeekingFlame:
+        spell-class: ".targeted.HomingMissileSpell"
+        name: SeekingFlame
+        cooldown: 1
+        cast-item: STICK
+        can-cast-by-command: true
+        modifiers:
+            - biome HELL power 1.5
+        projectile-velocity: 4
+        projectile-inertia: 10
+        particle-name: flame
+        spell: 10ArmourHarm
+        target-players: true
+        effects:
+          endspirit:
+            position: special
+            effect: particles
+            particle-name: flame
+            horiz-spread: 0.1
+            vert-spread: 0.1
+            speed: 0
+            count: 200
+            y-offset: 0
+          sound1:
+            position: buff
+            effect: sound
+            sound: fire.fire
+            effect-interval: 10
+            volume: 10
+            pitch: 0.1
+        cost:
+            - mana 50
+        str-cost: 50 Mana
+        str-cast-self: "&5Seeking Flame"
+
+    SeekingNova:
+        spell-class: ".instant.FirenovaSpell"
+        name: SeekingNova
+        spell-icon: blaze_powder
+        description: Summon an expanding ring of fire.
+        cast-item: BONE
+        cooldown: 10
+        range: 8
+        tick-speed: 11
+        burn-tall-grass: true
+        check-plugins: true
+        cost:
+            - mana 0
+        str-cost: 0 mana
+        str-cast-self:
+        str-cast-others:
+
+    NetharnaGift:
+        spell-class: ".instant.ConjureSpell"
+        name: NetharnaGift
+        description: Ask Netharna for some gifts.
+        modifiers:
+            - biome HELL required
+        cast-item: IRON_INGOT
+        bindable: false
+        can-cast-by-command: false
+        cooldown: 1200
+        items:
+            - 348 2-4
+            - 35:14 1-2 10%
+            - 369 1 10%
+            - 370 1 10%
+            - 265 1 40%
+            - 373:8259 1 5%
+            - 264 1 2%
+        add-to-inventory: false
+        cost:
+            - IRON_INGOT 1
+        str-cost: 1 Iron Ingot
+        str-cast-self: "&5Things appear!"
+
+    Firebolt:
+        spell-class: ".targeted.FireballSpell"
+        name: Firebolt
+        cooldown: 1
+        cast-item: STICK
+        modifiers:
+            - biome HELL power 1.5
+        can-cast-by-command: true
+        range: 50
+        require-entity-target: false
+        obey-los: true
+        target-players: true
+        check-plugins: true
+        damage-multiplier: 3
+        small-fireball: true
+        no-fire: true
+        no-explosion: false
+        effects:
+          flames:
+            position: caster
+            effect: particles
+            particle-name: flame
+            horiz-spread: 0.1
+            vert-spread: 0.1
+            speed: 0.2
+            count: 40
+        cost:
+            - mana 20
+        str-cost: 20 Mana
+        str-cast-self: "&5Firebolt"
+
+    Fireball:
+        spell-class: ".targeted.FireballSpell"
+        name: Fireball
+        cooldown: 1
+        cast-item: STICK
+        modifiers:
+            - biome HELL power 1.5
+        can-cast-by-command: true
+        range: 30
+        require-entity-target: false
+        obey-los: true
+        target-players: true
+        check-plugins: true
+        damage-multiplier: 2
+        small-fireball: false
+        no-fire: false
+        no-explosion: true
+        no-explosion-effect: true
+        no-explosion-damage-range: 5
+        effects:
+          flames:
+            position: caster
+            effect: particles
+            particle-name: flame
+            horiz-spread: 0.2
+            vert-spread: 0.2
+            speed: 0.1
+            count: 50
+        cost:
+            - mana 40
+        str-cost: 40 Mana
+        str-cast-self: "&5Fireball"
+
+    NetherRage:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: NetherRage
+        cooldown: 1
+        cast-item: STICK
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 1
+        special-effect-interval: 0
+        particle-name: flame
+        particle-speed: 0.1
+        particle-count: 50
+        particle-horizontal-spread: 0.2
+        particle-vertical-spread: 0.2
+        max-distance: 30
+        max-duration: 30
+        hit-radius: 3
+        vertical-hit-radius: 3
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        spell: xxNetherRage
+        cost:
+            - mana 75
+        str-cost: 75 Mana
+        str-cast-self: "&5Nether Rage"
+
+    xxNetherRage:
+        spell-class: ".targeted.CombustSpell"
+        target-modifers:
+            - wearing 310 addpower 2.5
+            - wearing 311 addpower 2.5
+            - wearing 312 addpower 2.5
+            - wearing 313 addpower 2.5
+        obey-los: true
+        fire-ticks: 1000
+        fire-tick-damage: 3
+        prevent-immunity: true
+        target-players: true
+        check-plugins: false
+    xxCombust:
+        spell-class: ".targeted.CombustSpell"
+        obey-los: true
+        fire-ticks: 200
+        fire-tick-damage: 4
+        prevent-immunity: true
+        target-players: true
+        check-plugins: false
+
+    Combust:
+        spell-class: ".targeted.AreaEffectSpell"
+        name: Combust
+        cooldown: 1
+        description: Ignite all nearby living things.
+        cast-item: STICK
+        modifiers:
+            - biome HELL power 1.5
+        can-cast-by-command: true
+        horizontal-radius: 6
+        vertical-radius: 6
+        point-blank: true
+        fail-if-no-targets: false
+        target-invisible-players: true
+        target-players: true
+        target-non-players: true
+        effects:
+          targetparticles:
+            position: caster
+            effect: fireworks
+            flicker: false
+            trail: false
+            type: 1
+            flight: 0
+            colors: FF0000
+            fade-colors: AA0000
+          flames:
+            position: caster
+            effect: particles
+            particle-name: flame
+            horiz-spread: 0.2
+            vert-spread: 0.2
+            speed: 0.1
+            count: 50
+        spells:
+            - xNetherRage
+            - 6harm
+        cost:
+            - mana 140
+        str-cost: 140 Mana
+        str-cast-self: "&5Combust"
+
+    Immolate:
+        spell-class: ".MultiSpell"
+        name: Immolate
+        modifiers:
+            - biome HELL power 1.5
+        target-players: false
+        target-self: true
+        range: 1
+        check-individual-cooldowns: false
+        spells:
+            - selfcombust
+            - burnclose
+        cost:
+            - mana 30
+        str-cost: 30 Mana
+        str-cast-self: "&5Immolate"
+
+    selfcombust:
+        spell-class: ".targeted.CombustSpell"
+        obey-los: false
+        fire-ticks: 200
+        fire-tick-damage: 2
+        prevent-immunity: true
+        target-players: true
+        target-caster: true
+        target-self: true
+        check-plugins: false
+
+    shortcombust:
+        spell-class: ".targeted.CombustSpell"
+        obey-los: true
+        fire-ticks: 50
+        fire-tick-damage: 2
+        prevent-immunity: false
+        target-players: false
+        target-self: true
+        check-plugins: false
+
+    burnclose:
+        spell-class: ".buff.FlamewalkSpell"
+        range: 2
+        fire-ticks: 100
+        tick-interval: 10
+        target-players: true
+        target-non-players: true
+        duration: 10
+    FlameWalk1:
+        spell-class: ".targeted.CombustSpell"
+        obey-los: false
+        fire-ticks: 100
+        fire-tick-damage: 1
+        prevent-immunity: true
+        target-players: true
+        check-plugins: false
+
+    Flamewalk:
+        spell-class: ".buff.FlamewalkSpell"
+        name: Flamewalk
+        cast-item: STICK
+        modifiers:
+            - biome HELL power 1.5
+        range: 6
+        fire-ticks: 200
+        tick-interval: 1
+        target-players: true
+        target-non-players: true
+        duration: 10
+        effects:
+          1:
+            position: buff
+            effect-interval: 10
+            effect: particles
+            particle-name: flame
+            horiz-spread: 0.2
+            vert-spread: 0.2
+            speed: 0.1
+            count: 50
+          2:
+            position: buff
+            effect: sound
+            sound: fire.fire
+            effect-interval: 5
+            volume: 10
+            pitch: 0.1
+        cost:
+            - mana 80
+        str-cost: 80 Mana
+        str-cast-self: "&5Flame Walk"
+    Rupture:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Rupture
+        cooldown: 1
+        cast-item: STICK
+        can-cast-by-command: false
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 1
+        special-effect-interval: 0
+        particle-name: lava
+        particle-speed: 0.
+        particle-count: 8
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 30
+        max-duration: 30
+        hit-radius: 2
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: true
+        spell: xxRupture
+        cost:
+            - mana 75
+        str-cost: 75 Mana
+        str-cast-self: "&5Rupture"
+
+    xxRupture:
+        spell-class: ".targeted.AreaEffectSpell"
+        horizontal-radius: 4
+        vertical-radius: 4
+        point-blank: true
+        fail-if-no-targets: false
+        spells: [RuptureDamage]
+        effects:
+            Sound:
+                position: caster
+                sound: entity.generic.explode
+            Particles:
+                position: special
+                effect: particles
+                forward-offset: 1
+                height-offset: 1
+                particle-name: cloud
+                horiz-spread: 4
+                vert-spread: 4
+                count: 30
+                speed: 0
+
+
+    RuptureDamage:
+         spell-class: ".targeted.ForcetossSpell"
+         damage: 4
+         horizontal-force: 10
+         vertical-force: 10
+         avoid-damage-modification: true
+    
+
+    FireSpirit:
+        spell-class: ".instant.ParticleProjectileSpell"
+        description: Slow projectile which deal damage and slow on hit.
+        name: FireSpirit
+        cast-item: BLAZE_ROD
+        projectile-velocity: 2.5
+        projectile-gravity: 0
+        tick-interval: 1
+        special-effect-interval: 2
+        particle-name: flame
+        particle-speed: 0.01
+        particle-count: 50
+        particle-horizontal-spread: 0.3
+        particle-vertical-spread: 0.3
+        max-distance: 20
+        max-duration: 100
+        hit-radius: 1.5
+        vertical-hit-radius: 1.5
+        hit-players: true
+        spell: MULTI_firespirit
+        cooldown: 0
+        cost:
+            - mana 0
+        str-cost: ""
+        str-cast-self: ""
+        str-cast-others: ""
+        effects:
+          spirit:
+            position: special
+            effect: particles
+            particle-name: reddust
+            horiz-spread: 0.4
+            vert-spread: 0.4
+            speed: 0
+            count: 200
+            y-offset: 0
+          endspirit:
+            position: delayed
+            effect: particles
+            particle-name: flame
+            horiz-spread: 0.1
+            vert-spread: 0.1
+            speed: 0.2
+            count: 200
+            y-offset: 0
+          sound1:
+            position: caster
+            effect: sound
+            sound: entity.ghast.fireball
+            volume: 1.0
+            pitch: 0.1
+          sound2:
+            position: special
+            effect: sound
+            sound: fire.fire
+            volume: 1.0
+            pitch: 0.1
+          sound3:
+            position: target
+            effect: sound
+            sound: entity.blaze.death
+            volume: 1.0
+            pitch: 0.1
+    MULTI_firespirit:
+        spell-class: ".TargetedMultiSpell"
+        check-individual-cooldowns: false
+        require-entity-target: true
+        can-target: players,nonplayers
+        check-individual-modifiers: true
+        spells:
+            - 4harm
+            - target200slow2
+    FireArrow1:
+        spell-class: ".targeted.VolleySpell"
+        name: FireArrow
+        spell-icon: 261
+        description: Send a volley of arrows at your targeted location.
+        cast-item: GOLD_SWORD
+        cooldown: 60
+        range: 100
+        no-target: true
+        arrows: 400
+        fire: 500
+        speed: 20
+        spread: 250
+        shoot-interval: 1
+        remove-delay: 200
+        cost:
+            - Mana 0
+        str-cost:
+        str-cast-self: You fire a volley of magic arrows.
+        str-cast-others:
+        str-no-target: No target found.
+    FireArrow2:
+        spell-class: ".targeted.VolleySpell"
+        name: FireArrow
+        spell-icon: 261
+        description: Send a volley of arrows at your targeted location.
+        cast-item: GOLD_SWORD
+        cooldown: 60
+        range: 100
+        no-target: true
+        arrows: 400
+        fire: 500
+        speed: 20
+        spread: 350
+        shoot-interval: 1
+        remove-delay: 200
+        cost:
+            - Mana 0
+        str-cost: 
+        str-cast-self:
+        str-cast-others:
+        str-no-target:
+    FireArrow3:
+        spell-class: ".targeted.VolleySpell"
+        name: FireArrow
+        spell-icon: 261
+        description: Send a volley of arrows at your targeted location.
+        cast-item: GOLD_SWORD
+        cooldown: 60
+        range: 100
+        no-target: true
+        arrows: 400
+        fire: 500
+        speed: 20
+        spread: 150
+        shoot-interval: 1
+        remove-delay: 200
+        cost:
+            - Mana 0
+        str-cost:
+        str-cast-self: 
+        str-cast-others:
+        str-no-target: 
+    CoveringFire:
+        spell-class: ".MultiSpell"
+        description: Summons a Fairy
+        name: CoveringFire
+        cast-item: GOLD_SWORD
+        check-individual-cooldowns: false
+        check-individual-modifiers: true
+        cooldown: 60
+        cost:
+            - mana 100
+        str-cost: ""
+        str-cast-self: 
+        str-cast-others:
+        spells:
+            - FireArrow1
+            - FireArrow2
+            - FireArrow3
+            - FireArrowEff
+            - ArrowShield
+    ArrowShield:
+        spell-class: ".buff.InvulnerabilitySpell"
+        name: ArrowShield
+        description: Keeps you safe from some forms of damage.
+        cast-item: STICK
+        damage-causes:
+            - projectile
+            - fire
+            - fire tick
+        duration: 15
+        cooldown: 60
+        cost:
+            - mana 0
+        str-cost:
+        str-cast-self:
+        str-cast-others:
+        str-fade:
+    FireArrowEff:
+        spell-class: ".instant.ProjectileSpell"
+        name: FireArrowEff
+        spell-icon: arrow
+        description: Cause an explosion where an arrow lands
+        cast-item: blaze_rod
+        cooldown: 60
+        projectile: arrow
+        velocity: 0
+        require-hit-entity: false
+        aoe-radius: 15
+        cancel-damage: false
+        remove-projectile: true
+        allow-target-change: false
+        max-distance: 100
+        spells:
+            - FireArrowPot1
+            - FireArrowPot2
+            - FireArrowPot3
+            - FireArrowPot4
+        cost:
+            - mana 0
+    str-cost: 
+    str-cast-self:
+    FireArrowPot1:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: FireArrowPot1
+        type: 2
+        strength: 2
+        duration: 400
+        obey-los: false
+        targeted: true
+        target-players: true
+        target-non-players: true
+
+    FireArrowPot2:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: FireArrowPot2
+        type: 4
+        strength: 3
+        duration: 400
+        obey-los: false
+        targeted: true
+        target-players: true
+        target-non-players: true
+
+    FireArrowPot3:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: FireArrowPot3
+        type: 8
+        strength: -4
+        obey-los: false
+        duration: 300
+        targeted: true
+        target-players: true
+        target-non-players: true
+
+    FireArrowPot4:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: FireArrowPot4
+        type: 9
+        obey-los: false
+        strength: 4
+        duration: 400
+        targeted: true
+        target-players: true
+        target-non-players: true
+    fireleap:
+        spell-class: ".instant.LeapSpell"
+        name: FireLeap
+        description: Leap forward.
+        forward-velocity: 30
+        upward-velocity: 15
+        modifiers:
+             - wearing 310 addpower -0.09
+             - wearing 311 addpower -0.09
+             - wearing 312 addpower -0.09
+             - wearing 313 addpower -0.09
+             - wearing 306 addpower -0.04
+             - wearing 307 addpower -0.04
+             - wearing 308 addpower -0.04
+             - wearing 309 addpower -0.04
+             - wearing 314 addpower -0.04
+             - wearing 315 addpower -0.04
+             - wearing 316 addpower -0.04
+             - wearing 317 addpower -0.04
+    Jolt:
+        spell-class: ".instant.LeapSpell"
+        name: Jolt
+        cooldown: 1
+        cast-item: nether_wart
+        bindable: false
+        can-cast-by-command: true
+        forward-velocity: 45.0
+        upward-velocity: 0
+        cancel-damage: false
+        modifiers:
+            - inblock 10,11, required
+        str-cast-self: "&cJolt"
+
+    Thrust:
+        spell-class: ".instant.LeapSpell"
+        name: Thrust
+        cooldown: 1
+        cast-item: NETHER_WART
+        bindable: false
+        can-cast-by-command: true
+        forward-velocity: 75.0
+        upward-velocity: 0
+        cancel-damage: false
+        modifiers:
+            - inblock 10,11, required
+        cost:
+            - mana 10
+        str-cost: 10 Mana
+        str-cast-self: "&4Thrust"
+    Propel:
+        spell-class: ".MultiSpell"
+        name: Propel
+        description: 
+        modifiers:
+            - onblock 0 denied
+        str-modifier-failed: You have to be on ground.
+        cast-item: LEATHER
+        check-individual-cooldowns: false
+        check-individual-modifiers: true
+        cooldown: 5
+        cost:
+            - mana 50
+        str-cost: "50 Mana"
+        str-cast-self: "&4You blast forward"
+        str-cast-others: "%a &4Blast's forward"
+        spells:
+            - PropelLeap
+            - BlastExplode
+            - BlastInvul
+    PropelLeap:
+        spell-class: ".instant.LeapSpell"
+        name: PropelLeap
+        description: Leap forward.
+        cast-item: STICK
+        cooldown: 0
+        forward-velocity: 40
+        upward-velocity: 20
+        cancel-damage: false
+        cost:
+        str-cost:
+        str-cast-self:
+        str-cast-others:
+    BlastJump:
+        spell-class: ".MultiSpell"
+        name: BlastJump
+        description:
+        modifiers:
+            - onblock 0 denied
+        str-modifier-failed: You have to be on ground.
+        cast-item: LEATHER
+        check-individual-cooldowns: false
+        check-individual-modifiers: false
+        cooldown: 5
+        cost:
+            - mana 50
+        str-cost: "50 Mana"
+        str-cast-self: "&4You blast into the air."
+        str-cast-others: "%a &4blast's into the air."
+        spells:
+            - BlastLeap
+            - BlastExplode
+            - BlastInvul
+    BlastLeap:
+        spell-class: ".instant.LeapSpell"
+        name: BlastLeap
+        description: Leap forward.
+        cast-item: STICK
+        cooldown: 0
+        forward-velocity: 0
+        upward-velocity: 50
+        cancel-damage: false
+        cost:
+        str-cost:
+        str-cast-self:
+        str-cast-others:
+    BlastExplode:
+        spell-class: ".targeted.ExplodeSpell"
+        name: BlastExplode
+        spell-icon: tnt
+        description: Create an explosion.
+        cast-item: blaze_rod
+        cooldown: 0
+        range: 10
+        explosion-size: 4
+        backfire-chance: 100
+        prevent-block-damage: true
+        prevent-player-damage: false
+        damage-multiplier: 10
+        add-fire: true
+        simulate-tnt: false
+        ignore-canceled: false
+        str-cost:
+        str-no-target:
+        str-cast-self:
+        str-cast-others:
+    BlastInvul:
+        spell-class: ".buff.InvulnerabilitySpell"
+        name: BlastInvul
+        description: Keeps you safe from some forms of damage.
+        cast-item: STICK
+        damage-causes:
+            - entity explosion
+            - block explosion
+        duration: 1
+        cooldown: 0
+        cost:
+            - mana 0
+        str-cost:
+        str-cast-self:
+        str-cast-others:
+        str-fade:

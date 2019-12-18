@@ -1,0 +1,266 @@
+SpawnZombie:
+    spell-class: ".targeted.SpawnMonsterSpell"
+    name: Spawn Zombie
+    description: Conjure a Zombie.
+    cast-item: 367
+    bindable: false
+    can-cast-by-command: false
+    location: target
+    entity-type: zombie
+    tamed: false
+    range: 15
+    cost:
+        - mana 9999
+        - 367 1
+    effects:
+      Spawn Effect:
+        position: target
+        effect: spawn
+      Spawn Sound:
+        position: target
+        effect: sound
+        sound: random.pop
+    str-cost: 50 Mana and holding a Rotten Flesh.
+    str-cast-self: You have conjured a Zombie.
+    str-cast-others: A Zombie has been conjured.
+    str-missing-reagents: Your conjuration fails.
+SpawnSkeleton:
+    spell-class: ".targeted.SpawnMonsterSpell"
+    name: Spawn Skeleton
+    description: Conjure a Skeleton.
+    cast-item: bone
+    bindable: false
+    can-cast-by-command: false
+    location: target
+    entity-type: skeleton
+    tamed: false
+    range: 15
+    cost:
+        - mana 25
+        - bone 1
+    holding: bow
+    effects:
+      Spawn Effect:
+        position: target
+        effect: spawn
+      Spawn Sound:
+        position: target
+        effect: sound
+        sound: random.pop
+        potion-effects:
+          - 5 99999 2
+          - 10 100 5
+          - 1 99999 2
+    str-cost: 50 Mana, 1 feather and holding a Bone.
+    str-cast-self: You have conjured a Skeleton.
+    str-cast-others: A Skeleton has been conjured.
+    str-missing-reagents: Your conjuration fails.
+Ossa:
+    spell-class: ".targeted.SpawnMonsterSpell"
+    name: Ossa
+    description: Conjure a Skeleton.
+    cast-item: bone
+    nameplate-text: Unyielding Undead Skeleton
+    bindable: true
+    can-cast-by-command: true
+    location: target
+    entity-type: skeleton
+    tamed: false
+    duration: 2200
+    range: 15
+    potion-effects:
+      - 5 99999 2
+      - 10 100 5
+      - 1 99999 3
+    attributes:
+      - "generic.maxHealth 45"
+      - "generic.Health 45"
+      - "generic.knockbackresistance 100"
+      - "generic.followrange 30"
+    cost:
+        - mana 20
+        - 352 5
+    holding: 352
+    effects:
+      Spawn Effect:
+        position: target
+        effect: spawn
+      Spawn Sound:
+        position: target
+        effect: sound
+        sound: entity.skeleton.death
+        volume: 5
+        pitch: 0.1
+    str-cost: 20 Mana, 5 bones
+    str-cast-self: "&2&lA skeleton rises from the bones"
+    str-cast-others: "&2Ossa redi surge vitae!"
+    str-missing-reagents: Your ritual fails.
+Inmortuae:
+    spell-class: ".targeted.SpawnMonsterSpell"
+    name: Inmortuae
+    description: Conjure a Skeleton.
+    cast-item: bone
+    nameplate-text: Unyielding Undead
+    bindable: true
+    can-cast-by-command: true
+    location: target
+    entity-type: zombie
+    tamed: false
+    duration: 2200
+    helmet: necrosis_inmortuae
+    helmet-drop-chance: 0
+    range: 15
+    potion-effects:
+      - 5 99999 2
+      - 10 100 5
+      - 1 99999 3
+    attributes:
+      - "generic.maxHealth 45"
+      - "generic.Health 45"
+      - "generic.knockbackresistance 100"
+      - "generic.followrange 30"
+    cost:
+        - mana 20
+        - 367 5
+    holding: 0
+    effects:
+      Spawn Effect:
+        position: target
+        effect: spawn
+      Spawn Sound:
+        position: target
+        effect: sound
+        sound: entity.zombie.death
+        volume: 5
+        pitch: 0.1
+    str-cost: 20 Mana, 5 rotten flesh.
+    str-cast-self: "&2&lAn undead rises from the flesh."
+    str-cast-others: "&2Inmortuae redi surge vitae!"
+    str-missing-reagents: Your ritual fails.
+FuranturVitae:
+    spell-class: ".MultiSpell"
+    description:
+    name: FuranturVitae
+    cast-item: 
+    check-individual-cooldowns: false
+    check-individual-modifiers: true
+    cooldown: 5
+    cost:
+        - mana 75
+    str-cost: ""
+    str-cast-self: ""
+    str-cast-others: ""
+    spells:
+        - drainlifeH
+        - stunmana
+        - LifeDrainSlow
+        - LifeDevourEff1
+drainlifeH:
+    spell-class: ".targeted.DrainlifeSpell"
+    name: drainlifeH
+    spell-icon: ghast_tear
+    description: Drain life from your enemy and give it to you.
+    cast-item: blaze_rod
+    cooldown: 20
+    range: 3
+    take-type: health
+    take-amt: 10
+    give-type: health
+    give-amt: 10
+    animation-speed: 2
+    ignore-armor: true
+    obey-los: true
+    show-spell-effect: false
+    instant: true
+    target-players: true
+    target-non-players: true
+    require-target: true
+    check-plugins: true
+    cost:
+        - mana 0
+    str-cost:
+    str-cast-self: "&2You steal life from your enemy"
+    str-cast-target: "%a Steals life from you"
+UNdrain:
+    spell-class: ".targeted.DrainlifeSpell"
+    name: UNdrain
+    spell-icon: ghast_tear
+    description: Drain life from your enemy and give it to you.
+    cast-item: blaze_rod
+    cooldown: 0
+    range: 5
+    take-type: health
+    take-amt: 10
+    give-type: health
+    give-amt: 10
+    animation-speed: 2
+    ignore-armor: true
+    obey-los: false
+    show-spell-effect: false
+    instant: true
+    target-players: true
+    target-non-players: true
+    require-target: true
+    check-plugins: true
+    str-cost: 
+    str-cast-self:
+    str-cast-target:
+
+LifeDrainSlow:
+    spell-class: ".targeted.PotionEffectSpell"
+    name: LifeDrainSlow
+    type: 2
+    strength: 10
+    duration: 50
+    targeted: false
+    str-cast-self:
+    str-cast-others:
+LifeDevourEff1:
+    spell-class: ".buff.DummySpell"
+    duration: 1
+    effects:
+      Fairy1:
+        position: orbit
+        orbit-radius: 2.6
+        orbit-seconds-per-revolution: 1.0
+        orbit-tick-interval: 1
+        orbit-y-offset: 1.0
+        effect: particles
+        particle-name: smoke
+        horiz-spread: 0.3
+        vert-spread: 0.5
+        speed: 0
+        count: 400
+        y-offset: 0
+      SOUNDFairy:
+        position: buff
+        effect-interval: 200
+        effect: sound
+        sound: entity.zombie.hurt
+        volume: 10
+        pitch: 0.1
+BonesToBlood:
+    spell-class: ".instant.ConjureSpell"
+    name: BonesToBlood
+    description:
+    items:
+        - 367 5
+    add-to-inventory: false
+    cost:
+        - 352 5
+        - mana 25
+    str-cost: 5 Bones and 5 Rotten Flesh
+    str-cast-self: "&2Rotten flesh grows across the bones"
+
+BloodToBones:
+    spell-class: ".instant.ConjureSpell"
+    name: BloodToBones
+    description: 
+    items:
+        - 352 5
+    add-to-inventory: false
+    cost:
+        - 367 5
+        - mana 5
+    str-cost: 5 Rotten flesh and 5 mana
+    str-cast-self: "&2The flesh rots to bone"

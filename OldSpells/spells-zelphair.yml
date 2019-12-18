@@ -1,0 +1,559 @@
+    ZelphairGift:
+        spell-class: ".instant.ConjureSpell"
+        name: ZelphairGift
+        cast-item: IRON_INGOT
+        cooldown: 1200
+        items:
+            - 288 1-4
+            - 155:1 1 10%
+            - 155:2 1 10%
+            - 35:3 1-2 10%
+            - 22 1 10%
+            - 365 1 10%
+        add-to-inventory: false
+        cost:
+            - IRON_INGOT 1
+        str-cost: 1 Iron Ingot
+        str-cast-self: "&5Things appear!"
+
+    Wingblast:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Wingblast
+        cast-item: STICK
+        modifiers:
+            - buffactive Windwalk stop
+            - buffactive Soar required
+        can-cast-by-command: false
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: cloud
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 15
+        max-duration: 10
+        hit-radius: 1
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        spell: xxRupture
+        cost:
+            - mana 40
+        str-cost: 40 Mana
+        str-cast-self: "&5Wingblast"
+
+    Grounded:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Grounded
+        cast-item: STICK
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: cloud
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 15
+        max-duration: 10
+        hit-radius: 1
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        effects:
+          casterparticles:
+            position: target
+            effect: bluesparkle
+        spell: xGrounded
+        cost:
+            - mana 40
+        str-cost: 40 Mana
+        str-cast-self: "&5Grounded"
+
+    xGrounded:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: xGrounded
+        type: 8
+        strength: -4
+        duration: 300
+        obey-los: true
+        targeted: true
+        target-players: true
+        target-non-players: true
+        effects:
+          negativehit:
+            position: target
+            effect: bluesparkle
+
+    Zephyr:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Zephyr
+        cast-item: STICK
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: cloud
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 15
+        max-duration: 10
+        hit-radius: 1
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        effects:
+          casterparticles:
+            position: target
+            effect: bluesparkle
+        spell: xZephyr
+        cost:
+            - mana 50
+        str-cost: 50 Mana
+        str-cast-self: "&5Zephyr"
+
+    xZephyr:
+        spell-class: ".targeted.ForcetossSpell"
+        damage: 4
+        horizontal-force: 10
+        vertical-force: 10
+        obey-los: true
+        target-players: true
+        check-plugins: true
+
+    Gust:
+        spell-class: ".targeted.ForcebombSpell"
+        name: Gust
+        range: 15
+        radius: 6
+        pushback-force: 20
+        additional-vertical-force: 15
+        max-vertical-force: 15
+        target-players: true
+        dont-target-caster: true
+        cost:
+            - mana 50
+        str-cost: 50 mana
+        str-cast-self: "&5Gust"
+
+    Switch:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Switch
+        cast-item: STICK
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: cloud
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 10
+        max-duration: 5
+        hit-radius: 1
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        effects:
+          casterparticles:
+            position: target
+            effect: bluesparkle
+        spell: xSwitch
+        cost:
+            - mana 80
+        str-cost: 80 Mana
+        str-cast-self: "&5Switch"
+    xSwitch:
+        spell-class: ".targeted.SwitchSpell"
+        range: 15
+        switch-back: 0
+        target-players: true
+        obey-los: true
+
+    WindWalk:
+        spell-class: ".buff.WindwalkSpell"
+        name: WindWalk
+        spell-icon: feather
+        enabled: true
+        description: Fly through the air.
+        cast-item: feather
+        can-cast-by-command: true
+        fly-speed: 0.20
+        launch-speed: 5
+        cancel-on-land: true
+        cancel-on-logout: true
+        cancel-on-teleport: false
+        cancel-on-damage: true
+        cancel-on-take-damage: true
+        effects:
+          caster:
+            position: caster
+            effect: particles
+            particle-name: cloud
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0.1
+            count: 20
+            y-offset: 0.5
+            render-distance: 15
+          done:
+            position: disabled
+            effect: particles
+            particle-name: cloud
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0.1
+            count: 20
+            y-offset: 0.5
+            render-distance: 15
+        modifiers:
+            - biome HELL reagents 1.5
+            - wearing 298 reagents 1.05
+            - wearing 299 reagents 1.1
+            - wearing 300 reagents 1.05
+            - wearing 301 reagents 1.05
+            - wearing 302 reagents 1.1
+            - wearing 303 reagents 1.2
+            - wearing 304 reagents 1.1
+            - wearing 305 reagents 1.1
+            - wearing 306 reagents 1.2
+            - wearing 307 reagents 1.3
+            - wearing 308 reagents 1.2
+            - wearing 309 reagents 1.2
+            - wearing 310 reagents 1.2
+            - wearing 311 reagents 1.3
+            - wearing 312 reagents 1.2
+            - wearing 313 reagents 1.2
+            - wearing 314 reagents 1.2
+            - wearing 315 reagents 1.3
+            - wearing 316 reagents 1.2
+            - wearing 317 reagents 1.2
+        cost:
+            - mana 30
+        use-cost:
+            - mana 20
+        use-cost-interval: 10
+        str-cast-self: "&5Windwalk"
+        str-cast-others: "&5%a is flying."
+        str-fade: "&4Windwalk Ended"
+
+    ChampWindWalk:
+        spell-class: ".buff.WindwalkSpell"
+        name: ChampWindWalk
+        duration: 20
+        spell-icon: feather
+        enabled: true
+        description: Fly through the air.
+        cast-item: feather
+        can-cast-by-command: true
+        fly-speed: 0.20
+        launch-speed: 5
+        cancel-on-land: true
+        cancel-on-logout: true
+        cancel-on-teleport: false
+        cancel-on-damage: false
+        cancel-on-take-damage: false
+        effects:
+          caster:
+            position: caster
+            effect: particles
+            particle-name: cloud
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0
+            count: 20
+            y-offset: 0.5
+            render-distance: 30
+          done:
+            position: disabled
+            effect: particles
+            particle-name: cloud
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0.1
+            count: 20
+            y-offset: 0.5
+            render-distance: 15
+        modifiers:
+            - biome HELL reagents 1.5
+            - wearing 298 reagents 1.05
+            - wearing 299 reagents 1.1
+            - wearing 300 reagents 1.05
+            - wearing 301 reagents 1.05
+            - wearing 302 reagents 1.1
+            - wearing 303 reagents 1.2
+            - wearing 304 reagents 1.1
+            - wearing 305 reagents 1.1
+            - wearing 306 reagents 1.2
+            - wearing 307 reagents 1.3
+            - wearing 308 reagents 1.2
+            - wearing 309 reagents 1.2
+            - wearing 310 reagents 1.2
+            - wearing 311 reagents 1.3
+            - wearing 312 reagents 1.2
+            - wearing 313 reagents 1.2
+            - wearing 314 reagents 1.2
+            - wearing 315 reagents 1.3
+            - wearing 316 reagents 1.2
+            - wearing 317 reagents 1.2
+        cost:
+            - mana 0
+        use-cost:
+            - mana 0
+        use-cost-interval: 50
+        str-cast-self:
+        str-cast-others:
+        str-fade:
+
+    Soar:
+        spell-class: ".buff.WindwalkSpell"
+        name: Soar
+        enabled: true
+        bindable: false
+        cast-item: feather
+        can-cast-by-command: false
+        fly-speed: 0.30
+        launch-speed: 3
+        cancel-on-land: true
+        cancel-on-logout: true
+        cancel-on-teleport: false
+        cancel-on-damage: true
+        cancel-on-take-damage: true
+        modifiers:
+            - biome HELL reagents 1.5
+            - wearing 298 reagents 1.05
+            - wearing 299 reagents 1.1
+            - wearing 300 reagents 1.05
+            - wearing 301 reagents 1.05
+            - wearing 302 reagents 1.1
+            - wearing 303 reagents 1.2
+            - wearing 304 reagents 1.1
+            - wearing 305 reagents 1.1
+            - wearing 306 reagents 1.2
+            - wearing 307 reagents 1.3
+            - wearing 308 reagents 1.2
+            - wearing 309 reagents 1.2
+            - wearing 310 reagents 1.2
+            - wearing 311 reagents 1.3
+            - wearing 312 reagents 1.2
+            - wearing 313 reagents 1.2
+            - wearing 314 reagents 1.2
+            - wearing 315 reagents 1.3
+            - wearing 316 reagents 1.2
+            - wearing 317 reagents 1.2
+        effects:
+          caster:
+            position: caster
+            effect: particles
+            particle-name: cloud
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0.1
+            count: 20
+            y-offset: 0.5
+            render-distance: 15
+          done:
+            position: disabled
+            effect: particles
+            particle-name: cloud
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0.1
+            count: 20
+            y-offset: 0.5
+            render-distance: 15
+        cost:
+            - mana 60
+        use-cost:
+            - mana 40
+        use-cost-interval: 10
+        str-cast-self: "&5Soar"
+        str-cast-others: "&5%a is flying."
+        str-fade: "&4Soar Ended"
+    BatFlight:
+        spell-class: ".buff.WindwalkSpell"
+        name: BatFlight
+        enabled: true
+        bindable: false
+        can-cast-by-command: true
+        fly-speed: 0.20
+        launch-speed: 3
+        cancel-on-land: true
+        cancel-on-logout: true
+        cancel-on-teleport: false
+        cancel-on-damage: true
+        cancel-on-take-damage: true
+        modifiers:
+            - wearing 298 reagents 1.05
+            - wearing 299 reagents 1.1
+            - wearing 300 reagents 1.05
+            - wearing 301 reagents 1.05
+            - wearing 302 reagents 1.1
+            - wearing 303 reagents 1.2
+            - wearing 304 reagents 1.1
+            - wearing 305 reagents 1.1
+            - wearing 306 reagents 1.2
+            - wearing 307 reagents 1.3
+            - wearing 308 reagents 1.2
+            - wearing 309 reagents 1.2
+            - wearing 310 reagents 1.2
+            - wearing 311 reagents 1.3
+            - wearing 312 reagents 1.2
+            - wearing 313 reagents 1.2
+            - wearing 314 reagents 1.2
+            - wearing 315 reagents 1.3
+            - wearing 316 reagents 1.2
+            - wearing 317 reagents 1.2
+        str-cast-self: "&4You begin flying"
+        str-fade: "&cYou are no longer flying."
+
+    Featherfall:
+        spell-class: ".buff.InvulnerabilitySpell"
+        name: Featherfall
+        bindable: false
+        cast-item: feather
+        damage-causes:
+            - fall
+        duration: 10
+        num-uses: 1
+        cost:
+            - mana 30
+        str-cost: 30 Mana.
+        str-cast-self: "&5Feather Fall"
+        str-fade: "&4Feather Fall Ended"
+    FeatherfallSuper:
+        spell-class: ".buff.InvulnerabilitySpell"
+        name: FeatherfallSuper
+        bindable: false
+        cast-item: feather
+        damage-causes:
+            - fall
+        toggle: true
+        num-uses: 0
+        cost:
+            - mana 0
+        str-cost: 0 Mana.
+        str-cast-self:
+        str-fade: 
+
+    Air:
+        spell-class: ".targeted.ZapSpell"
+        name: Air
+        allowed-block-types: ""
+        disallowed-block-types: [0,23,7,54,47,63,68,95,130]
+        drop-block: false
+        drop-normal: false
+        check-plugins: true
+        range: 15
+        cost:
+            - mana 25
+        str-cost: 25 Mana
+
+    CloudTomb:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: CloudTomb
+        cast-item: STICK
+        projectile-velocity: 10
+        projectile-gravity: 0
+        tick-interval: 2
+        special-effect-interval: 0
+        particle-name: cloud
+        particle-speed: 0.3
+        particle-count: 20
+        particle-horizontal-spread: 0.5
+        particle-vertical-spread: 0.5
+        max-distance: 15
+        max-duration: 10
+        hit-radius: 1
+        vertical-hit-radius: 2
+        hit-players: true
+        hit-non-players: true
+        hit-ground: false
+        effects:
+          casterparticles:
+            position: target
+            effect: bluesparkle
+        spell: xCloudTomb
+        cost:
+            - mana 50
+        str-cost: 50 Mana
+        str-cast-self: "&5Cloud Tomb"
+
+    xCloudTomb:
+        spell-class: ".targeted.EntombSpell"
+        obey-los: true
+        damage: 1
+        target-players: true
+        tomb-block-type: 35
+        tomb-duration: 10
+
+    Tempest:
+        spell-class: ".instant.ParticleProjectileSpell"
+        name: Tempest
+        cooldown: 2
+        cast-item: STICK
+        projectile-velocity: 0
+        projectile-gravity: 0
+        particle-name: largeexplode
+        particle-speed: 1
+        particle-count: 150
+        particle-horizontal-spread: 2
+        particle-vertical-spread: 2
+        max-duration: 10
+        hit-radius: 6
+        hit-players: false
+        hit-non-players: false
+        hit-ground: false
+        hit-air-at-end: false
+        hit-air-during: true
+        hit-ground: false
+        spell-interval: 20
+        stop-on-hit-entity: false
+        stop-on-hit-ground: false
+        special-effect-interval: 3
+        spell: cuttingstorm
+        cost:
+            - mana 100
+        str-cost: 100 Mana
+        str-cast-self: "&5Tempest"
+        effects:
+            - caster sound item.elytra.flying 10.0 1.0
+
+    cuttingstorm:
+        spell-class: ".targeted.AreaEffectSpell"
+        name: cuttingstorm
+        horizontal-radius: 6
+        vertical-radius: 1
+        point-blank: true
+        target-players: true
+        target-non-players: true
+        target-invisible-players: true
+        fail-if-no-targets: false
+        max-targets: 50
+        spell-source-in-center: true
+        spells:
+            - xZephyr
+            - 2harm
+
+    burntwings:
+        spell-class: ".PassiveSpell"
+        modifiers:
+#            - biome HELL required
+        triggers:
+            - fly
+            - stopfly
+        chance: 100
+        cooldown: 0
+        spells:
+            - selfcombust

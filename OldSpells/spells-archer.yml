@@ -1,0 +1,1130 @@
+#-----------------------------
+# ABILITIES
+#-----------------------------
+
+    passive-awareness:
+        spell-class: ".PassiveSpell"
+        name: passive-awareness
+        triggers:
+            - shoot
+        chance: 5
+        spells:
+            - longresist
+
+    passive-adrenaline:
+        spell-class: ".PassiveSpell"
+        name: passive-adrenaline
+        triggers:
+            - shoot
+        chance: 5
+        spells:
+            - SelfRegeneration
+            - nightvision
+    LockdownP:
+        spell-class: ".PassiveSpell"
+        triggers:
+            - rightclickblockcoord -10072,81,-99929
+        chance: 100
+        cast-without-target: true
+        cooldown: 0
+        spells:
+            - Bongo
+    VolleySpell:
+        spell-class: ".PassiveSpell"
+        name: VolleySpell
+        triggers:
+            -
+        chance: 90
+        spells:
+            - Volleyarch
+    Snipe:
+        spell-class: ".instant.ProjectileSpell"
+        name: Snipe
+        cast-item: ARROW
+        projectile: arrow
+        bindable: true
+        velocity: 5
+        require-hit-entity: true
+        cancel-damage: false
+        ignore-armor: false
+        remove-projectile: false
+        target-players: true
+        target-non-players: true
+        max-distance: 100
+        spells: [SnipeWeak,SnipeBlind,SnipeSlow]
+        cost:
+            - mana 50
+            - ARROW 5
+        str-cast-self: "&2Snipe"
+        str-cost: 5 Arrows and 50 Mana
+        str-no-target:
+    SnipeWeak:
+        spell-class: ".targeted.PotionEffectSpell"
+        type: 18
+        strength: 3
+        duration: 200
+        targeted: true
+        target-players: true
+        target-non-players: true
+
+    SnipeSlow:
+        spell-class: ".targeted.PotionEffectSpell"
+        type: 2
+        strength: 5
+        duration: 200
+        targeted: true
+        target-players: true
+        target-non-players: true
+
+    SnipeBlind:
+        spell-class: ".targeted.PotionEffectSpell"
+        type: 15
+        strength: 5
+        duration: 200
+        targeted: true
+        target-players: true
+        target-non-players: true
+    Lockdown:
+        spell-class: ".targeted.PulserSpell"
+        name: Lockdown
+        spell-icon:
+        description:
+        cast-item:
+        cooldown: 30
+        total-pulses: 1
+        interval: 5
+        max-distance: 50
+        ensure-spell-cast: false
+        cap-per-player: 1
+        block-type: carpet:13
+        unbreakable: false
+        only-count-on-success: true
+        spells:
+            - LockdownAOE
+        str-cast-self: "&aYou lock down the area"
+        str-cast-others:
+        str-at-cap:
+    LockdownP:
+        spell-class: ".PassiveSpell"
+        triggers:
+            - spelltargeted LockdownAOE
+        chance: 100
+        cast-without-target: true
+        cooldown: 0
+        spells:
+            - LockdownEff
+    LockDownEff:
+        spell-class: ".buff.DummySpell"
+        duration: 10
+        effects:
+          Primeffect1:
+            position: orbit
+            orbit-radius: 0.5
+            orbit-seconds-per-revolution: 0.5
+            orbit-tick-interval: 1
+            orbit-y-offset: 1.8
+            effect: particles
+            particle-name: crit
+            horiz-spread: 0.3
+            vert-spread: 0.2
+            speed: 0
+            count: 8
+            y-offset: 1.8
+          SOUNDFairy:
+            position: buff
+            effect-interval: 1
+            effect: sound
+            sound: entity.firework.blast
+            volume: 10
+            pitch: 1
+    LockDownEffM:
+        spell-class: ".buff.DummySpell"
+        duration: 1
+        effects:
+          Primeffect1:
+            position: orbit
+            orbit-radius: 0.5
+            orbit-seconds-per-revolution: 0.5
+            orbit-tick-interval: 1
+            orbit-y-offset: 1.8
+            effect: particles
+            particle-name: crit
+            horiz-spread: 0.3
+            vert-spread: 0.2
+            speed: 0
+            count: 8
+            y-offset: 1.8
+          SOUNDFairy:
+            position: buff
+            effect-interval: 100
+            effect: sound
+            sound: record.strad
+            volume: 10
+            pitch: 2
+          SOUNDFairy:
+            position: buff
+            effect-interval: 100
+            effect: sound
+            sound: record.cat
+            volume: 10
+            pitch: 1.5
+    LockDownAOE:
+        spell-class: ".targeted.AreaEffectSpell"
+        name: LockDownAOE
+        description: Give all those around you Mana.
+        cast-item: STICK
+        horizontal-radius: 10
+        vertical-radius: 10
+        point-blank: true
+        fail-if-no-targets: true
+        target-players: true
+        target-non-players: true
+        spells:
+            - LockdownEff2
+        cost:
+            - mana 0
+        str-cost: 0 Mana
+    LockDownEff2:
+        spell-class: ".targeted.PotionEffectSpell"
+        type: 18
+        strength: 1
+        duration: 1
+        targeted: false
+        str-cast-self:
+        str-cast-others:
+
+#-----------------------------
+# AKWAL 3
+#-----------------------------
+
+    VolleyBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&9Volley Bow"
+        spell-on-hit-entity: "volleyboweffect"
+        spell-on-hit-ground: "volleyboweffect"
+    volleyboweffect:
+        spell-class: ".targeted.VolleySpell"
+        target-players: true
+        can-target: players,animals,nonplayers
+        range: 50
+        arrows: 5
+        speed: 20
+        spread: 30
+        shoot-interval: 1
+        remove-delay: 0
+
+    ChannelBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&9Channel Bow"
+        spell-on-hit-entity: "Channelboweffect"
+        spell-on-hit-ground: ""
+    Channelboweffect:
+        spell-class: ".targeted.DrainlifeSpell"
+        take-type: health
+        take-amt: 2
+        give-type: health
+        give-amt: 6
+        show-spell-effect: true
+        animation-speed: 2
+        instant: true
+        ignore-armor: true
+        target-players: true
+        check-plugins: false
+
+    SoakerBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&9Soaker Bow"
+        spell-on-hit-entity: "2harm"
+        spell-on-hit-ground: ""
+    DrenchBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&9Drench Bow"
+        spell-on-hit-entity: "DrenchEff"
+        spell-on-hit-ground: "DrenchAOE"
+    DrenchEffect:
+        spell-class: ".targeted.DummySpell"
+        cooldown: 0
+        str-cost: ""
+        str-cast-self: ""
+        str-cast-others: ""
+        effects:
+          Tidal:
+            position: target
+            effect: particles
+            particle-name: wake
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0
+            count: 500
+            y-offset: 0
+    DrenchEff:
+        spell-class: ".targeted.PotionEffectSpell"
+        type: 2
+        strength: 3
+        duration: 100
+        targeted: true
+        target-players: true
+        target-non-players: true
+        obey-los: false
+        effects:
+          Tidal:
+            position: target
+            effect: particles
+            particle-name: Dripwater
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0
+            count: 500
+            y-offset: 0
+    DrenchAOES:
+        spell-class: ".targeted.PotionEffectSpell"
+        type: 2
+        strength: 1
+        duration: 100
+        targeted: true
+        target-players: true
+        target-non-players: true
+        obey-los: false
+
+    DrenchAOE:
+        spell-class: ".targeted.AreaEffectSpell"
+        can-cast-by-command: false
+        horizontal-radius: 3
+        vertical-radius: 3
+        point-blank: true
+        target-players: true
+        target-non-players: true
+        target-invisible-players: true
+        fail-if-no-targets: false
+        max-targets: 5
+        spell-source-in-center: true
+        spells:
+            - DrenchAOES
+        cost:
+            - mana 0
+        str-cost:
+        str-cast-self:
+        effects:
+          Tidal:
+            position: special
+            effect: particles
+            particle-name: wake
+            horiz-spread: 1
+            vert-spread: 1
+            speed: 0
+            count: 500
+            y-offset: 0
+    TidalBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&9Tidal Bow"
+        spell-on-hit-entity: "TidalMultiSpell"
+        spell-on-hit-ground: "TidalAOE"
+    TidalMultiSpell:
+      spell-class: ".TargetedMultiSpell"
+      check-individual-cooldowns: false
+      require-entity-target: true
+      can-target: players,nonplayers
+      check-individual-modifiers: true
+      spells:
+          - TidalSingle
+          - TidalEffect
+    TidalSingle:
+        spell-class: ".targeted.GeyserSpell"
+        range: 30
+        damage: 2
+        velocity: 12
+        animation-speed: 2
+        geyser-height: 3
+        geyser-type: water
+        ignore-armor: true
+        obey-los: true
+        target-players: true
+        check-plugins: false
+    TidalEffect:
+      spell-class: ".targeted.DummySpell"
+      duration: 10
+      cooldown: 0
+      str-cost: ""
+      str-cast-self: ""
+      str-cast-others: ""
+      effects:
+        Tidal:
+          position: target
+          effect: particles
+          particle-name: dripWater
+          horiz-spread: 0.25
+          vert-spread: 5
+          speed: 0
+          count: 250
+          y-offset: 0
+    TidalAOE:
+        spell-class: ".targeted.AreaEffectSpell"
+        can-cast-by-command: false
+        horizontal-radius: 6
+        vertical-radius: 5
+        point-blank: true
+        target-players: true
+        target-non-players: true
+        target-invisible-players: true
+        fail-if-no-targets: false
+        max-targets: 5
+        spell-source-in-center: true
+        spells:
+            - TidalSingle
+        cost:
+            - mana 60
+        str-cost: 60 Mana
+        str-cast-self: "&5Fissures"
+
+
+
+#-----------------------------
+# CAVILON 5
+#-----------------------------
+
+    WebBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&7Web Bow"
+        spell-on-hit-entity: "webboweffect"
+        spell-on-hit-ground: ""
+    webboweffect:
+        spell-class: ".targeted.EntombSpell"
+        target-players: true
+        tomb-block-type: 30
+        tomb-duration: 1
+
+    DiamondBo:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&7Diamond Bo"
+        spell-on-hit-entity: "5Harm"
+        spell-on-hit-ground: ""
+
+    BewilderBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&7Bewilder Bow"
+        spell-on-hit-entity: "bewilderboweffect"
+        spell-on-hit-ground: ""
+    haste:
+        spell-class: ".buff.HasteSpell"
+        name: haste
+        description: Sprint faster for a time.
+        effect-strength: 3
+        boost-duration: 300
+        duration: 60
+
+    VenomBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&7Venom Bow"
+        spell-on-hit-entity: "venomboweffect"
+        spell-on-hit-ground: ""
+    venomboweffect:
+        spell-class: ".targeted.PotionEffectSpell"
+        type: 19
+        strength: 2
+        duration: 100
+        targeted: true
+        target-players: true
+        target-non-players: true
+        obey-los: false
+
+    ElusionBo:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&7Elusion Bo"
+        spell-on-hit-entity: "elusioneffect"
+        spell-on-hit-ground: ""
+    elusioneffect:
+        spell-class: ".targeted.PotionEffectSpell"
+        type: 4
+        strength: 3
+        duration: 200
+        targeted: true
+        target-players: true
+        target-non-players: false
+        obey-los: false
+
+#-----------------------------
+# DESERMA 3
+#-----------------------------
+
+    HazeBo:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&eHaze Bo"
+        spell-on-hit-entity: "hazeboweffect"
+        spell-on-hit-ground: ""
+    hazeboweffect:
+        spell-class: ".targeted.PotionEffectSpell"
+        type: 9
+        strength: 1
+        duration: 200
+        targeted: true
+        target-players: true
+        target-non-players: false
+        obey-los: false
+
+    SwelterBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&eSwelter Bow"
+        spell-on-hit-entity: "swelterboweffect"
+        spell-on-hit-ground: ""
+    swelterboweffect:
+        spell-class: ".TargetedMultiSpell"
+        check-individual-cooldowns: false
+        require-entity-target: true
+        can-target: players,nonplayers
+        check-individual-modifiers: true
+        spells:
+            - target200weakness1
+            - target200slow2
+
+    BarrenBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&eBarren Bow"
+        spell-on-hit-entity: "target200hunger2"
+        spell-on-hit-ground: ""
+
+    RefractionBo:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&eRefraction Bo"
+        spell-on-hit-entity: "passblink"
+        spell-on-hit-ground: "passblink"
+        modifiers:
+            - lightlevelabove 13 required
+            - day required
+    desertblink:
+        spell-class: ".TargetedMultiSpell"
+        check-individual-cooldowns: false
+        require-entity-target: false
+        target-players: false
+        modifiers:
+            - biome DESERT required
+        spells:
+            - passblink
+    passblink:
+        spell-class: ".targeted.BlinkSpell"
+        name: passblink
+        range: 20
+        pass-through-ceiling: true
+        smoke-trail: false
+        effects:
+            - pos1 ender
+            - pos2 ender
+
+#-----------------------------
+# Mycelyix
+#-----------------------------
+
+    PlagueBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&5Plague Bow"
+        spell-on-hit-entity: "PlagueSingle"
+        spell-on-hit-ground: ""
+    PlagueSingle:
+        spell-class: ".targeted.PotionEffectSpell"
+        name: PlagueSingle
+        type: 20
+        strength: 3
+        duration: 300
+        targeted: true
+    PlagueAOE:
+        spell-class: ".targeted.AreaEffectSpell"
+        horizontal-radius: 3
+        vertical-radius: 3
+        point-blank: true
+        target-players: true
+        fail-if-no-targets: true
+        target-non-players: true
+        check-plugins: true
+        spells:
+            - PlagueSingle
+
+    MushroomBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&5Mushroom Bow"
+        spell-on-hit-entity: "xMushroomTomb"
+        spell-on-hit-ground: "MushTombAOE"
+    MushTombAOE:
+        spell-class: ".targeted.AreaEffectSpell"
+        horizontal-radius: 3
+        vertical-radius: 3
+        point-blank: true
+        target-players: true
+        fail-if-no-targets: true
+        target-non-players: true
+        check-plugins: true
+        spells:
+            - xMushroomTomb
+
+    SporeBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&5Spore Bow"
+        spell-on-hit-entity: "SporeSingle"
+        spell-on-hit-ground: "SporeAOE"
+    SporeSingle:
+        spell-class: ".targeted.PainSpell"
+        damage: 4
+        ignore-armor: true
+        obey-los: true
+        target-players: true
+        target-non-players: true
+        check-plugins: true
+        effects:
+          casterparticles:
+            position: target
+            effect: particles
+            particle-name: witchMagic
+            horiz-spread: 2
+            vert-spread: 2
+            speed: 0.2
+            count: 20
+            y-offset: 0.5
+            render-distance: 15
+    SporeAOE:
+        spell-class: ".targeted.AreaEffectSpell"
+        horizontal-radius: 3
+        vertical-radius: 3
+        point-blank: true
+        target-players: true
+        fail-if-no-targets: true
+        target-non-players: true
+        check-plugins: true
+        spells:
+            - SporeSingle
+
+
+#-----------------------------
+# NETHARNA
+#-----------------------------
+
+    HeatBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&cHeat Bow"
+        spell-on-hit-entity: ""
+        spell-on-hit-ground: "heatboweffect"
+    heatboweffect:
+        spell-class: ".targeted.AreaEffectSpell"
+        horizontal-radius: 3
+        vertical-radius: 3
+        point-blank: true
+        fail-if-no-targets: false
+        target-players: true
+        target-non-players: true
+        spells:
+            - fireboweffect
+
+
+    ExplosionBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&cExplosion Bow"
+        spell-on-hit-entity: "2Explode"
+        spell-on-hit-ground: "2Explode"
+
+    FlameBo:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&cFlame Bo"
+        spell-on-hit-entity: "fireboweffect"
+        spell-on-hit-ground: ""
+    fireboweffect:
+        spell-class: ".targeted.CombustSpell"
+        obey-los: true
+        fire-ticks: 60
+        fire-tick-damage: 2
+        prevent-immunity: true
+        target-players: true
+        check-plugins: false
+
+    WildFireBo:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&cWildfire Bo"
+        spell-on-hit-entity: "wildfireeffect"
+        spell-on-hit-ground: ""
+    wildfireeffect:
+        spell-class: ".targeted.ChainSpell"
+        spell: fireboweffect
+        bounces: 4
+        bounce-range: 10
+        interval: 100
+        beneficial: false
+        target-players: true
+        target-non-players: true
+
+#-----------------------------
+# WILDAVEN 3 tOak Bow -
+#-----------------------------
+
+    BirchBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&2Birch Bow"
+        spell-on-hit-entity: "birchboweffect"
+        spell-on-hit-ground: ""
+    birchboweffect:
+        spell-class: ".targeted.DrainlifeSpell"
+        take-type: hunger
+        take-amt: 6
+        give-type: hunger
+        give-amt: 6
+        show-spell-effect: true
+        animation-speed: 2
+        instant: true
+        ignore-armor: true
+        target-players: true
+        check-plugins: false
+
+    SpruceBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&2Spruce Bow"
+        spell-on-hit-entity: "spruceboweffect"
+        spell-on-hit-ground: ""
+    spruceboweffect:
+        spell-class: ".targeted.DrainlifeSpell"
+        take-type: mana
+        take-amt: 20
+        give-type: health
+        give-amt: 6
+        show-spell-effect: false
+        animation-speed: 2
+        instant: true
+        ignore-armor: true
+        target-players: true
+        check-plugins: false
+
+    OakBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&2Oak Bow"
+        spell-on-hit-entity: "xleaftomb"
+        spell-on-hit-ground: ""
+
+    JungleBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&2Jungle Bow"
+        spell-on-hit-entity: "JungleBowmulti"
+        spell-on-hit-ground: "JungleAOE"
+    JungleBowmulti:
+        spell-class: ".TargetedMultiSpell"
+        target-players: true
+        check-individual-cooldowns: false
+        spells:
+            - jungleEffect
+            - weakness
+            - target200slow2
+    JungleEffect:
+        spell-class: ".targeted.PainSpell"
+        damage: 4
+        ignore-armor: true
+        obey-los: true
+        target-players: true
+        target-non-players: true
+        check-plugins: true
+        effects:
+          jungle:
+            position: target
+            effect: particles
+            particle-name: happyVillager
+            horiz-spread: 0.5
+            vert-spread: 0.5
+            speed: 0
+            count: 250
+            y-offset: 0
+    jungleAOE:
+        spell-class: ".targeted.AreaEffectSpell"
+        horizontal-radius: 6
+        vertical-radius: 5
+        point-blank: true
+        target-players: true
+        fail-if-no-targets: true
+        target-non-players: true
+        check-plugins: true
+        spells:
+            - jungleEffect
+            - weakness
+            - target200slow2
+
+#-----------------------------
+# WINTIVAL 2
+#-----------------------------
+
+    FreezeBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&bFreeze Bow"
+        spell-on-hit-entity: "freezeboweffect"
+        spell-on-hit-ground: ""
+    freezeboweffect:
+        spell-class: ".targeted.PotionEffectSpell"
+        type: 2
+        strength: 10
+        duration: 100
+        targeted: true
+        target-players: true
+        target-non-players: false
+        obey-los: false
+
+    ChillBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&bIce Bow"
+        spell-on-hit-entity: "chillarrowmulti"
+        spell-on-hit-ground: ""
+    chillarrowmulti:
+        spell-class: ".TargetedMultiSpell"
+        target-players: true
+        check-individual-cooldowns: false
+        spells:
+            - target200weakness1
+            - target200slow2
+
+    HailBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&bHail Arrow"
+        spell-on-hit-entity: "haileffect"
+        spell-on-hit-ground: "hailboweffect"
+    hailboweffect:
+        spell-class: ".targeted.AreaEffectSpell"
+        horizontal-radius: 3
+        vertical-radius: 3
+        point-blank: true
+        target-players: true
+        fail-if-no-targets: true
+        target-non-players: true
+        check-plugins: true
+        spells:
+            - haileffect
+    haileffect:
+        spell-class: ".targeted.PainSpell"
+        damage: 4
+        ignore-armor: true
+        obey-los: true
+        target-players: true
+        target-non-players: true
+        check-plugins: true
+        effects:
+          casterparticles:
+            position: target
+            effect: particles
+            particle-name: snowballpoof
+            horiz-spread: 2
+            vert-spread: 2
+            speed: 0.2
+            count: 20
+            y-offset: 0.5
+            render-distance: 15
+
+    BlizzardBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&bBlizzard Bow"
+        spell-on-hit-entity: "SnowTomb"
+        spell-on-hit-ground: ""
+    SnowTomb:
+        spell-class: ".targeted.EntombSpell"
+        obey-los: true
+        damage: 1
+        target-players: true
+        tomb-block-type: 78
+        tomb-duration: 10
+
+#-----------------------------
+# ZELPHAIR 5
+#-----------------------------
+
+    TetherBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&3Tether Bow"
+        spell-on-hit-entity: "xGrounded"
+        spell-on-hit-ground: ""
+
+    SwitchBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&3Switch Bow"
+        spell-on-hit-entity: "xSwitch"
+        spell-on-hit-ground: ""
+
+    ShuffleBo:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&3Shuffle Bo"
+        spell-on-hit-entity: "Shuffle"
+        spell-on-hit-ground: "Shuffle"
+
+    GustBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&3Gust Bow"
+        spell-on-hit-entity: "xzephyr"
+        spell-on-hit-ground: "cuttingstorm"
+
+    StormBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&3Storm Bow"
+        spell-on-hit-entity: "lightning"
+        spell-on-hit-ground: ""
+        modifiers:
+            - storm required
+
+#-----------------------------
+# ZEOLIX 5
+#-----------------------------
+
+    RiftBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&8Rift Bow"
+        spell-on-hit-entity: "RiftStepBlink"
+        spell-on-hit-ground: "RiftStepBlink"
+        modifiers:
+            - lightlevelbelow 13 required
+            - night required
+
+    VoidBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&8Void Bow"
+        spell-on-hit-entity: "blackened"
+        spell-on-hit-ground: ""
+
+    TenebrisBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&8Tenebris Bow"
+        spell-on-hit-entity: "ObsidianBowEffect"
+        spell-on-hit-ground: "ObsidianBEffect"
+    ObsidianBEffect:
+        spell-class: ".targeted.AreaEffectSpell"
+        horizontal-radius: 3
+        vertical-radius: 3
+        point-blank: true
+        target-players: true
+        fail-if-no-targets: true
+        target-non-players: true
+        check-plugins: true
+        spells:
+            - ObsidianBowEffect
+    ObsidianBowEffect:
+        spell-class: ".targeted.PainSpell"
+        damage: 4
+        ignore-armor: true
+        obey-los: true
+        target-players: true
+        target-non-players: true
+        check-plugins: true
+        effects:
+          casterparticles:
+            position: target
+            effect: ender
+            horiz-spread: 2
+            vert-spread: 2
+            speed: 0.2
+            count: 20
+            y-offset: 0.5
+            render-distance: 15
+
+    WitheringBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&8Withering Bow"
+        spell-on-hit-entity: "zeolixboweffect"
+        spell-on-hit-ground: ""
+    zeolixboweffect:
+        spell-class: ".targeted.ChainSpell"
+        spell: plaguesingle
+        bounces: 7
+        bounce-range: 15
+        interval: 40
+        beneficial: false
+        target-players: true
+        target-non-players: true
+#-----------------------------
+# Heretic
+#-----------------------------
+
+    Glarebow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&6Glare Bow"
+        spell-on-hit-entity: "GlareBowAOE2"
+        spell-on-hit-ground: "GlareBowAOE"
+
+    GlareBowAOE:
+        spell-class: ".targeted.AreaEffectSpell"
+        name: GlareBowAOE
+        description: Shuffle those around you.
+        cast-item: STICK
+        horizontal-radius: 5
+        vertical-radius: 5
+        point-blank: true
+        fail-if-no-targets: true
+        target-caster: true
+        target-players: true
+        target-non-players: true
+        effects:
+          Fairy1:
+            position: special
+            effect: fireworks
+            flicker: false
+            trail: true
+            type: 4
+            flight: 0
+            colors: ffff00
+            fade-colors: de8305
+        spells:
+            - GlareBlindBow
+        cost:
+            - mana 0
+        str-cost: 0 Mana
+    GlareBowAOE2:
+        spell-class: ".targeted.AreaEffectSpell"
+        name: GlareBowAOE2
+        description: Shuffle those around you.
+        cast-item: STICK
+        horizontal-radius: 5
+        vertical-radius: 5
+        point-blank: true
+        fail-if-no-targets: true
+        target-caster: true
+        target-players: true
+        target-non-players: true
+        effects:
+          Fairy1:
+            position: special
+            effect: fireworks
+            flicker: false
+            trail: true
+            type: 4
+            flight: 0
+            colors: ffff00
+            fade-colors: de8305
+        spells:
+            - GlareBlindBow2
+        cost:
+            - mana 0
+        str-cost: 0 Mana
+
+    GlareBlindBow:
+        spell-class: ".targeted.PotionEffectSpell"
+        range: 5
+        type: 15
+        strength: 1
+        duration: 50
+        targeted: true
+    GlareBlindBow2:
+        spell-class: ".targeted.PotionEffectSpell"
+        range: 5
+        type: 15
+        strength: 1
+        duration: 100
+        targeted: true
+    Barrier Bow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&6Barrier Bow"
+        spell-on-hit-entity: "barrierboweffect"
+        spell-on-hit-ground: ""
+    barrierboweffect:
+        spell-class: ".targeted.EntombSpell"
+        target-players: true
+        tomb-block-type: stained_glass_pane:1
+        tomb-duration: 2
+    Glarebo:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&6Glare Bo"
+        spell-on-hit-entity: "GlareBowAOE2"
+        spell-on-hit-ground: "GlareBowAOE"
+    FaithlessBow:
+        spell-class: ".ArrowSpell"
+        bow-name: "&0&6Faithless Bow"
+        spell-on-hit-entity: "FaithlessB"
+        spell-on-hit-ground: ""
+    FaithlessB:
+        spell-class: ".targeted.SilenceSpell"
+        name: FaithlessB
+        description: Prevent a player from speaking for a time.
+        cast-item: STICK
+        range: 2
+        prevent-cast: true
+        prevent-chat: false
+        prevent-commands: false
+        duration: 20
+        disallowed-spells:
+            - Geyser
+            - Drown
+            - Osmosis
+            - Fissures
+            - Artesian
+            - Drain
+            - Downpour
+            - Phase
+            - Cavespit
+            - Corrode
+            - Confusion
+            - Stonevision
+            - Biolith
+            - CaveMinion
+            - SpiderWeb
+            - Haze
+            - SunWalk
+            - Heatstroke
+            - Dune
+            - Sandtomb
+            - Dessicate
+            - Sandstorm
+            - Sandblast
+            - Firebolt
+            - Netherrage
+            - Seekingflame
+            - Rupture
+            - Flamewalk
+            - Darkfire
+            - Combust
+            - Blink
+            - Leaftomb
+            - Stake
+            - Logtomb
+            - Logwall
+            - Fertilise
+            - Woodwisp
+            - Food
+            - FrostWalk
+            - Icetomb
+            - Icewall
+            - Snowshield
+            - Icespike
+            - Undead
+            - Freeze
+            - Nighthelper
+            - Blizzard
+            - Grounded
+            - Wingblast
+            - Zephyr
+            - Gust
+            - Cloudtomb
+            - Switch
+            - Tempest
+            - Updraft
+            - Extinguish
+            - Blesswater
+            - Swim
+            - Powerstroke
+            - Senseore
+            - Encase
+            - Dilate
+            - MushroomTomb
+            - PlaguedSoil
+            - Stalk
+            - Mold
+            - Hyphae
+            - Primordium
+            - Decay
+            - Putrefy
+            - Spores
+            - SporeCloud
+            - Immolate
+            - Netherbound
+            - Lifewalk
+            - Beam
+            - Sustenance
+            - Nurture
+            - Tree
+            - Tornado
+            - Frost
+            - Inferno
+            - Deluge
+            - Brilliance
+            - Viciousmist
+            - SnareSeeds
+        str-cast-self:
+        str-cast-target:
+        str-silenced: "&6You feel faithless"
+    Fai:
+        spell-class: ".targeted.ModifyCooldownSpell"
+        spells:
+          - Geyser
+        seconds: 15
+        multiplier: 0

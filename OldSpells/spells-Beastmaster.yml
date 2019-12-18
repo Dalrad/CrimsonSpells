@@ -1,0 +1,454 @@
+SpawnChicken:
+    spell-class: ".targeted.SpawnMonsterSpell"
+    name: Spawn Chicken
+    description: Conjure a Chicken.
+    cast-item: COOKED_CHICKEN
+    bindable: false
+    can-cast-by-command: false
+    location: target
+    entity-type: chicken
+    tamed: false
+    range: 10
+    cost:
+        - mana 25
+        - COOKED_CHICKEN 1
+    effects:
+      Spawn Effect:
+        position: target
+        effect: spawn
+      Spawn Sound:
+        position: target
+        effect: sound
+        sound: random.pop
+    str-cost: 25 Mana and holding a Cooked Chicken.
+    str-cast-self: You have conjured a Chicken.
+    str-cast-others: A Chicken has been conjured.
+    str-missing-reagents: Your conjuration fails.
+
+SpawnPig:
+    spell-class: ".targeted.SpawnMonsterSpell"
+    name: Spawn Pig
+    description: Conjure a Pig.
+    cast-item: COOKED_PORKCHOP
+    bindable: false
+    can-cast-by-command: false
+    location: target
+    entity-type: pig
+    tamed: false
+    range: 10
+    cost:
+        - mana 5
+        - COOKED_PORKCHOP 1
+    effects:
+      Spawn Effect:
+        position: target
+        effect: spawn
+      Spawn Sound:
+        position: target
+        effect: sound
+        sound: random.pop
+    str-cost: 25 Mana and holding a Cooked Porkchop.
+    str-cast-self: You have conjured a Pig.
+    str-cast-others: A Pig has been conjured.
+    str-missing-reagents: Your conjuration fails.
+
+SpawnCow:
+    spell-class: ".targeted.SpawnMonsterSpell"
+    name: Spawn Cow
+    description: Conjure a Cow.
+    cast-item: COOKED_BEEF
+    bindable: false
+    can-cast-by-command: false
+    location: target
+    entity-type: cow
+    tamed: false
+    range: 10
+    cost:
+        - mana 5
+        - COOKED_BEEF 1
+    effects:
+      Spawn Effect:
+        position: target
+        effect: spawn
+      Spawn Sound:
+        position: target
+        effect: sound
+        sound: random.pop
+    str-cost: 25 Mana, 1 Leather and holding a Steak.
+    str-cast-self: You have conjured a Cow.
+    str-cast-others: A Cow has been conjured.
+    str-missing-reagents: Your conjuration fails.
+
+SpawnRabbit:
+    spell-class: ".targeted.SpawnMonsterSpell"
+    name: Spawn Rabbit
+    description: Conjure a Rabbit.
+    cast-item: "COOKED_RABBIT"
+    bindable: false
+    can-cast-by-command: false
+    location: target
+    entity-type: rabbit
+    tamed: false
+    range: 10
+    cost:
+        - mana 5
+        - COOKED_RABBIT 1
+    effects:
+      Spawn Effect:
+        position: target
+        effect: spawn
+      Spawn Sound:
+        position: target
+        effect: sound
+        sound: random.pop
+    str-cost: 25 Mana and holding a raw rabbit
+    str-cast-self: You have conjured a Rabbit.
+    str-cast-others: A Rabbit has been conjured.
+    str-missing-reagents: Your conjuration fails.
+
+SpawnSheep:
+    spell-class: ".targeted.SpawnMonsterSpell"
+    name: Spawn Sheep
+    description: Conjure a Sheep.
+    cast-item: "COOKED_MUTTON"
+    bindable: false
+    can-cast-by-command: false
+    location: target
+    entity-type: sheep
+    tamed: false
+    range: 10
+    cost:
+        - mana 5
+        - COOKED_MUTTON 1
+    effects:
+      Spawn Effect:
+        position: target
+        effect: spawn
+      Spawn Sound:
+        position: target
+        effect: sound
+        sound: random.pop
+    str-cost: 25 Mana and holding a mutton
+    str-cast-self: You have conjured a Sheep.
+    str-cast-others: A Sheep has been conjured.
+    str-missing-reagents: Your conjuration fails.
+
+SpawnCreeper:
+    spell-class: ".targeted.SpawnMonsterSpell"
+    name: Spawn Creeper
+    description: Conjure a Creeper.
+    cast-item: TNT
+    bindable: false
+    can-cast-by-command: false
+    location: target
+    entity-type: creeper
+    tamed: false
+    range: 15
+    cost:
+        - mana 25
+        - TNT 1
+    effects:
+      Spawn Effect:
+        position: target
+        effect: spawn
+      Spawn Sound:
+        position: target
+        effect: sound
+        sound: random.pop
+    str-cost: 75 Mana and holding TNT.
+    str-cast-self: You have conjured a Creeper.
+    str-cast-others: A Creeper has been conjured.
+    str-missing-reagents: Your conjuration fails.
+SpawnSpider:
+    spell-class: ".targeted.SpawnMonsterSpell"
+    name: Spawn Spider
+    description: Conjure a Spider.
+    cast-item: FERMENTED_SPIDER_EYE
+    bindable: false
+    can-cast-by-command: false
+    location: target
+    entity-type: spider
+    tamed: false
+    range: 15
+    cost:
+        - mana 9999
+        - FERMENTED_SPIDER_EYE 1
+    effects:
+      Spawn Effect:
+        position: target
+        effect: spawn
+      Spawn Sound:
+        position: target
+        effect: sound
+        sound: random.pop
+    str-cost: 50 Mana and holding a Fermented Spider Eye.
+    str-cast-self: You have conjured a Spider.
+    str-cast-others: A Spider has been conjured.
+    str-missing-reagents: Your conjuration fails.
+SpawnSlime:
+    spell-class: ".targeted.SpawnMonsterSpell"
+    name: Spawn Slime
+    description: Conjure a Slime.
+    cast-item: SLIME_BALL
+    bindable: false
+    can-cast-by-command: false
+    location: target
+    entity-type: slime
+    tamed: false
+    range: 15
+    cost:
+        - mana 50
+        - SLIME_BALL 1
+    effects:
+      Spawn Effect:
+        position: target
+        effect: spawn
+      Spawn Sound:
+        position: target
+        effect: sound
+        sound: random.pop
+    str-cost: 50 Mana and holding a Slime Ball.
+    str-cast-self: You have conjured a Slime.
+    str-cast-others: A Slime has been conjured.
+    str-missing-reagents: Your conjuration fails.
+
+SpawnBlaze:
+    spell-class: ".targeted.SpawnMonsterSpell"
+    name: Spawn Blaze
+    description: Conjure a Blaze.
+    cast-item: BLAZE_ROD
+    bindable: false
+    can-cast-by-command: false
+    location: target
+    entity-type: blaze
+    tamed: false
+    range: 15
+    cost:
+        - mana 75
+        - BLAZE_ROD 1
+    effects:
+      Spawn Effect:
+        position: target
+        effect: spawn
+      Spawn Sound:
+        position: target
+        effect: sound
+        sound: random.pop
+    str-cost: 75 Mana and holding a Blaze Rod.
+    str-cast-self: You have conjured a Blaze.
+    str-cast-others: A Blaze has been conjured.
+    str-missing-reagents: Your conjuration fails.
+
+SpawnEnderman:
+    spell-class: ".targeted.SpawnMonsterSpell"
+    name: Spawn Enderman
+    description: Conjure an Enderman.
+    cast-item: ENDER_PEARL
+    bindable: false
+    can-cast-by-command: false
+    location: target
+    entity-type: enderman
+    tamed: false
+    range: 15
+    cost:
+        - mana 75
+        - ENDER_PEARL 1
+    effects:
+      Spawn Effect:
+        position: target
+        effect: spawn
+      Spawn Sound:
+        position: target
+        effect: sound
+        sound: random.pop
+    str-cost: 75 Mana and holding an Ender Pearl 
+    str-cast-self: You have conjured an Enderman.
+    str-cast-others: An Enderman has been conjured.
+    str-missing-reagents: Your conjuration fails.
+
+SpawnGhast:
+    spell-class: ".targeted.SpawnMonsterSpell"
+    name: Spawn Ghast
+    description: Conjure a Ghast.
+    cast-item: GHAST_TEAR
+    bindable: false
+    can-cast-by-command: false
+    location: target
+    entity-type: ghast
+    tamed: false
+    range: 20
+    cost:
+        - mana 100
+        - GHAST_TEAR 1
+    effects:
+      Spawn Effect:
+        position: target
+        effect: spawn
+      Spawn Sound:
+        position: target
+        effect: sound
+        sound: random.pop
+    str-cost: 100 Mana and holding a Ghast Tear. 
+    str-cast-self: You have conjured an Enderman.
+    str-cast-others: An Enderman has been conjured.
+    str-missing-reagents: Your conjuration fails.
+Beartrap:
+    spell-class: ".targeted.PulserSpell"
+    name: Beartrap
+    spell-icon: 
+    description: Summons a diamond block that calls lightning down upon nearby enemies.
+    cast-item:
+    total-pulses: 1
+    interval: 10
+    max-distance: 100
+    ensure-spell-cast: true
+    cap-per-player: 1
+    target-caster: false
+    block-type: carpet:5
+    unbreakable: false
+    only-count-on-success: true
+    spells:
+        - BeartrapAOE
+    str-cast-self: "&aYou set a beartrap."
+    str-cast-others:
+    str-at-cap:
+BeartrapP:
+    spell-class: ".PassiveSpell"
+    triggers:
+        - spelltargeted BeartrapAOE
+    chance: 100
+    cast-without-target: true
+    cooldown: 0
+    spells:
+        - BearTrapEff
+BearTrapEff:
+    spell-class: ".targeted.StunSpell"
+    name: BearTrapEff
+    duration: 6
+    cost:
+        - mana 0
+    target-self: true
+    str-cast-self: "&4A beartrap snaps around your ankle."
+    str-cast-others: "&aA beartrap snaps around %a's &aankle"
+    effects:
+      Primeffect12:
+        position: target
+        effect: particles
+        particle-name: blockcrack_55_0
+        horiz-spread: 0.3
+        vert-spread: 0.0
+        speed: 0
+        count: 50
+        y-offset: 0.1
+      SOUNDFairy2:
+        position: target
+        effect-interval: 10
+        effect: sound
+        sound: entity.evocation_fangs.attack
+        volume: 10
+        pitch: 0.4
+BeartrapAOE:
+    spell-class: ".targeted.AreaEffectSpell"
+    name: BeartrapAOE
+    description: Give all those around you Mana.
+    cast-item: STICK
+    horizontal-radius: 2
+    vertical-radius: 2
+    point-blank: true
+    fail-if-no-targets: true
+    target-players: true
+    target-non-players: true
+    spells:
+        - BeartrapEff2
+        - 6harm
+    cost:
+        - mana 0
+    str-cost: 0 Mana
+BeartrapEff2:
+    spell-class: ".targeted.PotionEffectSpell"
+    type: 18
+    strength: 1
+    duration: 1
+    targeted: false
+    str-cast-self:
+    str-cast-others:
+BetterBeartrap:
+    spell-class: ".targeted.PulserSpell"
+    name: BetterBeartrap
+    spell-icon: 
+    description: Summons a diamond block that calls lightning down upon nearby enemies.
+    cast-item:
+    total-pulses: 1
+    interval: 10
+    max-distance: 100
+    ensure-spell-cast: true
+    cap-per-player: 1
+    target-caster: false
+    block-type: 28
+    unbreakable: false
+    only-count-on-success: true
+    spells:
+        - BeartrapAOEb
+    str-cast-self: "&aYou set a beartrap."
+    str-cast-others:
+    str-at-cap:
+BeartrapPB:
+    spell-class: ".PassiveSpell"
+    triggers:
+        - spelltargeted BeartrapAOEB
+    chance: 100
+    cast-without-target: true
+    cooldown: 0
+    spells:
+        - BearTrapEffB
+BearTrapEffB:
+    spell-class: ".targeted.StunSpell"
+    name: BearTrapEff
+    duration: 8
+    cost:
+        - mana 0
+    target-self: true
+    str-cast-self: "&4A beartrap snaps around your ankle."
+    str-cast-others: "&aA beartrap snaps around %a&a's &aankle"
+    effects:
+      Primeffect12:
+        position: target
+        effect: particles
+        particle-name: blockcrack_55_0
+        horiz-spread: 0.3
+        vert-spread: 0.0
+        speed: 0
+        count: 50
+        y-offset: 0.1
+      SOUNDFairy2:
+        position: target
+        effect-interval: 10
+        effect: sound
+        sound: entity.evocation_fangs.attack
+        volume: 10
+        pitch: 0.2
+BeartrapAOEB:
+    spell-class: ".targeted.AreaEffectSpell"
+    name: BeartrapAOE
+    description: Give all those around you Mana.
+    cast-item: STICK
+    horizontal-radius: 1
+    vertical-radius: 1
+    point-blank: true
+    fail-if-no-targets: true
+    target-players: true
+    target-non-players: true
+    spells:
+        - BeartrapEff2
+        - 6harm
+    cost:
+        - mana 0
+    str-cost: 0 Mana
+BeartrapEff2B:
+    spell-class: ".targeted.PotionEffectSpell"
+    type: 18
+    strength: 1
+    duration: 1
+    targeted: false
+    str-cast-self:
+    str-cast-others:
