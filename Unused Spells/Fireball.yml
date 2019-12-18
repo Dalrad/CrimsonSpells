@@ -1,0 +1,51 @@
+
+ Fireball:
+     spell-class: ".instant.ParticleProjectileSpell"
+     cooldown: 16
+     change-pitch: true
+     controllable: false
+     projectile-gravity: 0
+     projectile-velocity: 15
+     tick-interval: 2
+     max-distance: 40
+     special-effect-interval: 1
+     relative-offset: 0,1,0.2
+     spell: FireballDamage  
+     hit-radius: 2
+     hit-non-players: true
+     can-target: players,nonplayers
+     hit-players: true
+     str-cast-self: "&cYou summon a fireball"
+     str-on-cooldown: "&cFireball on cooldown! %c seconds remaining"
+     str-cost: "25 mana needed"
+     cost:
+         - mana 25
+     effects:
+         ParticleA:
+             position: special
+             effect: particles
+             particle-name: REDSTONE
+             horiz-spread: 0.1
+             vert-spread: 0.1
+             height-offset: 0
+             speed: 0.002
+             count: 12
+             color: f58905
+         ParticleB:
+             position: special
+             effect: particles        
+             particle-name: REDSTONE
+             horiz-spread: 0.1
+             vert-spread: 0.1
+             height-offset: 0
+             speed: 0.002
+             count: 12
+             color: f52105
+
+ FireballDamage:
+     spell-class: ".targeted.PainSpell"
+     damage: 5
+     damage-type: MAGIC
+     check-plugins: false
+     avoid-damage-modification: true
+     can-target: players,monsters,animals
