@@ -59,6 +59,8 @@ variables:
 ###############################
 ## End Variable Declarations ##
 ###############################
+## Begin Experience Handling ##
+###############################
 
 ExperienceGain_LowDifficulty: ##This is where we add low difficulty mobs
     spell-class: ".PassiveSpell"
@@ -109,10 +111,6 @@ LevelUp1:
           - AttributePoints +2
           - SkillPoints +1
           - Experience 0
-
-##########################
-## End Leveling section ##
-##########################
 
 
 ########################
@@ -326,6 +324,8 @@ DexterityIncrease:
     variable-mods-cast:
           - Dexterity +1
           - AttributePoints -1
+          
+          
 ####################
 ## XP Gain Spells ##
 ####################
