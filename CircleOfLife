@@ -1,0 +1,208 @@
+##Circle of Life -- Healing spell, large AoE
+
+CircleOfLife:
+    spell-class: ".MultiSpell"
+    cooldown: 360
+    str-cast-self: "&2You let the power of nature course through you"
+    str-on-cooldown: "&2Circle of Life on cooldown! %c seconds remaining"
+    cost: [mana 150]
+    variable-mods-cast:
+      - CircleDuration =40
+    str-cost: "150 mana"
+    spells:
+      - CircleOfLifeEffects
+      - CircleOfLifeSlow
+      - DELAY 120
+      - CircleOfLifeLoop
+
+CircleOfLifeSlow:
+    spell-class: ".targeted.PotionEffectSpell"
+    type: 2
+    duration: 360
+    hidden: true
+    strength: 10
+    target-self: true
+    beneficial: false
+    can-target: nonplayers,players,invisibles
+
+
+CircleOfLifeLoop:
+    spell-class: ".MultiSpell"
+    modifiers:
+      - variable CircleDuration<1 castinstead CircleReset
+    variable-mods-cast:
+      - CircleDuration -1
+    spells:
+      - DELAY 5
+      - CircleOfLifeLoop
+      - CircleOfLifeAoE
+      - CircleOfLifeSelf
+
+CircleReset:
+    spell-class: ".instant.DummySpell"
+    variable-mods-cast: [CircleDuration =0]
+
+CircleOfLifeAoE:
+    spell-class: ".targeted.AreaEffectSpell"
+    horizontal-radius: 30
+    vertical-radius: 20
+    spells: [CircleOfLifeHealOthers]
+
+CircleOfLifeHealOthers: &CircleHeal
+    spell-class: ".targeted.HealSpell"
+    can-target: players,nonplayers
+    target-self: false
+    heal-amount: 3
+    cancel-if-full: false
+    effects:
+      GreenPieces: 
+        position: target
+        effect: particles
+        particle-name: happy_villager
+        horiz-spread: 2
+        vert-spread: 0.3
+        duration:
+        speed: 0.2
+        count: 18
+      GreenPieces2:
+        position: caster
+        effect: particles
+        particle-name: happy_villager
+        horiz-spread: 2
+        vert-spread: 0.3
+        speed: 0.2
+        count: 18
+
+CircleOfLifeSelf: {<<: *CircleHeal, target-self: true}
+
+
+CircleOfLifeEffects:
+    spell-class: ".instant.DummySpell"
+    effects:
+      PartEffect1:
+        position: caster
+        effect: effectlib
+        effectlib:
+          class: Cone
+          particle: totem
+          delay: 120
+          duration: 6000
+          update_directions: false
+          update_locations: false
+          visible_range: 60
+          offset: 0,12,0
+          pitch: 90
+          radius_grow: 0.021
+      PartEffect2:
+        position: caster
+        effect: effectlib
+        effectlib:
+          class: Cone
+          particle: totem
+          duration: 6000
+          update_directions: false
+          update_locations: false
+          visible_range: 60
+          offset: -15,12,0
+          pitch: 90
+          radius_grow: 0.021
+      PartEffect3:
+        position: caster
+        effect: effectlib
+        effectlib:
+          class: Cone
+          particle: totem
+          duration: 6000
+          update_directions: false
+          update_locations: false
+          visible_range: 60
+          offset: 15,12,0
+          pitch: 90
+          radius_grow: 0.021
+      PartEffect4:
+        position: caster
+        effect: effectlib
+        effectlib:
+          class: Cone
+          particle: totem
+          duration: 6000
+          update_directions: false
+          update_locations: false
+          visible_range: 60
+          offset: 0,12,-15
+          pitch: 90
+          radius_grow: 0.021
+      PartEffect5:
+        position: caster
+        effect: effectlib
+        effectlib:
+          class: Cone
+          particle: totem
+          duration: 6000
+          update_directions: false
+          update_locations: false
+          visible_range: 60
+          offset: 0,12,15
+          pitch: 90
+          radius_grow: 0.021
+      PartEffect6:
+        position: caster
+        effect: effectlib
+        effectlib:
+          class: Vortex
+          delay: 130
+          radius: 30
+          radials: 0.3
+          particle: totem
+          duration: 6000
+          update_directions: false
+          update_locations: false
+          visible_range: 60
+          offset: 0,20,0
+          pitch: 90
+      PartEffect7:
+        position: caster
+        effect: effectlib
+        effectlib:
+          class: Vortex
+          delay: 120
+          radius: 15
+          radials: 0.3
+          particle: totem
+          duration: 6000
+          update_directions: false
+          update_locations: false
+          visible_range: 60
+          offset: 0,20,0
+          pitch: 90
+      PartEffect8:
+        position: caster
+        effect: effectlib
+        effectlib:
+          class: Vortex
+          delay: 210
+          radius: 30
+          radials: 0.3
+          particle: totem
+          duration: 6000
+          update_directions: false
+          update_locations: false
+          visible_range: 60
+          offset: 0,20,0
+          pitch: 90
+      PartEffect9:
+        position: caster
+        effect: effectlib
+        effectlib:
+          class: Vortex
+          delay: 200
+          radius: 15
+          radials: 0.3
+          particle: totem
+          duration: 6000
+          update_directions: false
+          update_locations: false
+          visible_range: 60
+          offset: 0,20,0
+          pitch: 90
+
