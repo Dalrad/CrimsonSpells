@@ -1,0 +1,18 @@
+EQTest: ## This produces an interesting line animation that curves
+    spell-class: ".instant.DummySpell"
+    effects:
+      PartEffect:
+        position: caster
+        effect: effectlib
+        effectlib:
+          class: EquationEffect
+          xEquation: 0
+          yEquation: "0.25t"
+          zEquation: "0"
+          duration: 10000
+          particles: 3
+          max_steps: 3
+          y2Equation: "sin((0.3141) * t2)"
+          x2Equation: "(t / 30) + 1t2 + 3.14159^t"
+          z2Equation: "(t / 60) * cos((t * 75) ^ 0.2 + 4 * 3.1415 / 2 * t2)"
+          particles2: 20
