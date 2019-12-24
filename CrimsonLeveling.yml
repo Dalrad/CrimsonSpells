@@ -9,7 +9,7 @@ variables:
           type: player
           default: 0
           min: 0
-          max: 100
+          max: 15000
           permanent: true
     SkillPoints:
           type: player
@@ -53,62 +53,91 @@ variables:
           min: 0
           max: 100
           permanent: true
-
+    SpellcastingPerks:
+          type: player
+          default: 0
+          min: 0
+          max: 10
+          permanent: true
+    DevotionPerks:
+          type: player
+          default: 0
+          min: 0
+          max: 10
+          permanent: true
+    StrengthPerks:
+          type: player
+          default: 0
+          min: 0
+          max: 10
+          permanent: true
+    DexterityPerks:
+          type: player
+          default: 0
+          min: 0
+          max: 10
+          permanent: true
+    IntelligencePerks:
+          type: player
+          default: 0
+          min: 0
+          max: 10
+          permanent: true
 
 
 ###############################
 ## End Variable Declarations ##
 ###############################
-
-ExperienceGain_LowDifficulty: ##This is where we add low difficulty mobs
-    spell-class: ".PassiveSpell"
-    triggers:
-          - kill zombie
-          - kill creeper
-          - kill skeleton
-          - kill spider
-          - kill guardian
-    spells:
-          - ExperienceGain5
-    modifiers:
-          - variable Experience:99 castinstead LevelUp1
-          - variable Experience:100 castinstead LevelUp1
-
-ExperienceGain_MediumDifficulty: ##This is where we add medium difficulty mobs
-    spell-class: ".PassiveSpell"
-    triggers:
-          - kill blaze
-          - kill wither_skeleton
-          - kill zombie_pigman
-          - kill ghast
-          - kill husk
-          - kill witch
-    spells:
-          - ExperienceGain10
-    modifiers:
-          - variable Experience:99 castinstead LevelUp1
-          - variable Experience:100 castinstead LevelUp1
-
-ExperienceGain_HardDifficulty: ##This is where we add hard mobs
-    spell-class: ".PassiveSpell"
-    triggers:
-          - kill wither
-          - kill ender_dragon
-    spells:
-          - ExperienceGain100
-    modifiers:
-          - variable Level<25 castinstead Levelup1
-          - variable Experience:99 castinstead LevelUp1
-          - variable Experience:100 castinstead LevelUp1
-
-LevelUp1:
-    spell-class: ".instant.DummySpell"
-    str-cast-self: "&6Level up!"
-    variable-mods-cast:
-          - Levels +1
-          - AttributePoints +2
-          - SkillPoints +1
-          - Experience 0
+#
+#ExperienceGain_LowDifficulty: ##This is where we add low difficulty mobs
+#    spell-class: ".PassiveSpell"
+#    triggers:
+#          - kill zombie
+#          - kill creeper
+#          - kill skeleton
+#          - kill spider
+#          - kill guardian
+#    spells:
+#          - ExperienceGain5
+#    modifiers:
+#          - variable Experience>99 castinstead LevelUp1
+#          - variable Experience>100 castinstead LevelUp1
+#
+#ExperienceGain_MediumDifficulty: ##This is where we add medium difficulty mobs
+#    spell-class: ".PassiveSpell"
+#    triggers:
+#          - kill blaze
+#          - kill wither_skeleton
+#          - kill zombie_pigman
+#          - kill ghast
+#          - kill husk
+#          - kill witch
+#    spells:
+#          - ExperienceGain10
+#    modifiers:
+#          - variable Experience:99 castinstead LevelUp1
+#          - variable Experience:100 castinstead LevelUp1
+#
+#ExperienceGain_HardDifficulty: ##This is where we add hard mobs
+#    spell-class: ".PassiveSpell"
+#    triggers:
+#          - kill wither
+#          - kill ender_dragon
+#    spells:
+#          - ExperienceGain100
+#    modifiers:
+#          - variable Level<25 castinstead Levelup1
+#          - variable Experience:99 castinstead LevelUp1
+#          - variable Experience:100 castinstead LevelUp1
+#
+#LevelUp1:
+#    spell-class: ".instant.DummySpell"
+#    str-cast-self: "&6Level up!"
+#    variable-mods-cast:
+#          - Levels +1
+#          - AttributePoints +2
+#          - SkillPoints +1
+#          - Experience 0
 
 ##########################
 ## End Leveling section ##
@@ -132,8 +161,8 @@ PlayerMenu:
               name: "&6Player Information"
               lore:
                 - "&6Stats:"
-                - "&rXP: &7%var:Experience%"
-                - "&rLevel: &7%var:Levels%"
+                - "&rXP: &7%var:Experience:0%"
+                - "&rLevel: &7%var:Levels:0%"
                 - ''
                 - '&7Made entirely in Magic Spells'
                 - '&7If you find a bug, please report'
@@ -153,17 +182,30 @@ PlayerMenu:
               type: bookshelf
               name: "&6Attributes"
               lore:
-                - '&rAttribute Points Remaining: &7%var:AttributePoints%'
+                - '&rAttribute Points Remaining: &7%var:AttributePoints:0%'
                 - ''
-                - "&rDevotion: &7%var:Devotion%"
-                - "&rSpellcasting: &7%var:Spellcastings%"
-                - "&rStrength: &7%var:Strength%"
-                - "&rDexterity: &7%var:Dexterity%"
-                - "&rIntelligence: &7%var:Intelligence%"
+                - "&rDevotion: &7%var:Devotion:0%"
+                - "&rSpellcasting: &7%var:Spellcastings:0%"
+                - "&rStrength: &7%var:Strength:0%"
+                - "&rDexterity: &7%var:Dexterity:0%"
+                - "&rIntelligence: &7%var:Intelligence:0%"
                 - ''
+                - '&7[Click to spend attributes]'
                 - '&7Made entirely in Magic Spells'
             stay-open: true
             spell: SubMenuAttributeSelection
+        SkillTreeMenus:
+          slot: 4
+          item:
+            type: map
+            name: "&6Spend Skill Points"
+            lore:
+              - ""
+              - '&rSkill Points : &7%var:SkillPoints:0%'
+              - "&7[Click here to use skill points]"
+          stay-open: true
+          spell: SubMenuSkillTrees
+
 
 SubMenuAttributeSelection:
     spell-class: ".MenuSpell"
@@ -178,7 +220,7 @@ SubMenuAttributeSelection:
               type: nether_star
               name: "&6Devotion"
               lore:
-                - "&rCurrent Devotion: &7%var:Devotion%/100"
+                - "&rCurrent Devotion: &7%var:Devotion:0%/100"
                 - "&rClick to increase (1 Skill Point)"
                 - ''
                 - '&55 Devotion: &7Unlocks /prayer'
@@ -186,14 +228,14 @@ SubMenuAttributeSelection:
                 - '&550 Devotion: &7Doubles Creed spell strength'
                 - '&5100 Devotion: &7Eligible to become champion'
             stay-open: true
-            spell: DevotionIncrease
+            spell: DevotionIncrease(mode=full)
         Spellcasting:
             slot: 2
             item:
               type: book
               name: "&6Spellcasting"
               lore:
-                - "&rCurrent Spellcasting: &7%var:Spellcasting%/50"
+                - "&rCurrent Spellcasting: &7%var:Spellcasting:0%/50"
                 - "&rClick to increase (1 Skill Point)"
                 - ''
                 - '&510 Spellcasting: &7Unlocks Magic Missile'
@@ -209,7 +251,7 @@ SubMenuAttributeSelection:
               type: iron_axe
               name: "&6Strength"
               lore:
-                - "&rCurrent Strength: &7%var:Strength%/100"
+                - "&rCurrent Strength: &7%var:Strength:0%/100"
                 - "&rClick to increase (1 Skill Point)"
                 - ''
                 - '&55 Strength: &7Unlocks tier 1 strength abilities'
@@ -225,7 +267,7 @@ SubMenuAttributeSelection:
               type: bow
               name: "&6Dexterity"
               lore:
-                - "&rCurrent Dexterity: &7%var:Dexterity%/100"
+                - "&rCurrent Dexterity: &7%var:Dexterity:0%/100"
                 - "&rClick to increase (1 Skill Point)"
                 - ''
                 - '&55 Dexterity: &7Unlocks tier 1 dexterity abilities'
@@ -240,7 +282,7 @@ SubMenuAttributeSelection:
               type: redstone
               name: "&6Intelligence"
               lore:
-                - "&rCurrent Devotion: &7%var:Intelligence%"
+                - "&rCurrent Intelligence: &7%var:Intelligence:0%"
                 - "&rClick to increase (1 Skill Point)"
                 - ''
                 - '&55 Intelligence: &7Unlocks tier 1 intelligence abilities'
@@ -262,13 +304,13 @@ SubMenuAttributeSelection:
               type: bookshelf
               name: "&6Attributes"
               lore:
-                - '&rAttribute Points Remaining: &7%var:AttributePoints%'
+                - '&rAttribute Points Remaining: &7%var:AttributePoints:0%'
                 - ''
-                - "&rDevotion: &7%var:Devotion%"
-                - "&rSpellcasting: &7%var:Spellcastings%"
-                - "&rStrength: &7%var:Strength%"
-                - "&rDexterity: &7%var:Dexterity%"
-                - "&rIntelligence: &7%var:Intelligence%"
+                - "&rDevotion: &7%var:Devotion:0%"
+                - "&rSpellcasting: &7%var:Spellcastings:0%"
+                - "&rStrength: &7%var:Strength:0%"
+                - "&rDexterity: &7%var:Dexterity:0%"
+                - "&rIntelligence: &7%var:Intelligence:0%"
                 - ''
                 - '&7Made entirely in Magic Spells'
             stay-open: true
@@ -276,6 +318,352 @@ SubMenuAttributeSelection:
 
 dummy:
     spell-class: ".instant.DummySpell"
+
+
+
+########################
+##### Skill trees ######
+########################
+
+SubMenuSkillTrees:
+    spell-class: ".MenuSpell"
+    title: "&6Player Skill Trees"
+    target-self: true
+    cooldown: 1
+    delay: 1
+    options:
+        Strength:
+            slot: 0
+            item:
+              type: iron_axe
+              name: "&6Strength"
+              lore:
+                - "&rCurrent Strength: &7%var:Strength:0%/100"
+                - "&7[Click to view strength skills]"
+                - ''
+                - '&55 Strength: &7Unlocks tier 1 strength abilities'
+                - '&525 Strength: &7Unlocks tier 2 strength abilities'
+                - '&550 Strength: &7Unlocks tier 3 strength abilities'
+                - '&5100 Strength: &7Unlocks legendary strength abilities'
+            stay-open: true
+            spell: StrengthTierOneMenu
+        Dexterity:
+            slot: 2
+            item:
+              type: bow
+              name: "&6Dexterity"
+              lore:
+                - "&rCurrent Dexterity: &7%var:Dexterity:0%/100"
+                - "&7[Click to view dexterity skills]"
+                - ''
+                - '&55 Dexterity: &7Unlocks tier 1 dexterity abilities'
+                - '&525 Dexterity: &7Unlocks tier 2 dexterity abilities'
+                - '&550 Dexterity: &7Unlocks tier 3 dexterity abilities'
+                - '&5100 Dexterity: &7Unlocks legendary strength abilities'
+            stay-open: true
+            spell: DexterityTierOneMenu
+        Intelligence:
+            slot: 4
+            item:
+              type: redstone
+              name: "&6Intelligence"
+              lore:
+                - "&rCurrent Intelligence: &7%var:Intelligence:0%"
+                - "&7[Click to view intelligence skills]"
+                - ''
+                - '&55 Intelligence: &7Unlocks tier 1 intelligence abilities'
+                - '&550 Intelligence: &7Unlocks tier 2 intelligence abilities'
+                - '&575 Intelligence: &7Unlocks tier 3 intelligence abilities'
+                - '&5100 Intelligence &7Unlocks legendary intelligence abilities'
+            stay-open: true
+            spell: IntelligenceTierOneMenu
+        GUISpacing:
+          slot: 8
+          item:
+            type: red_wool
+            name: "&cReturn to previous menu"
+          spell: PlayerMenu
+        AttributeMenu:
+            slot: 6
+            item:
+              type: bookshelf
+              name: "&6Attributes"
+              lore:
+                - '&rAttribute Points Remaining: &7%var:AttributePoints:0%'
+                - ''
+                - "&rDevotion: &7%var:Devotion:0%"
+                - "&rSpellcasting: &7%var:Spellcastings:0%"
+                - "&rStrength: &7%var:Strength:0%"
+                - "&rDexterity: &7%var:Dexterity:0%"
+                - "&rIntelligence: &7%var:Intelligence:0%"
+                - ''
+                - '&7Made entirely in Magic Spells'
+            stay-open: true
+            spell: dummy
+
+
+## Strength Skill Menus ##
+
+StrengthTierOneMenu:
+    spell-class: ".MenuSpell"
+    title: "&6Strength Tier One Skills"
+    target-self: true
+    modifiers:
+      - variable Strength>4 required$$&4Error! You lack the required strength for these skills!
+    cooldown: 1
+    delay: 1
+    options:
+        GUISpacing:
+          slot: 8
+          item:
+            type: red_wool
+            name: "&cReturn to previous menu"
+          spell: PlayerMenu
+        ProgressMenu:
+          slot: 7
+          item:
+            type: green_wool
+            name: "&aProgress to next tier"
+          spell: StrengthTierTwoMenu
+
+
+StrengthTierTwoMenu:
+    spell-class: ".MenuSpell"
+    title: "&6Strength Tier Two Skills"
+    target-self: true
+    modifiers:
+      - variable Strength>24 required$$&4Error! You lack the required strength for these skills!
+    cooldown: 1
+    delay: 1
+    options:
+        GUISpacing:
+          slot: 8
+          item:
+            type: red_wool
+            name: "&cReturn to previous menu"
+          spell: StrengthTierOneMenu
+        ProgressMenu:
+          slot: 7
+          item:
+            type: green_wool
+            name: "&aProgress to next tier"
+          spell: StrengthTierThreeMenu
+
+
+StrengthTierThreeMenu:
+    spell-class: ".MenuSpell"
+    title: "&6Strength Tier Three Skills"
+    target-self: true
+    modifiers:
+      - variable Strength>49 required$$&4Error! You lack the required strength for these skills!
+    cooldown: 1
+    delay: 1
+    options:
+        GUISpacing:
+          slot: 8
+          item:
+            type: red_wool
+            name: "&cReturn to previous menu"
+          spell: StrengthTierTwoMenu
+        ProgressMenu:
+          slot: 7
+          item:
+            type: green_wool
+            name: "&aProgress to next tier"
+          spell: StrengthTierLegendaryMenu
+
+StrengthTierLegendaryMenu:
+    spell-class: ".MenuSpell"
+    title: "&6Strength Legendary Skills"
+    target-self: true
+    modifiers:
+      - variable Strength>99 required$$&4Error! You lack the required strength for these skills!
+    cooldown: 1
+    delay: 1
+    options:
+        GUISpacing:
+          slot: 8
+          item:
+            type: red_wool
+            name: "&cReturn to previous menu"
+          spell: StrengthTierThreeMenu
+
+
+
+
+## Dexterity Skill Menus ##
+
+DexterityTierOneMenu:
+    spell-class: ".MenuSpell"
+    title: "&6Dexterity Tier One Skills"
+    target-self: true
+    modifiers:
+      - variable Dexterity>4 required$$&4Error! You lack the required dexterity for these skills!
+    cooldown: 1
+    delay: 1
+    options:
+        GUISpacing:
+          slot: 8
+          item:
+            type: red_wool
+            name: "&cReturn to previous menu"
+          spell: PlayerMenu
+        ProgressMenu:
+          slot: 7
+          item:
+            type: green_wool
+            name: "&aProgress to next tier"
+          spell: DexterityTierTwoMenu
+
+
+DexterityTierTwoMenu:
+    spell-class: ".MenuSpell"
+    title: "&6Dexterity Tier Two Skills"
+    target-self: true
+    modifiers:
+      - variable Dexterity>24 required$$&4Error! You lack the required dexterity for these skills!
+    cooldown: 1
+    delay: 1
+    options:
+        GUISpacing:
+          slot: 8
+          item:
+            type: red_wool
+            name: "&cReturn to previous menu"
+          spell: DexterityTierOneMenu
+        ProgressMenu:
+          slot: 7
+          item:
+            type: green_wool
+            name: "&aProgress to next tier"
+          spell: DexterityTierThreeMenu
+
+DexterityTierThreeMenu:
+    spell-class: ".MenuSpell"
+    title: "&6Dexterity Tier Three Skills"
+    target-self: true
+    modifiers:
+      - variable Dexterity>49 required$$&4Error! You lack the required dexterity for these skills!
+    cooldown: 1
+    delay: 1
+    options:
+        GUISpacing:
+          slot: 8
+          item:
+            type: red_wool
+            name: "&cReturn to previous menu"
+          spell: DexterityTierTwoMenu
+        ProgressMenu:
+          slot: 7
+          item:
+            type: green_wool
+            name: "&aProgress to next tier"
+          spell: DexterityTierLegendaryMenu
+
+DexterityTierLegendaryMenu:
+    spell-class: ".MenuSpell"
+    title: "&6Dexterity Legendary Skills"
+    target-self: true
+    modifiers:
+      - variable Dexterity>99 required$$&4Error! You lack the required dexterity for these skills!
+    cooldown: 1
+    delay: 1
+    options:
+        GUISpacing:
+          slot: 8
+          item:
+            type: red_wool
+            name: "&cReturn to previous menu"
+          spell: DexterityTierThreeMenu
+
+
+
+##Intelligence Skill menus
+
+IntelligenceTierOneMenu:
+    spell-class: ".MenuSpell"
+    title: "&6Intelligence Tier One Skills"
+    modifiers:
+      - variable Intelligence>4 required$$&4Error! You lack the required intelligence for this!
+    target-self: true
+    cooldown: 1
+    delay: 1
+    options:
+        GUISpacing:
+          slot: 8
+          item:
+            type: red_wool
+            name: "&cReturn to previous menu"
+          spell: PlayerMenu
+        ProgressMenu:
+          slot: 7
+          item:
+            type: green_wool
+            name: "&aProgress to next tier"
+          spell: IntelligenceTierTwoMenu
+
+
+IntelligenceTierTwoMenu:
+    spell-class: ".MenuSpell"
+    title: "&6Intelligence Tier Two Skills"
+    modifiers:
+      - variable Intelligence>49 required$$&4Error! You lack the required intelligence for this!
+    target-self: true
+    cooldown: 1
+    delay: 1
+    options:
+        GUISpacing:
+          slot: 8
+          item:
+            type: red_wool
+            name: "&cReturn to previous menu"
+          spell: PlayerMenu
+        ProgressMenu:
+          slot: 7
+          item:
+            type: green_wool
+            name: "&aProgress to next tier"
+          spell: IntelligenceTierThreeMenu
+
+IntelligenceTierThreeMenu:
+    spell-class: ".MenuSpell"
+    title: "&6Intelligence Tier Three Skills"
+    modifiers:
+      - variable Intelligence>74 required$$&4Error! You lack the required intelligence for this!
+    target-self: true
+    cooldown: 1
+    delay: 1
+    options:
+        GUISpacing:
+          slot: 8
+          item:
+            type: red_wool
+            name: "&cReturn to previous menu"
+          spell: PlayerMenu
+        ProgressMenu:
+          slot: 7
+          item:
+            type: green_wool
+            name: "&aProgress to next tier"
+          spell: IntelligenceTierLegendaryMenu
+
+
+IntelligenceTierLegendaryMenu:
+    spell-class: ".MenuSpell"
+    title: "&6Intelligence Legendary Skills"
+    modifiers:
+      - variable Intelligence>99 required$$&4Error! You lack the required intelligence for this!
+    target-self: true
+    cooldown: 1
+    delay: 1
+    options:
+        GUISpacing:
+          slot: 8
+          item:
+            type: red_wool
+            name: "&cReturn to previous menu"
+          spell: PlayerMenu
+
 
 
 ########################
@@ -287,68 +675,357 @@ DevotionIncrease:
     str-cast-self: "&6Devotion increased by one!"
     modifiers:
       - variable AttributePoints>0 required$$&4Error! Not enough Attribute Points!
+      - variable Devotion:4 castinstead DevotionPrayerPerk
+      - variable Devotion:14 castinstead DevotionPerkIncrease
+      - variable Devotion:49 castinstead DevotionPerkIncrease
+      - variable Devotion:99 castinstead DevotionPerkIncrease
     variable-mods-cast:
           - Devotion +1
           - AttributePoints -1
+
+DevotionPerkIncrease:
+    spell-class: ".instant.DummySpell"
+    str-cast-self: "&6Devotion increased by one! New perk unlocked!"
+    modifiers:
+          - variable AttributePoints>0 required$$&4Error! Not enough Attribute Points!
+    variable-mods-cast:
+          - Devotion +1
+          - DevotionPerks +1
+          - AttributePoints -1
+
+## Spellcasting stuff ##
 
 SpellcastingIncrease:
     spell-class: ".instant.DummySpell"
     str-cast-self: "&6Spellcasting increased by one!"
     modifiers:
-      - variable AttributePoints>0 required$$&4Error! Not enough Attribute Points!
+          - variable AttributePoints>0 required$$&4Error! Not enough Attribute Points!
+          - variable Spellcasting:9 castinstead SpellcastingPerkIncrease
+          - variable Spellcasting:19 castinstead SpellcastingPerkIncrease
+          - variable Spellcasting:29 castinstead SpellcastingPerkIncrease
+          - variable Spellcasting:39 castinstead SpellcastingPerkIncrease
+          - variable Spellcasting:49 castinstead SpellcastingPerkIncrease
     variable-mods-cast:
           - Spellcasting +1
           - AttributePoints -1
+
+SpellcastingPerkIncrease:
+    spell-class: ".instant.DummySpell"
+    str-cast-self: "&6Spellcasting increased by one! New perk unlocked!"
+    modifiers:
+          - variable AttributePoints>0 required$$&4Error! Not enough Attribute Points!
+    variable-mods-cast:
+          - Spellcasting +1
+          - SpellcastingPerks +1
+          - AttributePoints -1
+
+## Strength Stuff ##
 
 StrengthIncrease:
     spell-class: ".instant.DummySpell"
     str-cast-self: "&6Strength increased by one!"
     modifiers:
-      - variable AttributePoints>0 required$$&4Error! Not enough Attribute Points!
+          - variable AttributePoints>0 required$$&4Error! Not enough Attribute Points!
+          - variable Strength:4 castinstead StrengthPerkIncrease
+          - variable Strength:14 castinstead DiamondArmorPerk
+          - variable Strength:24 castinstead StrengthPerkIncrease
+          - variable Strength:49 castinstead StrengthPerkIncrease
+          - variable Strength:99 castinstead StrengthPerkIncrease
     variable-mods-cast:
           - Strength +1
           - AttributePoints -1
+
+
+StrengthPerkIncrease:
+    spell-class: ".instant.DummySpell"
+    str-cast-self: "&6Strength increased by one! New perk unlocked!"
+    modifiers:
+          - variable AttributePoints>0 required$$&4Error! Not enough Attribute Points!
+    variable-mods-cast:
+          - Strength +1
+          - StrengthPerks +1
+          - AttributePoints -1
+
+## Intelligence stuff ##
 
 IntelligenceIncrease:
     spell-class: ".instant.DummySpell"
     str-cast-self: "&6Intelligence increased by one!"
     modifiers:
-      - variable AttributePoints>0 required$$&4Error! Not enough Attribute Points!
+          - variable AttributePoints>0 required$$&4Error! Not enough Attribute Points!
+          - variable Intelligence:4 castinstead IntelligencePerkIncrease
+          - variable Intelligence:14 castinstead IntelligenceRecipePerk
+          - variable Intelligence:49 castinstead IntelligencePerkIncrease
+          - variable Intelligence:74 castinstead IntelligencePerkIncrease
+          - variable Intelligence:99 castinstead IntelligencePerkIncrease
     variable-mods-cast:
           - Intelligence +1
           - AttributePoints -1
+
+IntelligencePerkIncrease:
+    spell-class: ".instant.DummySpell"
+    str-cast-self: "&6Intelligence increased by one! New perk unlocked!"
+    modifiers:
+          - variable AttributePoints>0 required$$&4Error! Not enough Attribute Points!
+    variable-mods-cast:
+          - Intelligence +1
+          - IntelligencePerks +1
+          - AttributePoints -1
+
+## Dexterity stuff ##
 
 DexterityIncrease:
     spell-class: ".instant.DummySpell"
     str-cast-self: "&6Dexterity increased by one!"
     modifiers:
-      - variable AttributePoints>0 required$$&4Error! Not enough Attribute Points!
+           - variable AttributePoints>0 required$$&4Error! Not enough Attribute Points!
+           - variable Dexterity:4 castinstead DexterityPerkIncrease
+           - variable Dexterity:24 castinstead DexterityPerkIncrease
+           - variable Dexterity:49 castinstead DexterityPerkIncrease
+           - variable Dexterity:99 castinstead DexterityPerkIncrease
     variable-mods-cast:
           - Dexterity +1
           - AttributePoints -1
+
+DexterityPerkIncrease:
+    spell-class: ".instant.DummySpell"
+    str-cast-self: "&6Dexterity increased by one! New perk unlocked!"
+    modifiers:
+          - variable AttributePoints>0 required$$&4Error! Not enough Attribute Points!
+    variable-mods-cast:
+          - Dexterity +1
+          - DexterityPerks +1
+          - AttributePoints -1
+
+
+
+
+
+####################################
+## Perk traits that aren't skills ##
+####################################
+
+DevotionPrayerPerk:
+    spell-class: ".ExternalCommandSpell"
+    str-cast-self: "&6Devotion increased by one! New perk unlocked!"
+    execute-on-console-instead: true
+    command-to-execute: ["lp user %a perm set message.prayer"]
+    modifiers:
+          - variable AttributePoints>0 required$$&4Error! Not enough Attribute Points!
+    variable-mods-cast:
+          - Devotion +1
+          - DevotionPerks +1
+          - AttributePoints -1
+
+DiamondArmorPerk:
+    spell-class: ".ExternalCommandSpell"
+    str-cast-self: "&6Strength increased by one! New perk unlocked!"
+    execute-on-console-instead: true
+    command-to-execute: ["lp user %a perm set magicspells.cast.DiamondArmorPenalty false"]
+    modifiers:
+          - variable AttributePoints>0 required$$&4Error! Not enough Attribute Points!
+    variable-mods-cast:
+          - Strength +1
+          - StrengthPerks +1
+          - AttributePoints -1
+
+IntelligenceRecipePerk:
+    spell-class: ".ExternalCommandSpell"
+    str-cast-self: "&6Intelligence increased by one! New perk unlocked!"
+    execute-on-console-instead: true
+    command-to-execute: ["lp user %a parent add CustomRecipes"]
+    modifiers:
+          - variable AttributePoints>0 required$$&4Error! Not enough Attribute Points!
+    variable-mods-cast:
+          - Intelligence +1
+          - IntelligencePerks +1
+          - AttributePoints -1
+
 
 ####################
 ## XP Gain Spells ##
 ####################
 
-ExperienceGain5:
+
+ExperienceGain_LowDifficulty: ##This is where we add low difficulty mobs
+    spell-class: ".PassiveSpell"
+    triggers:
+          - kill zombie
+          - kill creeper
+          - kill skeleton
+          - kill spider
+          - kill guardian
+    spells:
+          - dummy
+    modifiers:
+          - variable Levels>0 cast ExperienceGainFiveUnder25
+          - variable Levels>24 cast ExperienceGainFiveOver25
+          - variable Levels>49 cast ExperienceGainFiveOver50
+          - variable Levels>74 cast ExperienceGainFiveOver75
+          - variable Levels>100 cast ExperienceGainFiveOver100
+
+
+ExperienceGain_MediumDifficulty: ##This is where we add medium difficulty mobs
+    spell-class: ".PassiveSpell"
+    triggers:
+          - kill blaze
+          - kill wither_skeleton
+          - kill zombie_pigman
+          - kill ghast
+          - kill husk
+          - kill witch
+    spells:
+          - dummy
+    modifiers:
+          - variable Levels>0 cast ExperienceGainTenUnder25
+          - variable Levels>24 cast ExperienceGainTenOver25
+          - variable Levels>49 cast ExperienceGainTenOver50
+          - variable Levels>74 cast ExperienceGainTenOver75
+          - variable Levels>100 cast ExperienceGainTenOver100
+
+ExperienceGain_HardDifficulty: ##This is where we add hard mobs
+    spell-class: ".PassiveSpell"
+    triggers:
+          - kill wither
+          - kill ender_dragon
+    spells:
+          - dummy
+    modifiers:
+          - variable Levels>0 cast ExperienceGainHundredUnder25
+          - variable Levels>24 cast ExperienceGainHundredOver25
+          - variable Levels>49 cast ExperienceGainHundredOver50
+          - variable Levels>74 cast ExperienceGainHundredOver75
+          - variable Levels>100 cast ExperienceGainHundredOver100
+
+gainlevel:
     spell-class: ".instant.DummySpell"
+    str-cast-self: "&6Level up!"
+    variable-mods-cast:
+          - Levels +1
+          - AttributePoints +2
+          - SkillPoints +1
+          - Experience 0
+
+
+## XP gain 5 brackets
+
+ExperienceGainFiveUnder25:
+    spell-class: ".instant.DummySpell"
+    modifiers:
+      - variable Levels<25 required
+      - variable Experience>200 castinstead gainlevel
+    variable-mods-cast:
+      - Experience +5
+
+ExperienceGainFiveOver25:
+    spell-class: ".instant.DummySpell"
+    modifiers:
+      - variable Levels<50 required
+      - variable Experience>600 castinstead GainLevel
     variable-mods-cast:
           - Experience +5
 
-ExperienceGain10:
+ExperienceGainFiveOver50:
     spell-class: ".instant.DummySpell"
+    modifiers:
+      - variable Levels<75 required
+      - variable Experience>1000 castinstead GainLevel
+    variable-mods-cast:
+          - Experience +5
+
+ExperienceGainFiveOver75:
+    spell-class: ".instant.DummySpell"
+    modifiers:
+      - variable Levels<100 required
+      - variable Experience>3000 castinstead GainLevel
+    variable-mods-cast:
+          - Experience +5
+
+ExperienceGainFiveOver100:
+    spell-class: ".instant.DummySpell"
+    modifiers:
+      - variable Experience>10000 castinstead GainLevel
+    variable-mods-cast:
+          - Experience +5
+
+## 10 xp gain leveling things
+
+ExperienceGainTenUnder25:
+    spell-class: ".instant.DummySpell"
+    modifiers:
+      - variable Levels<25 required
+      - variable Experience>200 castinstead gainlevel
+    variable-mods-cast:
+      - Experience +10
+
+ExperienceGainTenOver25:
+    spell-class: ".instant.DummySpell"
+    modifiers:
+      - variable Levels<50 required
+      - variable Experience>600 castinstead GainLevel
     variable-mods-cast:
           - Experience +10
 
-ExperienceGain100:
+ExperienceGainTenOver50:
     spell-class: ".instant.DummySpell"
+    modifiers:
+      - variable Levels<75 required
+      - variable Experience>1000 castinstead GainLevel
+    variable-mods-cast:
+          - Experience +10
+
+ExperienceGainTenOver75:
+    spell-class: ".instant.DummySpell"
+    modifiers:
+      - variable Levels<100 required
+      - variable Experience>3000 castinstead GainLevel
+    variable-mods-cast:
+          - Experience +10
+
+ExperienceGainTenOver100:
+    spell-class: ".instant.DummySpell"
+    modifiers:
+      - variable Experience>10000 castinstead GainLevel
+    variable-mods-cast:
+          - Experience +10
+
+## 100 xp gain bracketing
+
+ExperienceGainHundredUnder25:
+    spell-class: ".instant.DummySpell"
+    modifiers:
+      - variable Levels<25 required
+      - variable Experience>200 castinstead gainlevel
+    variable-mods-cast:
+      - Experience +100
+
+ExperienceGainHundredOver25:
+    spell-class: ".instant.DummySpell"
+    modifiers:
+      - variable Levels<50 required
+      - variable Experience>600 castinstead GainLevel
     variable-mods-cast:
           - Experience +100
 
-permission:
-  spell-class: ".PermissionSpell"
-  duration: 0
-  target-self: true
-  permission-nodes:
-    - essentials.kill
+ExperienceGainHundredOver50:
+    spell-class: ".instant.DummySpell"
+    modifiers:
+      - variable Levels<75 required
+      - variable Experience>1000 castinstead GainLevel
+    variable-mods-cast:
+          - Experience +100
+
+ExperienceGainHundredOver75:
+    spell-class: ".instant.DummySpell"
+    modifiers:
+      - variable Levels<100 required
+      - variable Experience>3000 castinstead GainLevel
+    variable-mods-cast:
+          - Experience +100
+
+ExperienceGainHundredOver100:
+    spell-class: ".instant.DummySpell"
+    modifiers:
+      - variable Experience>10000 castinstead GainLevel
+    variable-mods-cast:
+          - Experience +100
