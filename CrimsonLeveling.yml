@@ -83,65 +83,65 @@ variables:
           min: 0
           max: 10
           permanent: true
+    PocketSand:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    QuickTrip:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    DartToss:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    PoisonedDart:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    MinorVolley:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    Backpedal:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    CalledShot:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    Hasten:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    Disengage:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
 
 
 ###############################
 ## End Variable Declarations ##
 ###############################
-#
-#ExperienceGain_LowDifficulty: ##This is where we add low difficulty mobs
-#    spell-class: ".PassiveSpell"
-#    triggers:
-#          - kill zombie
-#          - kill creeper
-#          - kill skeleton
-#          - kill spider
-#          - kill guardian
-#    spells:
-#          - ExperienceGain5
-#    modifiers:
-#          - variable Experience>99 castinstead LevelUp1
-#          - variable Experience>100 castinstead LevelUp1
-#
-#ExperienceGain_MediumDifficulty: ##This is where we add medium difficulty mobs
-#    spell-class: ".PassiveSpell"
-#    triggers:
-#          - kill blaze
-#          - kill wither_skeleton
-#          - kill zombie_pigman
-#          - kill ghast
-#          - kill husk
-#          - kill witch
-#    spells:
-#          - ExperienceGain10
-#    modifiers:
-#          - variable Experience:99 castinstead LevelUp1
-#          - variable Experience:100 castinstead LevelUp1
-#
-#ExperienceGain_HardDifficulty: ##This is where we add hard mobs
-#    spell-class: ".PassiveSpell"
-#    triggers:
-#          - kill wither
-#          - kill ender_dragon
-#    spells:
-#          - ExperienceGain100
-#    modifiers:
-#          - variable Level<25 castinstead Levelup1
-#          - variable Experience:99 castinstead LevelUp1
-#          - variable Experience:100 castinstead LevelUp1
-#
-#LevelUp1:
-#    spell-class: ".instant.DummySpell"
-#    str-cast-self: "&6Level up!"
-#    variable-mods-cast:
-#          - Levels +1
-#          - AttributePoints +2
-#          - SkillPoints +1
-#          - Experience 0
-
-##########################
-## End Leveling section ##
-##########################
 
 
 ########################
@@ -150,7 +150,7 @@ variables:
 
 PlayerMenu:
     spell-class: ".MenuSpell"
-    title: "&6Player Stats"
+    title: "&6&lPlayer Stats"
     cooldown: 1
     delay: 1
     options:
@@ -209,7 +209,7 @@ PlayerMenu:
 
 SubMenuAttributeSelection:
     spell-class: ".MenuSpell"
-    title: "&6Player Attributes"
+    title: "&6&lPlayer Attributes"
     target-self: true
     cooldown: 1
     delay: 1
@@ -327,7 +327,7 @@ dummy:
 
 SubMenuSkillTrees:
     spell-class: ".MenuSpell"
-    title: "&6Player Skill Trees"
+    title: "&6&lPlayer Skill Trees"
     target-self: true
     cooldown: 1
     delay: 1
@@ -390,6 +390,7 @@ SubMenuSkillTrees:
               name: "&6Attributes"
               lore:
                 - '&rAttribute Points Remaining: &7%var:AttributePoints:0%'
+                - '&rSkill Points: &7%var:SkillPoints:0%'
                 - ''
                 - "&rDevotion: &7%var:Devotion:0%"
                 - "&rSpellcasting: &7%var:Spellcastings:0%"
@@ -406,7 +407,7 @@ SubMenuSkillTrees:
 
 StrengthTierOneMenu:
     spell-class: ".MenuSpell"
-    title: "&6Strength Tier One Skills"
+    title: "&6&lStrength Tier One Skills"
     target-self: true
     modifiers:
       - variable Strength>4 required$$&4Error! You lack the required strength for these skills!
@@ -426,10 +427,9 @@ StrengthTierOneMenu:
             name: "&aProgress to next tier"
           spell: StrengthTierTwoMenu
 
-
 StrengthTierTwoMenu:
     spell-class: ".MenuSpell"
-    title: "&6Strength Tier Two Skills"
+    title: "&6&lStrength Tier Two Skills"
     target-self: true
     modifiers:
       - variable Strength>24 required$$&4Error! You lack the required strength for these skills!
@@ -449,10 +449,9 @@ StrengthTierTwoMenu:
             name: "&aProgress to next tier"
           spell: StrengthTierThreeMenu
 
-
 StrengthTierThreeMenu:
     spell-class: ".MenuSpell"
-    title: "&6Strength Tier Three Skills"
+    title: "&6&lStrength Tier Three Skills"
     target-self: true
     modifiers:
       - variable Strength>49 required$$&4Error! You lack the required strength for these skills!
@@ -474,7 +473,7 @@ StrengthTierThreeMenu:
 
 StrengthTierLegendaryMenu:
     spell-class: ".MenuSpell"
-    title: "&6Strength Legendary Skills"
+    title: "&6&lStrength Legendary Skills"
     target-self: true
     modifiers:
       - variable Strength>99 required$$&4Error! You lack the required strength for these skills!
@@ -495,13 +494,55 @@ StrengthTierLegendaryMenu:
 
 DexterityTierOneMenu:
     spell-class: ".MenuSpell"
-    title: "&6Dexterity Tier One Skills"
+    title: "&6&lDexterity Tier One Skills"
     target-self: true
     modifiers:
       - variable Dexterity>4 required$$&4Error! You lack the required dexterity for these skills!
     cooldown: 1
     delay: 1
     options:
+        Quicktrip:
+          slot: 2
+          item:
+            type: rabbit_foot
+            name: "&6Quicktrip"
+            lore:
+              - '&rLash out to stun and trip your enemy'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: QuickTripUnlock
+          stay-open: true
+        PocketSand:
+          slot: 0
+          item:
+            type: sand
+            name: "&6Pocket Sand"
+            lore:
+              - '&rThrow pocket sand to disorient your enemy'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: PocketSandUnlock
+          stay-open: true
+        DartToss:
+          slot: 4
+          item:
+            type: arrow
+            name: "&6Dart Toss"
+            lore:
+              - '&rThrow a dart to harm your enemy'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: DartTossUnlock
+          stay-open: true
         GUISpacing:
           slot: 8
           item:
@@ -515,16 +556,57 @@ DexterityTierOneMenu:
             name: "&aProgress to next tier"
           spell: DexterityTierTwoMenu
 
-
 DexterityTierTwoMenu:
     spell-class: ".MenuSpell"
-    title: "&6Dexterity Tier Two Skills"
+    title: "&6&lDexterity Tier Two Skills"
     target-self: true
     modifiers:
       - variable Dexterity>24 required$$&4Error! You lack the required dexterity for these skills!
     cooldown: 1
     delay: 1
     options:
+        PoisonedDart:
+          slot: 2
+          item:
+            type: spectral_arrow
+            name: "&6Poisoned Dart"
+            lore:
+              - '&rThrow a dart covered in toxins at an enemy'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: PoisonedDartUnlock
+          stay-open: true
+        MinorVolley:
+          slot: 0
+          item:
+            type: bow
+            name: "&6Minor Volley"
+            lore:
+              - '&rLaunch a volley of arrows at a single location'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: MinorVolleyUnlock
+          stay-open: true
+        Backpedal:
+          slot: 4
+          item:
+            type: ender_pearl
+            name: "&6Backpedal"
+            lore:
+              - '&rQuickly leap backwards to evade attacks'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: BackpedalUnlock
+          stay-open: true
         GUISpacing:
           slot: 8
           item:
@@ -540,13 +622,55 @@ DexterityTierTwoMenu:
 
 DexterityTierThreeMenu:
     spell-class: ".MenuSpell"
-    title: "&6Dexterity Tier Three Skills"
+    title: "&6&lDexterity Tier Three Skills"
     target-self: true
     modifiers:
       - variable Dexterity>49 required$$&4Error! You lack the required dexterity for these skills!
     cooldown: 1
     delay: 1
     options:
+        Disengage:
+          slot: 2
+          item:
+            type: feather
+            name: "&6Disengage"
+            lore:
+              - '&rLeap backwards with extreme dexterity'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: DisengageUnlock
+          stay-open: true
+        CalledShot:
+          slot: 0
+          item:
+            type: arrow
+            name: "&6Called Shot"
+            lore:
+              - '&rCall a target and fire a shot that never misses'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: CalledShotUnlock
+          stay-open: true
+        Hasten:
+          slot: 4
+          item:
+            type: minecart
+            name: "&6Hasten"
+            lore:
+              - '&rHasten yourself to gain speed'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: HastenUnlock
+          stay-open: true
         GUISpacing:
           slot: 8
           item:
@@ -562,7 +686,7 @@ DexterityTierThreeMenu:
 
 DexterityTierLegendaryMenu:
     spell-class: ".MenuSpell"
-    title: "&6Dexterity Legendary Skills"
+    title: "&6&lDexterity Legendary Skills"
     target-self: true
     modifiers:
       - variable Dexterity>99 required$$&4Error! You lack the required dexterity for these skills!
@@ -576,13 +700,11 @@ DexterityTierLegendaryMenu:
             name: "&cReturn to previous menu"
           spell: DexterityTierThreeMenu
 
-
-
 ##Intelligence Skill menus
 
 IntelligenceTierOneMenu:
     spell-class: ".MenuSpell"
-    title: "&6Intelligence Tier One Skills"
+    title: "&6&lIntelligence Tier One Skills"
     modifiers:
       - variable Intelligence>4 required$$&4Error! You lack the required intelligence for this!
     target-self: true
@@ -602,10 +724,9 @@ IntelligenceTierOneMenu:
             name: "&aProgress to next tier"
           spell: IntelligenceTierTwoMenu
 
-
 IntelligenceTierTwoMenu:
     spell-class: ".MenuSpell"
-    title: "&6Intelligence Tier Two Skills"
+    title: "&6&lIntelligence Tier Two Skills"
     modifiers:
       - variable Intelligence>49 required$$&4Error! You lack the required intelligence for this!
     target-self: true
@@ -627,7 +748,7 @@ IntelligenceTierTwoMenu:
 
 IntelligenceTierThreeMenu:
     spell-class: ".MenuSpell"
-    title: "&6Intelligence Tier Three Skills"
+    title: "&6&lIntelligence Tier Three Skills"
     modifiers:
       - variable Intelligence>74 required$$&4Error! You lack the required intelligence for this!
     target-self: true
@@ -647,10 +768,9 @@ IntelligenceTierThreeMenu:
             name: "&aProgress to next tier"
           spell: IntelligenceTierLegendaryMenu
 
-
 IntelligenceTierLegendaryMenu:
     spell-class: ".MenuSpell"
-    title: "&6Intelligence Legendary Skills"
+    title: "&6&lIntelligence Legendary Skills"
     modifiers:
       - variable Intelligence>99 required$$&4Error! You lack the required intelligence for this!
     target-self: true
@@ -663,7 +783,6 @@ IntelligenceTierLegendaryMenu:
             type: red_wool
             name: "&cReturn to previous menu"
           spell: PlayerMenu
-
 
 
 ########################
@@ -864,7 +983,6 @@ ExperienceGain_LowDifficulty: ##This is where we add low difficulty mobs
           - variable Levels>74 cast ExperienceGainFiveOver75
           - variable Levels>100 cast ExperienceGainFiveOver100
 
-
 ExperienceGain_MediumDifficulty: ##This is where we add medium difficulty mobs
     spell-class: ".PassiveSpell"
     triggers:
@@ -903,7 +1021,7 @@ gainlevel:
     variable-mods-cast:
           - Levels +1
           - AttributePoints +2
-          - SkillPoints +1
+          - SkillPoints +0.25
           - Experience 0
 
 
@@ -1029,3 +1147,166 @@ ExperienceGainHundredOver100:
       - variable Experience>10000 castinstead GainLevel
     variable-mods-cast:
           - Experience +100
+
+###########################
+## Skill Unlocking Stuff ##
+###########################
+
+##########################
+## Dex Tier One Skills  ##
+##########################
+
+###Pocket Sand Unlock
+
+PocketSandUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Attribute Points!
+     - variable PocketSand<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - PocketSand +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.PocketSand"
+      - "lp user %a perm set magicspells.grant.PocketSand"
+
+##QuickTrip
+
+QuickTripUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Attribute Points!
+     - variable QuickTrip<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - QuickTrip +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.QuickTrip"
+      - "lp user %a perm set magicspells.grant.QuickTrip"
+
+##DartToss
+
+DartTossUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Attribute Points!
+     - variable DartToss<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - DartToss +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.DartToss"
+      - "lp user %a perm set magicspells.grant.DartToss"
+
+
+##########################
+## Dex Tier Two Skills  ##
+##########################
+
+###Poisoned Dart Unlock
+
+PoisonedDartUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Attribute Points!
+     - variable PoisonedDart<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - PoisonedDart +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.PoisonedDart"
+      - "lp user %a perm set magicspells.grant.PoisonedDart"
+
+##MinorVolley
+
+MinorVolleyUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    modifiers:
+      - variable SkillPoints>0 required$$&4Error! Not enough Attribute Points!
+      - variable MinorVolley<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+      - MinorVolley +1
+      - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.MinorVolley"
+      - "lp user %a perm set magicspells.grant.MinorVolley"
+
+
+##Backpedal
+
+BackpedalUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    modifiers:
+      - variable SkillPoints>0 required$$&4Error! Not enough Attribute Points!
+      - variable Backpedal<2 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+      - Backpedal +1
+      - SkillPoints -1
+    target-self: true
+    command-to-execute:
+     - "lp user %a perm set magicspells.cast.Backpedal"
+     - "lp user %a perm set magicspells.grant.Backpedal"
+
+############################
+## Dex Tier Three Skills  ##
+############################
+
+###Disengage Unlock
+
+DisengageUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Attribute Points!
+     - variable Disengage<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - Disengage +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.Disengage"
+      - "lp user %a perm set magicspells.grant.Disengage"
+
+##CalledShot
+
+CalledShotUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    modifiers:
+      - variable SkillPoints>0 required$$&4Error! Not enough Attribute Points!
+      - variable CalledShot<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+      - CalledShot +1
+      - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.CalledShot"
+      - "lp user %a perm set magicspells.grant.CalledShot"
+
+
+##Hasten
+
+HastenUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    modifiers:
+      - variable SkillPoints>0 required$$&4Error! Not enough Attribute Points!
+      - variable Hasten<2 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+      - Hasten +1
+      - SkillPoints -1
+    target-self: true
+    command-to-execute:
+     - "lp user %a perm set magicspells.cast.Hasten"
+     - "lp user %a perm set magicspells.grant.Hasten"
