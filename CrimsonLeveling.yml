@@ -299,8 +299,6 @@ PlayerMenu:
     cooldown: 1
     delay: 1
     options:
-        Nonsense:
-            slot: 9
         StatDisplay:
             slot: 0
             item:
