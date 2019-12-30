@@ -138,11 +138,11 @@ variables:
           max: 1
           permanent: true
     Uppercut:
-      type: player
-      default: 0
-      min: 0
-      max: 1
-      permanent: true
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
     ForwardStrike:
           type: player
           default: 0
@@ -287,11 +287,6 @@ ShowXPGainOn:
     variable-mods-cast:
       - ShowXP =2
 
-ShowXPGainOff:
-    spell-class: ".instant.DummySpell"
-    str-cast-self: "&7XP Gain in chat disabled"
-    variable-mods-cast:
-      - ShowXP =0
 
 ########################
 ## Begin Menu Section ##
