@@ -137,12 +137,161 @@ variables:
           min: 0
           max: 1
           permanent: true
-
+    Uppercut:
+      type: player
+      default: 0
+      min: 0
+      max: 1
+      permanent: true
+    ForwardStrike:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    AxeToss:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    GrapplingHook:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    WhirlwindSlash:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    TossEnemy:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    Rampage:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    GoringBlade:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    ShieldBlock:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    ExpertBrew:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    CrudeTrap:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    CrudeBrew:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    CrudeExplosives:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    FineExplosives:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    FlashPowder:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    ArrowTurret:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    ExpertTrap:
+          type: player
+          default: 0
+          min: 0
+          max: 1
+          permanent: true
+    ShowXP:
+          type: player
+          default: 1
+          min: 1
+          max: 2
+          permanent: true
 
 ###############################
 ## End Variable Declarations ##
 ###############################
 
+StatusUpdate:
+    spell-class: ".instant.DummySpell"
+    incantations:
+      - '/xpinfo'
+      - 'how do i check my level'
+      - 'How do i see my stats'
+      - '/status'
+    str-cast-self: "&rCurrent level: &7%var:Levels% &6| &rCurrent XP: &7%var:Experience:0%"
+
+
+GenericHealthPassive:
+    spell-class: ".PassiveSpell"
+    triggers:
+      - join
+    variable-mods-cast:
+      - meta_max_health =70
+    spells: [dummy]
+
+###################
+## Show XP gains ##
+###################
+
+ShowXPGain:
+    spell-class: ".instant.DummySpell"
+    modifiers:
+      - variable ShowXP=1 castinstead ShowXPGainOn
+    str-cast-self: "&7XP Gain in chat disabled"
+    variable-mods-cast:
+      - ShowXP =1
+
+
+ShowXPGainOn:
+    spell-class: ".instant.DummySpell"
+    str-cast-self: "&7XP Gain in chat enabled"
+    variable-mods-cast:
+      - ShowXP =2
+
+ShowXPGainOff:
+    spell-class: ".instant.DummySpell"
+    str-cast-self: "&7XP Gain in chat disabled"
+    variable-mods-cast:
+      - ShowXP =0
 
 ########################
 ## Begin Menu Section ##
@@ -151,9 +300,12 @@ variables:
 PlayerMenu:
     spell-class: ".MenuSpell"
     title: "&6&lPlayer Stats"
+    incantations: ['/playermenu']
     cooldown: 1
     delay: 1
     options:
+        Nonsense:
+            slot: 9
         StatDisplay:
             slot: 0
             item:
@@ -164,12 +316,13 @@ PlayerMenu:
                 - "&rXP: &7%var:Experience:0%"
                 - "&rLevel: &7%var:Levels:0%"
                 - ''
-                - '&7Made entirely in Magic Spells'
+                - '&7[Click to toggle XP gain in chat]'
+                - ''
                 - '&7If you find a bug, please report'
                 - "&7it to Sempett for a bug finder's"
                 - '&7cookie as soon as possible :).'
             stay-open: true
-            spell: dummy
+            spell: ShowXPGain(mode=full)
         GUISpacing:
           slot: 17
           item:
@@ -221,10 +374,10 @@ SubMenuAttributeSelection:
               name: "&6Devotion"
               lore:
                 - "&rCurrent Devotion: &7%var:Devotion:0%/100"
-                - "&rClick to increase (1 Skill Point)"
+                - "&rClick to increase (1 Attribute Point)"
                 - ''
                 - '&55 Devotion: &7Unlocks /prayer'
-                - '&515 Devotion: &7Unlocks Creed spells'
+                - '&525 Devotion: &7Unlocks Creed spells'
                 - '&550 Devotion: &7Doubles Creed spell strength'
                 - '&5100 Devotion: &7Eligible to become champion'
             stay-open: true
@@ -236,7 +389,7 @@ SubMenuAttributeSelection:
               name: "&6Spellcasting"
               lore:
                 - "&rCurrent Spellcasting: &7%var:Spellcasting:0%/50"
-                - "&rClick to increase (1 Skill Point)"
+                - "&rClick to increase (1 Attribute Point)"
                 - ''
                 - '&510 Spellcasting: &7Unlocks Magic Missile'
                 - '&520 Spellcasting: &7Unlocks Force Toss'
@@ -244,7 +397,7 @@ SubMenuAttributeSelection:
                 - '&540 Spellcasting: &7Unlocks Mana Flare'
                 - '&550 Spellcasting: &7Unlocks Drowning Mana'
             stay-open: true
-            spell: SpellcastingIncrease
+            spell: SpellcastingIncrease(mode=full)
         Strength:
             slot: 4
             item:
@@ -252,7 +405,7 @@ SubMenuAttributeSelection:
               name: "&6Strength"
               lore:
                 - "&rCurrent Strength: &7%var:Strength:0%/100"
-                - "&rClick to increase (1 Skill Point)"
+                - "&rClick to increase (1 Attribute Point)"
                 - ''
                 - '&55 Strength: &7Unlocks tier 1 strength abilities'
                 - '&515 Strength: &7Unlocks diamond armor without penalty'
@@ -260,7 +413,7 @@ SubMenuAttributeSelection:
                 - '&550 Strength: &7Unlocks tier 3 strength abilities'
                 - '&5100 Strength: &7Unlocks legendary strength abilities'
             stay-open: true
-            spell: StrengthIncrease
+            spell: StrengthIncrease(mode=full)
         Dexterity:
             slot: 8
             item:
@@ -268,14 +421,14 @@ SubMenuAttributeSelection:
               name: "&6Dexterity"
               lore:
                 - "&rCurrent Dexterity: &7%var:Dexterity:0%/100"
-                - "&rClick to increase (1 Skill Point)"
+                - "&rClick to increase (1 Attribute Point)"
                 - ''
                 - '&55 Dexterity: &7Unlocks tier 1 dexterity abilities'
                 - '&525 Dexterity: &7Unlocks tier 2 dexterity abilities'
                 - '&550 Dexterity: &7Unlocks tier 3 dexterity abilities'
                 - '&5100 Dexterity: &7Unlocks legendary strength abilities'
             stay-open: true
-            spell: DexterityIncrease
+            spell: DexterityIncrease(mode=full)
         Intelligence:
             slot: 6
             item:
@@ -283,7 +436,7 @@ SubMenuAttributeSelection:
               name: "&6Intelligence"
               lore:
                 - "&rCurrent Intelligence: &7%var:Intelligence:0%"
-                - "&rClick to increase (1 Skill Point)"
+                - "&rClick to increase (1 Attribute Point)"
                 - ''
                 - '&55 Intelligence: &7Unlocks tier 1 intelligence abilities'
                 - '&515 Intelligence: &7Unlocks custom recipes'
@@ -291,7 +444,7 @@ SubMenuAttributeSelection:
                 - '&575 Intelligence: &7Unlocks tier 3 intelligence abilities'
                 - '&5100 Intelligence &7Unlocks legendary intelligence abilities'
             stay-open: true
-            spell: IntelligenceIncrease
+            spell: IntelligenceIncrease(mode=full)
         GUISpacing:
           slot: 26
           item:
@@ -318,7 +471,6 @@ SubMenuAttributeSelection:
 
 dummy:
     spell-class: ".instant.DummySpell"
-
 
 
 ########################
@@ -414,6 +566,48 @@ StrengthTierOneMenu:
     cooldown: 1
     delay: 1
     options:
+        Uppercut:
+          slot: 2
+          item:
+            type: scute
+            name: "&6Uppercut"
+            lore:
+              - '&rUppercut a nearby enemy'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: UppercutUnlock(mode=full)
+          stay-open: true
+        ForwardStrike:
+          slot: 0
+          item:
+            type: iron_sword
+            name: "&6Forward Strike"
+            lore:
+              - '&rCharge forward and strike your enemy'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: ForwardStrikeUnlock(mode=full)
+          stay-open: true
+        AxeToss:
+          slot: 4
+          item:
+            type: iron_axe
+            name: "&6Axe Toss"
+            lore:
+              - '&rHuck an axe at an enemy'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: AxeTossUnlock(mode=full)
+          stay-open: true
         GUISpacing:
           slot: 8
           item:
@@ -436,13 +630,55 @@ StrengthTierTwoMenu:
     cooldown: 1
     delay: 1
     options:
-        GUISpacing:
+      GrapplingHook:
+        slot: 2
+        item:
+          type: iron_bars
+          name: "&6Grappling Hook"
+          lore:
+            - '&rToss a grappling hook and pull in your enemy'
+            - ''
+            - '&rCosts 1 skill point'
+            - '&rCurrently have &7%var:SkillPoints:0% skill points'
+            - ''
+            - '&7[Click to unlock]'
+        spell: GrapplingHookUnlock(mode=full)
+        stay-open: true
+      WhirlwindSlash:
+        slot: 0
+        item:
+          type: iron_sword
+          name: "&6Whirlwind Slash"
+          lore:
+            - '&rSlash around and strike every nearby enemy'
+            - ''
+            - '&rCosts 1 skill point'
+            - '&rCurrently have &7%var:SkillPoints:0% skill points'
+            - ''
+            - '&7[Click to unlock]'
+        spell: WhirlwindSlashUnlock(mode=full)
+        stay-open: true
+      TossEnemy:
+        slot: 4
+        item:
+          type: piston
+          name: "&6Toss Enemy"
+          lore:
+            - '&rToss your enemy into the air'
+            - ''
+            - '&rCosts 1 skill point'
+            - '&rCurrently have &7%var:SkillPoints:0% skill points'
+            - ''
+            - '&7[Click to unlock]'
+        spell: TossEnemyUnlock(mode=full)
+        stay-open: true
+      GUISpacing:
           slot: 8
           item:
             type: red_wool
             name: "&cReturn to previous menu"
           spell: StrengthTierOneMenu
-        ProgressMenu:
+      ProgressMenu:
           slot: 7
           item:
             type: green_wool
@@ -458,13 +694,56 @@ StrengthTierThreeMenu:
     cooldown: 1
     delay: 1
     options:
-        GUISpacing:
+       Rampage:
+         slot: 0
+         item:
+            type: redstone_block
+            name: "&6Rampage"
+            lore:
+            - '&rEnter a rampage, taking more damage'
+            - '&rto completely obliterate an enemy'
+            - ''
+            - '&rCosts 1 skill point'
+            - '&rCurrently have &7%var:SkillPoints:0% skill points'
+            - ''
+            - '&7[Click to unlock]'
+         spell: RampageUnlock(mode=full)
+         stay-open: true
+       GoringBlade:
+          slot: 2
+          item:
+            type: iron_sword
+            name: "&6Goring Blade"
+            lore:
+              - '&rGore your enemy and cause them to bleed'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: GoringBladeUnlock(mode=full)
+          stay-open: true
+       ShieldBlock:
+          slot: 4
+          item:
+            type: shield
+            name: "&6Shield Block"
+            lore:
+              - '&rRaise your shield and enter a defensive stance'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: ShieldBlockUnlock(mode=full)
+          stay-open: true
+       GUISpacing:
           slot: 8
           item:
             type: red_wool
             name: "&cReturn to previous menu"
           spell: StrengthTierTwoMenu
-        ProgressMenu:
+       ProgressMenu:
           slot: 7
           item:
             type: green_wool
@@ -513,7 +792,7 @@ DexterityTierOneMenu:
               - '&rCurrently have &7%var:SkillPoints:0% skill points'
               - ''
               - '&7[Click to unlock]'
-          spell: QuickTripUnlock
+          spell: QuickTripUnlock(mode=full)
           stay-open: true
         PocketSand:
           slot: 0
@@ -527,7 +806,7 @@ DexterityTierOneMenu:
               - '&rCurrently have &7%var:SkillPoints:0% skill points'
               - ''
               - '&7[Click to unlock]'
-          spell: PocketSandUnlock
+          spell: PocketSandUnlock(mode=full)
           stay-open: true
         DartToss:
           slot: 4
@@ -541,7 +820,7 @@ DexterityTierOneMenu:
               - '&rCurrently have &7%var:SkillPoints:0% skill points'
               - ''
               - '&7[Click to unlock]'
-          spell: DartTossUnlock
+          spell: DartTossUnlock(mode=full)
           stay-open: true
         GUISpacing:
           slot: 8
@@ -577,7 +856,7 @@ DexterityTierTwoMenu:
               - '&rCurrently have &7%var:SkillPoints:0% skill points'
               - ''
               - '&7[Click to unlock]'
-          spell: PoisonedDartUnlock
+          spell: PoisonedDartUnlock(mode=full)
           stay-open: true
         MinorVolley:
           slot: 0
@@ -591,7 +870,7 @@ DexterityTierTwoMenu:
               - '&rCurrently have &7%var:SkillPoints:0% skill points'
               - ''
               - '&7[Click to unlock]'
-          spell: MinorVolleyUnlock
+          spell: MinorVolleyUnlock(mode=full)
           stay-open: true
         Backpedal:
           slot: 4
@@ -605,7 +884,7 @@ DexterityTierTwoMenu:
               - '&rCurrently have &7%var:SkillPoints:0% skill points'
               - ''
               - '&7[Click to unlock]'
-          spell: BackpedalUnlock
+          spell: BackpedalUnlock(mode=full)
           stay-open: true
         GUISpacing:
           slot: 8
@@ -641,7 +920,7 @@ DexterityTierThreeMenu:
               - '&rCurrently have &7%var:SkillPoints:0% skill points'
               - ''
               - '&7[Click to unlock]'
-          spell: DisengageUnlock
+          spell: DisengageUnlock(mode=full)
           stay-open: true
         CalledShot:
           slot: 0
@@ -655,7 +934,7 @@ DexterityTierThreeMenu:
               - '&rCurrently have &7%var:SkillPoints:0% skill points'
               - ''
               - '&7[Click to unlock]'
-          spell: CalledShotUnlock
+          spell: CalledShotUnlock(mode=full)
           stay-open: true
         Hasten:
           slot: 4
@@ -669,7 +948,7 @@ DexterityTierThreeMenu:
               - '&rCurrently have &7%var:SkillPoints:0% skill points'
               - ''
               - '&7[Click to unlock]'
-          spell: HastenUnlock
+          spell: HastenUnlock(mode=full)
           stay-open: true
         GUISpacing:
           slot: 8
@@ -711,6 +990,48 @@ IntelligenceTierOneMenu:
     cooldown: 1
     delay: 1
     options:
+        CrudeBrew:
+          slot: 2
+          item:
+            type: potion
+            name: "&6Crude Brew"
+            lore:
+              - '&rBrew a random crude potion'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: CrudeBrewUnlock(mode=full)
+          stay-open: true
+        CrudeTrap:
+          slot: 0
+          item:
+            type: Stone_Slab
+            name: "&6Crude Trap"
+            lore:
+              - '&rFashion a crude trap'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: CrudeTrapUnlock(mode=full)
+          stay-open: true
+        CrudeExplosives:
+          slot: 4
+          item:
+            type: cyan_terracotta
+            name: "&6Crude Explosives"
+            lore:
+              - '&rToss a crude explosive'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: CrudeExplosivesUnlock(mode=full)
+          stay-open: true
         GUISpacing:
           slot: 8
           item:
@@ -733,6 +1054,48 @@ IntelligenceTierTwoMenu:
     cooldown: 1
     delay: 1
     options:
+        FineExplosive:
+          slot: 2
+          item:
+            type: red_terracotta
+            name: "&6Fine Explosives"
+            lore:
+              - '&rFashion and toss a fine explosive'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: FineExplosivesUnlock(mode=full)
+          stay-open: true
+        FlashPowder:
+          slot: 0
+          item:
+            type: gunpowder
+            name: "&6Flashpowder"
+            lore:
+              - '&rToss flashpowder that stuns mobs and disorients players'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: FlashPowderUnlock(mode=full)
+          stay-open: true
+        ArrowTurret:
+          slot: 4
+          item:
+            type: dispenser
+            name: "&6Arrow Turret"
+            lore:
+              - '&rPlace an arrow turret that targets nearby enemies'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: ArrowTurretUnlock(mode=full)
+          stay-open: true
         GUISpacing:
           slot: 8
           item:
@@ -755,6 +1118,48 @@ IntelligenceTierThreeMenu:
     cooldown: 1
     delay: 1
     options:
+        ExpertTrap:
+          slot: 2
+          item:
+            type: gray_carpet
+            name: "&6Expert Trap"
+            lore:
+              - '&rFashion an expert trap'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: ExpertTrapUnlock(mode=full)
+          stay-open: true
+        ExpertBrew:
+          slot: 0
+          item:
+            type: potion
+            name: "&6Expert Brew"
+            lore:
+              - '&rBrew a random splendid potion'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: ExpertBrewUnlock(mode=full)
+          stay-open: true
+        WorkInProgress:
+          slot: 4
+          item:
+            type: barrier
+            name: "&6Work in Progress"
+            lore:
+              - '&rBug sempett to put a skill here'
+              - ''
+              - '&rCosts 1 skill point'
+              - '&rCurrently have &7%var:SkillPoints:0% skill points'
+              - ''
+              - '&7[Click to unlock]'
+          spell: dummy
+          stay-open: true
         GUISpacing:
           slot: 8
           item:
@@ -794,8 +1199,9 @@ DevotionIncrease:
     str-cast-self: "&6Devotion increased by one!"
     modifiers:
       - variable AttributePoints>0 required$$&4Error! Not enough Attribute Points!
+      - permission Creedless denied$$&4Error! Only those with a creed may level devotion
       - variable Devotion:4 castinstead DevotionPrayerPerk
-      - variable Devotion:14 castinstead DevotionPerkIncrease
+      - variable Devotion:24 castinstead DevotionSpellUnlocking
       - variable Devotion:49 castinstead DevotionPerkIncrease
       - variable Devotion:99 castinstead DevotionPerkIncrease
     variable-mods-cast:
@@ -853,7 +1259,6 @@ StrengthIncrease:
     variable-mods-cast:
           - Strength +1
           - AttributePoints -1
-
 
 StrengthPerkIncrease:
     spell-class: ".instant.DummySpell"
@@ -916,10 +1321,6 @@ DexterityPerkIncrease:
           - DexterityPerks +1
           - AttributePoints -1
 
-
-
-
-
 ####################################
 ## Perk traits that aren't skills ##
 ####################################
@@ -936,17 +1337,51 @@ DevotionPrayerPerk:
           - DevotionPerks +1
           - AttributePoints -1
 
+DevotionSpellUnlocking:
+    spell-class: ".instant.DummySpell"
+    modifiers:
+      - permission Zelphair castinstead ZelphairCreedSpellUnlock
+      - permission Cavilon castinstead CavilonCreedSpellUnlock
+      - permission Mycelyix castinstead MycelyixCreedSpellUnlock
+      - permission Wintival castinstead WintivalCreedSpellUnlock
+      - permission Akwal castinstead AkwalCreedSpellUnlock
+      - permission Netharna castinstead NetharnaCreedSpellUnlock
+      - permission Wildaven castinstead WildavenCreedSpellUnlock
+    str-cast-self: "&6Devotion increased by one! Creed spells unlocked!"
+    variable-mods-cast:
+          - Devotion +1
+          - DevotionPerks +1
+          - AttributePoints -1
+
 DiamondArmorPerk:
     spell-class: ".ExternalCommandSpell"
-    str-cast-self: "&6Strength increased by one! New perk unlocked!"
+    str-cast-self: "&6Strength increased by one! You may now wear diamond armor!!"
     execute-on-console-instead: true
-    command-to-execute: ["lp user %a perm set magicspells.cast.DiamondArmorPenalty false"]
+    command-to-execute:
+      - "lp user %a perm unset magicspells.cast.DiamondArmorPenalty"
+      - "lp user %a perm set magicspells.cast.DiamondArmorPenalty false"
     modifiers:
           - variable AttributePoints>0 required$$&4Error! Not enough Attribute Points!
     variable-mods-cast:
           - Strength +1
           - StrengthPerks +1
           - AttributePoints -1
+
+DiamondArmorPenalty:
+    spell-class: ".PassiveSpell"
+    triggers:
+      - takedamage
+    modifiers:
+      - wearing =diamond_helmet,diamond_chestplate,diamond_leggings,diamond_boots required
+    spells:
+      - DiamondArmorPain(mode=full)
+
+DiamondArmorPain:
+    spell-class: ".targeted.PainSpell"
+    target-self: true
+    ignore-armor: truew
+    str-cast-self: "&4Warning! You feel that you are too weak to effectively use this armor! (15+ strength needed)"
+    damage: 10
 
 IntelligenceRecipePerk:
     spell-class: ".ExternalCommandSpell"
@@ -960,11 +1395,9 @@ IntelligenceRecipePerk:
           - IntelligencePerks +1
           - AttributePoints -1
 
-
 ####################
 ## XP Gain Spells ##
 ####################
-
 
 ExperienceGain_LowDifficulty: ##This is where we add low difficulty mobs
     spell-class: ".PassiveSpell"
@@ -977,11 +1410,16 @@ ExperienceGain_LowDifficulty: ##This is where we add low difficulty mobs
     spells:
           - dummy
     modifiers:
+          - variable ShowXP=2 cast ShowXPFive
           - variable Levels>0 cast ExperienceGainFiveUnder25
           - variable Levels>24 cast ExperienceGainFiveOver25
           - variable Levels>49 cast ExperienceGainFiveOver50
           - variable Levels>74 cast ExperienceGainFiveOver75
           - variable Levels>100 cast ExperienceGainFiveOver100
+
+ShowXPFive:
+  spell-class: ".instant.DummySpell"
+  str-cast-self: "&6You gain 5 experience!"
 
 ExperienceGain_MediumDifficulty: ##This is where we add medium difficulty mobs
     spell-class: ".PassiveSpell"
@@ -990,16 +1428,22 @@ ExperienceGain_MediumDifficulty: ##This is where we add medium difficulty mobs
           - kill wither_skeleton
           - kill zombie_pigman
           - kill ghast
+          - kill enderman
           - kill husk
           - kill witch
     spells:
           - dummy
     modifiers:
+          - variable ShowXP=2 cast ShowXPTen
           - variable Levels>0 cast ExperienceGainTenUnder25
           - variable Levels>24 cast ExperienceGainTenOver25
           - variable Levels>49 cast ExperienceGainTenOver50
           - variable Levels>74 cast ExperienceGainTenOver75
           - variable Levels>100 cast ExperienceGainTenOver100
+
+ShowXPTen:
+  spell-class: ".instant.DummySpell"
+  str-cast-self: "&6You gain 10 experience!"
 
 ExperienceGain_HardDifficulty: ##This is where we add hard mobs
     spell-class: ".PassiveSpell"
@@ -1009,11 +1453,16 @@ ExperienceGain_HardDifficulty: ##This is where we add hard mobs
     spells:
           - dummy
     modifiers:
+          - variable ShowXP=2 cast ShowXPHundred
           - variable Levels>0 cast ExperienceGainHundredUnder25
           - variable Levels>24 cast ExperienceGainHundredOver25
           - variable Levels>49 cast ExperienceGainHundredOver50
           - variable Levels>74 cast ExperienceGainHundredOver75
           - variable Levels>100 cast ExperienceGainHundredOver100
+
+ShowXPHundred:
+  spell-class: ".instant.DummySpell"
+  str-cast-self: "&6You gain 100 experience!"
 
 gainlevel:
     spell-class: ".instant.DummySpell"
@@ -1161,8 +1610,9 @@ ExperienceGainHundredOver100:
 PocketSandUnlock:
     spell-class: ".ExternalCommandSpell"
     execute-on-console-instead: true
+    cast-str-self: "&6New skill unlocked!"
     modifiers:
-     - variable SkillPoints>0 required$$&4Error! Not enough Attribute Points!
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
      - variable PocketSand<1 required$$&4Error! You already have this skill!
     variable-mods-cast:
      - PocketSand +1
@@ -1177,8 +1627,9 @@ PocketSandUnlock:
 QuickTripUnlock:
     spell-class: ".ExternalCommandSpell"
     execute-on-console-instead: true
+    cast-str-self: "&6New skill unlocked!"
     modifiers:
-     - variable SkillPoints>0 required$$&4Error! Not enough Attribute Points!
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
      - variable QuickTrip<1 required$$&4Error! You already have this skill!
     variable-mods-cast:
      - QuickTrip +1
@@ -1193,8 +1644,9 @@ QuickTripUnlock:
 DartTossUnlock:
     spell-class: ".ExternalCommandSpell"
     execute-on-console-instead: true
+    cast-str-self: "&6New skill unlocked!"
     modifiers:
-     - variable SkillPoints>0 required$$&4Error! Not enough Attribute Points!
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
      - variable DartToss<1 required$$&4Error! You already have this skill!
     variable-mods-cast:
      - DartToss +1
@@ -1214,8 +1666,9 @@ DartTossUnlock:
 PoisonedDartUnlock:
     spell-class: ".ExternalCommandSpell"
     execute-on-console-instead: true
+    cast-str-self: "&6New skill unlocked!"
     modifiers:
-     - variable SkillPoints>0 required$$&4Error! Not enough Attribute Points!
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
      - variable PoisonedDart<1 required$$&4Error! You already have this skill!
     variable-mods-cast:
      - PoisonedDart +1
@@ -1230,8 +1683,9 @@ PoisonedDartUnlock:
 MinorVolleyUnlock:
     spell-class: ".ExternalCommandSpell"
     execute-on-console-instead: true
+    cast-str-self: "&6New skill unlocked!"
     modifiers:
-      - variable SkillPoints>0 required$$&4Error! Not enough Attribute Points!
+      - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
       - variable MinorVolley<1 required$$&4Error! You already have this skill!
     variable-mods-cast:
       - MinorVolley +1
@@ -1246,10 +1700,11 @@ MinorVolleyUnlock:
 
 BackpedalUnlock:
     spell-class: ".ExternalCommandSpell"
+    cast-str-self: "&6New skill unlocked!"
     execute-on-console-instead: true
     modifiers:
-      - variable SkillPoints>0 required$$&4Error! Not enough Attribute Points!
-      - variable Backpedal<2 required$$&4Error! You already have this skill!
+      - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
+      - variable Backpedal<1 required$$&4Error! You already have this skill!
     variable-mods-cast:
       - Backpedal +1
       - SkillPoints -1
@@ -1267,8 +1722,9 @@ BackpedalUnlock:
 DisengageUnlock:
     spell-class: ".ExternalCommandSpell"
     execute-on-console-instead: true
+    cast-str-self: "&6New skill unlocked!"
     modifiers:
-     - variable SkillPoints>0 required$$&4Error! Not enough Attribute Points!
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
      - variable Disengage<1 required$$&4Error! You already have this skill!
     variable-mods-cast:
      - Disengage +1
@@ -1282,9 +1738,10 @@ DisengageUnlock:
 
 CalledShotUnlock:
     spell-class: ".ExternalCommandSpell"
+    cast-str-self: "&6New skill unlocked!"
     execute-on-console-instead: true
     modifiers:
-      - variable SkillPoints>0 required$$&4Error! Not enough Attribute Points!
+      - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
       - variable CalledShot<1 required$$&4Error! You already have this skill!
     variable-mods-cast:
       - CalledShot +1
@@ -1294,14 +1751,14 @@ CalledShotUnlock:
       - "lp user %a perm set magicspells.cast.CalledShot"
       - "lp user %a perm set magicspells.grant.CalledShot"
 
-
 ##Hasten
 
 HastenUnlock:
     spell-class: ".ExternalCommandSpell"
+    cast-str-self: "&6New skill unlocked!"
     execute-on-console-instead: true
     modifiers:
-      - variable SkillPoints>0 required$$&4Error! Not enough Attribute Points!
+      - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
       - variable Hasten<2 required$$&4Error! You already have this skill!
     variable-mods-cast:
       - Hasten +1
@@ -1310,3 +1767,412 @@ HastenUnlock:
     command-to-execute:
      - "lp user %a perm set magicspells.cast.Hasten"
      - "lp user %a perm set magicspells.grant.Hasten"
+
+##########################
+## Str Tier One Skills  ##
+##########################
+
+##Uppercut
+
+UppercutUnlock:
+    spell-class: ".ExternalCommandSpell"
+    cast-str-self: "&6New skill unlocked!"
+    execute-on-console-instead: true
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
+     - variable Uppercut<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - Uppercut +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.Uppercut"
+      - "lp user %a perm set magicspells.grant.Uppercut"
+
+##ForwardStrike
+
+ForwardStrikeUnlock:
+    spell-class: ".ExternalCommandSpell"
+    cast-str-self: "&6New skill unlocked!"
+    execute-on-console-instead: true
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
+     - variable ForwardStrike<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - ForwardStrike +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.ForwardStrike"
+      - "lp user %a perm set magicspells.grant.ForwardStrike"
+
+##AxeToss
+
+AxeTossUnlock:
+    spell-class: ".ExternalCommandSpell"
+    cast-str-self: "&6New skill unlocked!"
+    execute-on-console-instead: true
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
+     - variable AxeToss<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - AxeToss +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.AxeToss"
+      - "lp user %a perm set magicspells.grant.AxeToss"
+
+
+##########################
+## Str Tier Two Skills  ##
+##########################
+
+##GrapplingHook
+
+GrapplingHookUnlock:
+    spell-class: ".ExternalCommandSpell"
+    cast-str-self: "&6New skill unlocked!"
+    execute-on-console-instead: true
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
+     - variable GrapplingHook<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - GrapplingHook +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.GrapplingHook"
+      - "lp user %a perm set magicspells.grant.GrapplingHook"
+
+
+##WhirlwindSlash
+
+WhirlwindSlashUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    cast-str-self: "&6New skill unlocked!"
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
+     - variable WhirlwindSlash<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - WhirlwindSlash +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.WhirlwindSlash"
+      - "lp user %a perm set magicspells.grant.WhirlwindSlash"
+
+##TossEnemy
+
+TossEnemyUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    cast-str-self: "&6New skill unlocked!"
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
+     - variable TossEnemy<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - TossEnemy +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.TossEnemy"
+      - "lp user %a perm set magicspells.grant.TossEnemy"
+
+##Rampage
+
+RampageUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    cast-str-self: "&6New skill unlocked!"
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
+     - variable Rampage<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - Rampage +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.Rampage"
+      - "lp user %a perm set magicspells.grant.Rampage"
+
+##GoringBlade
+
+GoringBladeUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    cast-str-self: "&6New skill unlocked!"
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
+     - variable GoringBlade<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - GoringBlade +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.GoringBlade"
+      - "lp user %a perm set magicspells.grant.GoringBlade"
+
+##ShieldBlock
+
+ShieldBlockUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    cast-str-self: "&6New skill unlocked!"
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
+     - variable ShieldBlock<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - ShieldBlock +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.ShieldBlock"
+      - "lp user %a perm set magicspells.grant.ShieldBlock"
+
+##########################
+## Int Tier One Skills  ##
+##########################
+
+##Crude brew
+
+CrudeBrewUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    cast-str-self: "&6New skill unlocked!"
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
+     - variable CrudeBrew<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - CrudeBrew +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.CrudeBrew"
+      - "lp user %a perm set magicspells.grant.CrudeBrew"
+
+##CrudeExplosives
+
+CrudeExplosivesUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    cast-str-self: "&6New skill unlocked!"
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
+     - variable CrudeExplosives<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - CrudeExplosives +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.CrudeExplosives"
+      - "lp user %a perm set magicspells.grant.CrudeExplosives"
+
+##CrudeTrap
+
+CrudeTrapUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    cast-str-self: "&6New skill unlocked!"
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
+     - variable CrudeTrap<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - CrudeTrap +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.CrudeTrap"
+      - "lp user %a perm set magicspells.grant.CrudeTrap"
+
+
+##########################
+## Int Tier Two Skills  ##
+##########################
+
+##FineExplosives
+
+FineExplosivesUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    cast-str-self: "&6New skill unlocked!"
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
+     - variable FineExplosives<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - FineExplosives +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.FineExplosives"
+      - "lp user %a perm set magicspells.grant.FineExplosives"
+
+
+##Flashpowder
+
+FlashpowderUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    cast-str-self: "&6New skill unlocked!"
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
+     - variable Flashpowder<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - Flashpowder +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.Flashpowder"
+      - "lp user %a perm set magicspells.grant.Flashpowder"
+
+##ArrowTurret
+
+ArrowTurretUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    cast-str-self: "&6New skill unlocked!"
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
+     - variable ArrowTurret<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - ArrowTurret +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.ArrowTurret"
+      - "lp user %a perm set magicspells.grant.ArrowTurret"
+
+############################
+##  Int Tier Three Skills ##
+############################
+
+##ExpertTrap
+
+ExpertTrapUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    cast-str-self: "&6New skill unlocked!"
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
+     - variable ExpertTrap<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - ExpertTrap +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.ExpertTrap"
+      - "lp user %a perm set magicspells.grant.ExpertTrap"
+
+##ExpertBrew
+
+ExpertBrewUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    cast-str-self: "&6New skill unlocked!"
+    modifiers:
+     - variable SkillPoints>0 required$$&4Error! Not enough Skill Points!
+     - variable ExpertBrew<1 required$$&4Error! You already have this skill!
+    variable-mods-cast:
+     - ExpertBrew +1
+     - SkillPoints -1
+    target-self: true
+    command-to-execute:
+      - "lp user %a perm set magicspells.cast.ExpertBrew"
+      - "lp user %a perm set magicspells.grant.ExpertBrew"
+
+
+
+
+
+
+
+#############################
+## Creed unlock management ##
+#############################
+
+ZelphairCreedSpellUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    target-self: true
+    command-to-execute:
+      - "lp user %a parent add ZelphairMage"
+    str-cast-self: "&6Devotion increased by one! Creed spells unlocked!"
+    variable-mods-cast:
+          - Devotion +1
+          - DevotionPerks +1
+          - AttributePoints -1
+
+WintivalCreedSpellUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    target-self: true
+    command-to-execute:
+      - "lp user %a parent add WintivalMage"
+    str-cast-self: "&6Devotion increased by one! Creed spells unlocked!"
+    variable-mods-cast:
+          - Devotion +1
+          - DevotionPerks +1
+          - AttributePoints -1
+
+NetharnaCreedSpellUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    target-self: true
+    command-to-execute:
+      - "lp user %a parent add NetharnaMage"
+    str-cast-self: "&6Devotion increased by one! Creed spells unlocked!"
+    variable-mods-cast:
+          - Devotion +1
+          - DevotionPerks +1
+          - AttributePoints -1
+
+WildavenCreedSpellUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    target-self: true
+    command-to-execute:
+      - "lp user %a parent add WildavenMage"
+    str-cast-self: "&6Devotion increased by one! Creed spells unlocked!"
+    variable-mods-cast:
+          - Devotion +1
+          - DevotionPerks +1
+          - AttributePoints -1
+
+MycelyixCreedSpellUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    target-self: true
+    command-to-execute:
+      - "lp user %a parent add MycelyixMage"
+    str-cast-self: "&6Devotion increased by one! Creed spells unlocked!"
+    variable-mods-cast:
+          - Devotion +1
+          - DevotionPerks +1
+          - AttributePoints -1
+
+CavilonCreedSpellUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    target-self: true
+    command-to-execute:
+      - "lp user %a parent add CavilonMage"
+    str-cast-self: "&6Devotion increased by one! Creed spells unlocked!"
+    variable-mods-cast:
+          - Devotion +1
+          - DevotionPerks +1
+          - AttributePoints -1
+
+AkwalCreedSpellUnlock:
+    spell-class: ".ExternalCommandSpell"
+    execute-on-console-instead: true
+    target-self: true
+    command-to-execute:
+      - "lp user %a parent add AkwalMage"
+    str-cast-self: "&6Devotion increased by one! Creed spells unlocked!"
+    variable-mods-cast:
+          - Devotion +1
+          - DevotionPerks +1
+          - AttributePoints -1
+
+
