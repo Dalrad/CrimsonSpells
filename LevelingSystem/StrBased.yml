@@ -1,0 +1,341 @@
+#Tier one Strength skills
+#Uppercut
+
+Uppercut:
+  spell-class: ".targeted.ForcetossSpell"
+  range: 2
+  cooldown: 15
+  str-cast-self: You uppercut your opponent!
+  str-no-target: You fail to find an opponent to uppercut
+  str-missing-reagents: You lack enough mana! 20 required.
+  cost: [mana 20]
+  damage: 5
+  horizontal-force: 0
+  vertical-force: 3
+  can-target: players,nonplayers
+
+#Forward Strike
+
+ForwardStrike:
+  spell-class: ".MultiSpell"
+  cooldown: 25
+  cost: [mana 20]
+  str-cast-self: You cut through your opponents
+  str-missing-reagents: You lack enough mana! 20 required.
+  can-target: players,nonplayers
+  spells:
+   - ForwardStrikeMoveForward
+   - ForwardStrikeDamageTossAoE
+  effects:
+      eff1:
+          position: caster
+          effect: particles
+          particle-name: redstone
+          color: c4c4c4
+          horiz-spread: 1
+          vert-spread: 1
+          count: 6
+
+ForwardStrikeMoveForward:
+  spell-class: ".instant.LeapSpell"
+  forward-velocity: 9
+  upward-velocity: 3
+  cancel-damage: false
+
+ForwardStrikeDamageTossAoE:
+  spell-class: ".targeted.AreaEffectSpell"
+  horizontal-radius: 5
+  vertical-radius: 5
+  cone: 90
+  spells: [ForwardStrikeDamageToss]
+
+ForwardStrikeDamageToss:
+  spell-class: ".targeted.ForcetossSpell"
+  damage: 6
+  horizontal-force: 3
+  vertical-force: 4
+  can-target: players,nonplayers
+  check-plugins: true
+
+#AxeToss
+
+AxeToss:
+    spell-class: ".instant.ItemProjectileSpell"
+    cooldown: 20
+    speed: 1.3
+    vert-speed: 0
+    hit-radius: 1
+    y-offset: 1
+    cost:
+      - mana 30
+    str-missing-reagents: Requires 30 mana.
+    str-cast-self: "&rYou toss an axe."
+    spell-on-hit-entity: AxeTossDamage
+    spell-on-hit-ground: AxeTossDamage
+    item: iron_axe
+    effects:
+        eff1:
+            position: special
+            effect: particles
+            particle-name: redstone
+            color: c4c4c4
+            horiz-spread: 0.3
+            vert-spread: 0.3
+            count: 5
+
+AxeTossDamage:
+    spell-class: ".targeted.PainSpell"
+    damage: 13
+    ignore-armor: false
+    can-target: players,nonplayers
+    check-plugins: true
+
+#Bash
+
+#Tier Two Strength Skills
+#Grappling hook
+
+GrapplingHook:
+    spell-class: ".instant.ItemProjectileSpell"
+    cooldown: 30
+    speed: 1.3
+    vert-speed: 0
+    hit-radius: 1
+    y-offset: 1
+    cost:
+      - mana 30
+    str-missing-reagents: Requires 30 mana.
+    str-cast-self: "&rYou toss a grappling hook."
+    spell-on-hit-entity: GrapplingHookPull
+    spell-on-hit-ground: GrapplingHookPull
+    item: iron_bars
+    effects:
+        eff1:
+            position: special
+            effect: particles
+            particle-name: redstone
+            color: c4c4c4
+            horiz-spread: 0.3
+            vert-spread: 0.3
+            count: 5
+
+GrapplingHookPull:
+  spell-class: ".targeted.ForcetossSpell"
+  damage: 3
+  horizontal-force: -30
+  vertical-force: 3
+  can-target: players,nonplayers
+  check-plugins: true
+
+#Axes Unlock
+#Swords Unlock
+
+#Whirlwind slash
+
+WhirlwindSlash:
+  spell-class: ".targeted.AreaEffectSpell"
+  cooldown: 20
+  cost: [mana 40]
+  str-cast-self: You spin your weapon in a wide circle around you!
+  str-missing-reagents: Insufficient mana! Requires 40 mana.
+  horizontal-radius: 4
+  vertical-radius: 4
+  fail-if-no-targets: false
+  spells: [WhirlwindSlashDamageToss]
+  effects:
+    Whirlwind:
+      position: caster
+      effect: effectlibentity
+      effectlib:
+        class: Circle
+        whole_circle: true
+        particle: sweep_attack
+        radius: 4
+        duration: 450
+        enable_rotation: false
+        relative-offset: 0,1.4,0
+    Blood:
+      position: target
+      effect: effectlibentity
+      effectlib:
+        class: Flame
+        iterations: 8
+        duration: 300
+        particle: drip_lava
+        period: 11
+    SweepSound:
+        position: caster
+        effect: sound
+        sound: entity.player.attack.sweep
+        volume: 0.6
+        pitch: 1.9
+WhirlwindSlashDamageToss:
+  spell-class: ".targeted.ForcetossSpell"
+  damage: 12
+  horizontal-force: 3
+  vertical-force: 3
+  can-target: players,nonplayers
+  check-plugins: true
+
+#Toss enemy
+
+TossEnemy:
+  spell-class: ".targeted.ForcetossSpell"
+  range: 3
+  cooldown: 19
+  cost: [mana 50]
+  str-cast-self: You hoist your enemy into the air!
+  str-missing-reagents: Insufficient mana! Requires 50 mana.
+  str-no-target: You fail to find an enemy to toss!
+  damage: 7
+  horizontal-force: 9
+  vertical-force: 5
+  can-target: players,nonplayers
+  check-plugins: true
+
+#
+#Tier three strength skills
+
+
+#Rampage
+
+Rampage:
+  spell-class: ".MultiSpell"
+  cooldown: 120
+  cost: [mana 45]
+  str-cast-self: You being to rampage!
+  str-cast-others: "%a enters a blind rage"
+  str-missing-reagents: Insufficient mana! Requires 45 mana.
+  spells:
+    - RampageDamageVuln
+    - RampageStrengthIncrease
+  effects:
+    Blood:
+      position: caster
+      effect: effectlibentity
+      effectlib:
+        class: Flame
+        duration: 10000
+        particle: crit
+
+
+
+RampageDamageVuln:
+  spell-class: ".buff.ResistSpell"
+  duration: 10
+  toggle: false
+  target-self: true
+  normal-damage-types:
+    - ENTITY_ATTACK
+  multiplier: 1.5
+
+
+RampageStrengthIncrease:
+    spell-class: ".targeted.PotionEffectSpell"
+    type: Strength
+    duration: 200
+    strength: 2
+    target-self: true
+    ambient: false
+    hidden: true
+
+#Goring Blade
+
+GoringBlade:
+  spell-class: ".targeted.DotSpell"
+  range: 3
+  cooldown: 30
+  cost: [mana 25]
+  str-cast-self: You gore your enemy!
+  str-no-target: You fail to find a target for your sword
+  str-missing-reagents: Insufficient mana! Requires 50 mana.
+  damage: 4
+  delay: 0
+  interval: 10
+  duration: 60
+  prevent-knockback: true
+  spell-damage-type: entity_attack
+  effects:
+    Blood:
+      position: target
+      effect: effectlibentity
+      effectlib:
+        class: Flame
+        iterations: 8
+        duration: 300
+        particle: drip_lava
+        period: 20
+
+#Shield block
+
+ShieldBlock:
+  spell-class: ".MultiSpell"
+  cooldown: 30
+  cost: [mana 50]
+  str-cast-self: You raise your shield!
+  str-cast-others: "%a raises their shield!"
+  str-missing-reagents: Insufficient mana! Requires 50 mana.
+  spells:
+    - ShieldBlockResist
+    - ShieldBlockSlow
+    - ShieldBlockWeaken
+  effects:
+    ShieldBlock:
+      position: caster
+      effect: effectlibentity
+      effectlib:
+        class: Flame
+        particle: REDSTONE
+        color: 4d4a49
+        particles: 10
+        duration: 20000
+
+ShieldBlockResist: &ShieldBlockAnchor
+    spell-class: ".targeted.PotionEffectSpell"
+    type: RESISTANCE
+    duration: 300
+    strength: 3
+    target-self: true
+    ambient: false
+    hidden: true
+
+ShieldBlockSlow: {<<: *ShieldBlockAnchor, type: SLOWNESS}
+ShieldBlockWeaken: {<<: *ShieldBlockAnchor, type: WEAKNESS}
+
+#
+#Legendary strength skills
+#Steel Cyclone
+
+SteelCyclone:
+  spell-class: ".MultiSpell"
+  cooldown: 120
+  cost: [mana 100]
+  str-cast-self: You begin to spin wildly!
+  str-cast-others: "%a begins to spin wildly"
+  str-missing-reagents: Insufficient mana! Requires 100 mana.
+  spells:
+    - WhirlwindSlash
+    - DELAY 7
+    - WhirlwindSlash
+    - DELAY 7
+    - WhirlwindSlash
+    - DELAY 7
+    - WhirlwindSlash
+    - DELAY 7
+    - WhirlwindSlash
+    - DELAY 7
+    - WhirlwindSlash
+    - DELAY 7
+    - WhirlwindSlash
+  effects:
+    Tirm:
+      position: caster
+      effect: effectlibentity
+      effectlib:
+        class: Turn
+        duration: 2200
+
+
+
+#Inner Release
+#Royal Guard
