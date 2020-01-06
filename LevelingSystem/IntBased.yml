@@ -1,0 +1,654 @@
+#Tier one Intelligence skills
+#Crude Trap
+
+CrudeTrap:
+    spell-class: ".MultiSpell"
+    cooldown: 20
+    cost: [mana 40]
+    str-cast-self: "You being to fumble and lay a trap! (Remain looking at the ground until placed!)"
+    str-modifier-failed: "The trap can only be placed below your feet!"
+    range: 3
+    modifiers:
+      - pitch >70 required
+    spells:
+      - crudeTrapCasterSlow
+      - DELAY 40
+      - crudeTrapPulser
+    effects:
+      trapSetting:
+        position: caster
+        effect: effectlibentity
+        effectlib:
+          class: Flame
+          duration: 2000
+          particle: block_crack
+          material: lily_pad
+
+crudeTrapCasterSlow:
+    spell-class: ".targeted.PotionEffectSpell"
+    type: SLOWNESS
+    duration: 40
+    strength: 4
+    can-target: players,nonplayers
+    target-self: true
+    ambient: false
+    hidden: true
+
+crudeTrapPulser:
+    spell-class: ".targeted.PulserSpell"
+    range: 3
+    total-pulses: 2
+    interval: 5
+    max-distance: 100
+    block-type: stone_slab
+    only-count-on-success: true
+    str-modifier-failed: "The trap can only be placed below your feet!"
+    str-at-cap: "You can only control 2 traps at once!"
+    cap-per-player: 2
+    modifiers:
+        - pitch >70 required
+    spells:
+        - crudeTrapAoe
+    effects:
+      trapEffect:
+          position: special
+          effect: particles
+          particle-name: redstone
+          color: 000000
+          horiz-spread: 3
+          vert-spread: 0.3
+          count: 30
+
+crudeTrapAoe:
+    spell-class: ".targeted.AreaEffectSpell"
+    horizontal-radius: 2
+    vertical-radius: 1
+    can-target: players,nonplayers
+    spells:
+        - crudeTrapSlow
+        - crudeTrapDoT
+    effects:
+      trapEffect:
+          position: special
+          effect: particles
+          particle-name: redstone
+          color: 000000
+          horiz-spread: 3
+          vert-spread: 0.3
+          count: 30
+
+crudeTrapSlow:
+    spell-class: ".targeted.PotionEffectSpell"
+    type: SLOWNESS
+    duration: 120
+    strength: 4
+    can-target: players,nonplayers
+    targeted: true
+    ambient: false
+    hidden: true
+    effects:
+      trapped:
+        position: target
+        effect: effectlibentity
+        effectlib:
+          class: Flame
+          particle: block_crack
+          duration: 6000
+          material: redstone_block
+
+crudeTrapDoT:
+    spell-class: ".targeted.DotSpell"
+    damage: 1
+    delay: 0
+    interval: 10
+    duration: 120
+    prevent-knockback: true
+    spell-damage-type: entity_attack
+
+#Crude Brew
+CrudeBrew:
+    spell-class: ".instant.ConjureSpell"
+    cooldown: 420
+    cost:
+      - mana 25
+      - glass 1
+    power-affects-quantity: false
+    power-affects-chance: false
+    calculate-drops-individually: false
+    auto-equip: false
+    items:
+        - CrudePotion1 1 20%
+        - CrudePotion2 1 20%
+        - CrudePotion3 1 20%
+        - CrudePotion4 1 20%
+        - CrudePotion5 1 20%
+    add-to-inventory: true
+    str-missing-reagents: 'Crude brew costs 1 glass and 25 mana'
+    str-cast-self: 'You brew a crude, unidentifiable potion'
+
+#Crude Explosive
+
+CrudeExplosives:
+    spell-class: ".instant.ItemProjectileSpell"
+    cooldown: 25
+    cost:
+      - mana 20
+      - gunpowder 1
+    str-cast-self: "You toss an improvised explosive"
+    str-missing-reagents: "Crude Explosives require 1 gunpowder and 20 mana"
+    speed: 3
+    vert-speed: 0
+    hit-radius: 1
+    y-offset: 0
+    spell-on-hit-entity: CrudeExplosiveBomb
+    spell-on-hit-ground: CrudeExplosiveBomb
+    item: cyan_terracotta
+
+CrudeExplosiveBomb:
+    spell-class: ".targeted.BombSpell"
+    block: cyan_terracotta
+    fuse: 60
+    interval: 5
+    spell: CrudeExplosiveExplosions
+    effects:
+          Explosive:
+            position: delayed
+            effect: effectlibentity
+            effectlib:
+              class: Explode
+              visible_range: 60
+          eff2:
+            position: special
+            effect: particles
+            height-offset: 1
+            particle-name: redstone
+            horiz-spread: 1
+            vert-spread: 1
+            color: FF0000
+            speed: 0.04
+            count: 50
+
+CrudeExplosiveExplosions:
+    spell-class: ".targeted.AreaEffectSpell"
+    horizontal-radius: 5
+    vertical-radius: 3
+    spells: [CrudeExplosiveExplosion]
+    effects:
+        Explosive:
+            position: special
+            effect: effectlibentity
+            effectlib:
+              class: Explode
+
+CrudeExplosiveExplosion:
+    spell-class: ".targeted.ForcetossSpell"
+    helper-spell: true
+    damage: 9
+    horizontal-force: 8
+    vertical-force: 8
+    can-target: players,nonplayers
+    effects:
+        Explosive:
+            position: target
+            effect: effectlibentity
+            effectlib:
+              class: Explode
+
+#Tier two Intelligence Skills
+#Fine Explosives
+
+FineExplosives:
+    spell-class: ".instant.ItemProjectileSpell"
+    cooldown: 30
+    cost:
+      - mana 30
+      - gunpowder 2
+    str-cast-self: "You toss a fine explosive"
+    str-missing-reagents: "Fine Explosives require 2 gunpowder and 20 mana"
+    speed: 3
+    vert-speed: 0
+    hit-radius: 1
+    y-offset: 0
+    spell-on-hit-entity: FineExplosivesBomb
+    spell-on-hit-ground: FineExplosivesBomb
+    item: red_terracotta
+
+FineExplosivesBomb:
+    spell-class: ".targeted.BombSpell"
+    block: red_terracotta
+    fuse: 60
+    interval: 5
+    spell: FineExplosivesExplosions
+    effects:
+          Explosive:
+            position: delayed
+            effect: effectlibentity
+            effectlib:
+              class: Explode
+              visible_range: 60
+              radius: 7
+          eff2:
+            position: special
+            effect: particles
+            height-offset: 1
+            particle-name: redstone
+            horiz-spread: 6
+            vert-spread: 1
+            color: FF0000
+            speed: 0.04
+            count: 50
+
+FineExplosivesExplosions:
+    spell-class: ".targeted.AreaEffectSpell"
+    horizontal-radius: 7
+    vertical-radius: 3
+    spells: [FineExplosivesExplosion]
+    effects:
+        Explosive:
+            position: special
+            effect: effectlibentity
+            effectlib:
+              class: Explode
+
+FineExplosivesExplosion:
+    spell-class: ".targeted.ForcetossSpell"
+    helper-spell: true
+    damage: 14
+    horizontal-force: 10
+    vertical-force: 8
+    can-target: players,nonplayers
+    effects:
+        Explosive:
+            position: target
+            effect: effectlibentity
+            effectlib:
+              class: Explode
+
+#Flash Powder
+
+FlashPowder:
+    spell-class: ".instant.ItemProjectileSpell"
+    cooldown: 60
+    cost:
+      - mana 30
+      - gunpowder 1
+    str-cast-self: "You toss some flash powder"
+    str-missing-reagents: "Flash Powder require 1 gunpowder and 30 mana"
+    speed: 2
+    vert-speed: 0
+    hit-radius: 2
+    y-offset: 0
+    spell-on-hit-entity: FlashPowderAoE
+    spell-on-hit-ground: FlashPowderAoE
+    item: gunpowder
+
+FlashPowderAoE:
+    spell-class: ".targeted.AreaEffectSpell"
+    horizontal-radius: 7
+    vertical-radius: 3
+    target-self: false
+    cone: 45
+    spells:
+      - FlashPowderMobs(mode=full)
+      - FlashPowderBlind(mode=full)
+      - FlashPowderNausea(mode=full)
+    effects:
+        Particles:
+            position: special
+            effect: particles
+            forward-offset: 1
+            height-offset: 1
+            particle-name: flame
+            horiz-spread: 1
+            vert-spread: 1
+            count: 10
+            speed: 0
+
+FlashPowderMobs: &FlashPowder
+    spell-class: ".targeted.PotionEffectSpell"
+    type: SLOWNESS
+    duration: 600
+    targeted: true
+    strength: 40
+    can-target: nonplayers
+    target-self: false
+    ambient: false
+    hidden: true
+
+FlashPowderBlind: {<<: *FlashPowder, type: BLINDNESS, strength: 0, duration: 60, can-target: players}
+FlashPowderNausea: {<<: *FlashPowder, type: NAUSEA, strength: 1, duration: 60, can-target: players}
+
+#Arrow Turret
+
+ArrowTurret:
+    spell-class: ".TargetedMultiSpell"
+    cost:
+        - mana 25
+    str-cost: 25 mana
+    cooldown: 24
+    range: 3
+    require-entity-target: false
+    check-individual-messages: true
+    spells:
+        - ArrowTurretPulser(mode=hard)
+
+ArrowTurretPulser:
+    spell-class: ".targeted.PulserSpell"
+    can-cast-by-command: false
+    helper-spell: true
+    block-type: "dispenser"
+    total-pulses: 16
+    interval: 20
+    max-distance: 24
+    cap-per-player: 2
+    str-cast-self: "You deploy an arrow turret!"
+    str-at-cap: "You cannot control more than 2 arrow turrets at once!"
+    str-cant-cast: "You cannot place an arrow turret there!"
+    spells:
+       - ArrowTurretOffset1
+       - DELAY 1
+       - ArrowTurretaoe
+       - DELAY 1
+       - ArrowTurretOffset2
+    effects:
+         1:
+          position: caster
+          effect: particles
+          particle-name: blockcrack
+          material: black_concrete
+          height-offset: 0.3
+          count: 50
+          speed: 0.05
+          horiz-spread: 0.3
+          vert-spread: 0.3
+         2:
+          position: caster
+          effect: sound
+          sound: block.stone.place
+          volume: 2.0
+          pitch: 1.0
+
+ArrowTurretOffset1:
+    spell-class: ".targeted.OffsetLocationSpell"
+    can-cast-by-command: false
+    helper-spell: true
+    relative-offset: 0,-1,0
+    spell: dummyAoE
+
+ArrowTurretOffset2:
+    spell-class: ".targeted.OffsetLocationSpell"
+    can-cast-by-command: false
+    helper-spell: true
+    relative-offset: 0,1,0
+    spell: dummyAoE
+
+ArrowTurretaoe:
+    spell-class: ".targeted.AreaEffectSpell"
+    can-cast-by-command: false
+    can-target: players,nonplayers
+    helper-spell: true
+    horizontal-radius: 9
+    vertical-radius: 9
+    target-players: true
+    target-non-players: true
+    max-targets: 2
+    point-blank: false
+    spell-source-in-center: true
+    spells:
+       - ArrowTurretShoot
+
+ArrowTurretShoot:
+    spell-class: ".targeted.VolleySpell"
+    can-cast-by-command: false
+    can-target: players,nonplayers
+    helper-spell: true
+    arrows: 3
+    speed: 13
+    spread: 120
+    gravity: true
+    damage: 6
+    effects:
+      1:
+        position: projectile
+        effect: sound
+        sound: entity.player.attack.sweep
+        volume: 0.2
+        pitch: 1.8
+
+dummyAoE:
+    spell-class: ".targeted.DummySpell"
+
+#Tier three Intelligence Skills
+#Expert Trap
+
+ExpertTrap:
+    spell-class: ".MultiSpell"
+    cooldown: 12
+    range: 3
+    cost: [mana 40]
+    str-cast-self: "You being to expertly lay a trap!"
+    str-modifier-failed: "The trap can only be placed below your feet!"
+    modifiers:
+        - pitch >70 required
+    spells:
+      - ExpertTrapCasterSlow
+      - DELAY 60
+      - ExpertTrapPulser
+    effects:
+      trapSetting:
+        position: caster
+        effect: effectlibentity
+        effectlib:
+          class: Flame
+          duration: 3000
+          particle: block_crack
+          material: lily_pad
+
+ExpertTrapCasterSlow:
+    spell-class: ".targeted.PotionEffectSpell"
+    type: SLOWNESS
+    duration: 60
+    strength: 4
+    can-target: players,nonplayers
+    target-self: true
+    ambient: false
+    hidden: true
+
+ExpertTrapPulser:
+    spell-class: ".targeted.PulserSpell"
+    range: 3
+    total-pulses: 2
+    interval: 5
+    max-distance: 100
+    block-type: gray_carpet
+    only-count-on-success: true
+    str-modifier-failed: "The trap can only be placed below your feet!"
+    str-at-cap: "You can only control 2 traps at once!"
+    cap-per-player: 2
+    modifiers:
+        - pitch >70 required
+    spells:
+        - ExpertTrapAoe
+    effects:
+      trapEffect:
+          position: special
+          effect: particles
+          particle-name: redstone
+          color: 000000
+          horiz-spread: 3
+          vert-spread: 0.3
+          count: 30
+
+ExpertTrapAoe:
+    spell-class: ".targeted.AreaEffectSpell"
+    horizontal-radius: 2
+    vertical-radius: 1
+    can-target: players,nonplayers
+    spells:
+        - ExpertTrapSlow
+        - ExpertTrapDoT
+    effects:
+      trapEffect:
+          position: special
+          effect: particles
+          particle-name: redstone
+          color: 000000
+          horiz-spread: 3
+          vert-spread: 0.3
+          count: 30
+
+ExpertTrapSlow:
+    spell-class: ".targeted.PotionEffectSpell"
+    type: SLOWNESS
+    duration: 60
+    strength: 4
+    can-target: players,nonplayers
+    targeted: true
+    ambient: false
+    hidden: true
+    effects:
+      trapped:
+        position: target
+        effect: effectlibentity
+        effectlib:
+          class: Flame
+          particle: block_crack
+          duration: 3000
+          material: redstone_block
+
+ExpertTrapDoT:
+    spell-class: ".targeted.DotSpell"
+    damage: 2
+    delay: 0
+    interval: 5
+    duration: 60
+    prevent-knockback: true
+    spell-damage-type: entity_attack
+
+#Hidden Barrage
+
+HiddenBarrage:
+    spell-class: ".MultiSpell"
+    cost:
+        - mana 60
+    cooldown: 30
+    str-missing-reagents: 60 Mana required
+    str-cast-self: "You fire your hidden barrage"
+    str-on-cooldown: "&bHiddenBarrage is on cooldown! %c seconds"
+    spells:
+        - HiddenBarrageProjectile
+        - HiddenBarrageProjectile
+        - HiddenBarrageProjectile
+        - HiddenBarrageProjectile
+        - HiddenBarrageProjectile
+        - HiddenBarrageProjectile
+        - HiddenBarrageProjectile
+        - HiddenBarrageProjectile
+        - HiddenBarrageProjectile
+        - HiddenBarrageProjectile
+        - HiddenBarrageProjectile
+        - HiddenBarrageProjectile
+        - HiddenBarrageProjectile
+        - HiddenBarrageProjectile
+        - HiddenBarrageProjectile
+        - HiddenBarrageProjectile
+
+
+HiddenBarrageProjectile:
+    spell-class: ".instant.ProjectileSpell"
+    projectile-type: Tippedarrow
+    velocity: 2.1
+    require-hit-entity: true
+    cancel-damage: true
+    hit-radius: 0
+    remove-projectile: true
+    target-players: true
+    horizontal-spread: 0.45
+    vertical-spread: 0.45
+    max-distance: 20
+    spell: HiddenBarrageAoE
+
+HiddenBarrageAoE:
+    spell-class: ".targeted.AreaEffectSpell"
+    cast-item: paper
+    horizontal-radius: 3
+    vertical-radius: 3
+    point-blank: true
+    range: 200
+    spells:
+      - HiddenBarrageNausea
+      - HiddenBarrageDamage
+
+HiddenBarrageNausea:
+    spell-class: ".targeted.PotionEffectSpell"
+    type: NAUSEA
+    duration: 60
+    strength: 4
+    can-target: players,nonplayers
+    targeted: true
+    ambient: false
+    hidden: true
+    effects:
+      trapped:
+        position: target
+        effect: effectlibentity
+        effectlib:
+          class: Flame
+          particle: block_crack
+          duration: 500
+          material: cactus
+
+HiddenBarrageDamage:
+    spell-class: ".targeted.ForcetossSpell"
+    damage: 1
+    horizontal-force: 10
+    vertical-force: 10
+    avoid-damage-modification: true
+
+#Expert Brew
+
+ExpertBrew:
+    spell-class: ".instant.ConjureSpell"
+    cooldown: 420
+    cost:
+      - mana 25
+      - redstone 1
+      - glass 1
+    power-affects-quantity: false
+    power-affects-chance: false
+    calculate-drops-individually: false
+    auto-equip: false
+    items:
+        - ExpertBrew1 1 20%
+        - ExpertBrew2 1 20%
+        - ExpertBrew3 1 20%
+        - ExpertBrew4 1 20%
+        - ExpertBrew5 1 20%
+    add-to-inventory: true
+    str-missing-reagents: 'Expert Brew costs 1 glass, 1 redstone and 25 mana'
+    str-cast-self: 'You expertly brew a potion!'
+
+#Legendary Intelligence Skillss
+#Inspect Object
+#Large Health Flask
+
+MasterworkHealthPotion:
+    spell-class: ".instant.ConjureSpell"
+    cooldown: 420
+    cost:
+      - mana 25
+      - diamond 1
+      - glass 1
+    power-affects-quantity: false
+    power-affects-chance: false
+    calculate-drops-individually: false
+    auto-equip: false
+    items:
+        - MasterworkHealPotion 1 100%
+    add-to-inventory: true
+    str-missing-reagents: 'Expert Brew costs 1 glass, 1 diamond, and 25 mana'
+    str-cast-self: 'You brew a masterwork potion!'
+
+
+#Masterwork Trap
+
