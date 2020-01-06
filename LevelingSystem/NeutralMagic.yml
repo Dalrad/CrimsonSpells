@@ -1,0 +1,335 @@
+##Magic Missile, Low damage piercing missile - Functional 1/2/2020
+
+MagicMissile:
+    spell-class: ".instant.ProjectileSpell"
+    cooldown: 20
+    projectile-type: arrow
+    special-effect-interval: 3
+    velocity: 1.5
+    max-duration: 3
+    spell: MagicMissileDamage
+    cost: [mana 20]
+    str-no-target: No target found.
+    str-cast-self: You fire a bolt of mana.
+    effects:
+        MagicMissile:
+            position: special
+            effect: effectlibentity
+            effectlib:
+              class: Cone
+              particle: crit
+              duration: 200
+              radius_grow: 0.015
+              visible_range: 90
+        MagicMissileB:
+            position: special
+            effect: effectlibentity
+            effectlib:
+              class: Cone
+              particle: crit_magic
+              length_grow: 0.02
+              duration: 200
+              radius_grow: 0.015
+              visible_range: 90
+
+MagicMissileDamage:
+    spell-class: ".targeted.PainSpell"
+    damage: 6
+    ignore-armor: true
+
+##ManaBlast - Functional 1/2/2020
+
+
+ManaBlast:
+    spell-class: ".targeted.ForcetossSpell"
+    cooldown: 30
+    range: 35
+    damage: 0
+    horizontal-force: 30
+    vertical-force: 15
+    can-target: players,nonplayers
+    check-plugins: true
+    cost: [mana 10]
+    str-missing-reagents: Insufficient mana! You require 10 mana.
+    str-no-target: No target found.
+    str-cast-self: You send out your mana to blow back an enemy
+    effects:
+        MagicMissile:
+            position: target
+            effect: effectlib
+            effectlib:
+              class: Helix
+              radius: 2
+              target_offset: 0,0.5,0
+              particle: crit
+              duration: 1000
+              visible_range: 90
+        MagicCannonC:
+            position: target
+            effect: effectlibentity
+            effectlib:
+              class: Explode
+              duration: 200
+
+
+##Mana Cannon, high damage burst - Functional 1/2/2020
+
+MagicCannon:
+    spell-class: ".instant.ParticleProjectileSpell"
+    cooldown: 120
+    hit-radius: 1.5
+    hit-players: true
+    controllable: true
+    velocity: 0.6
+    max-duration: 20
+    spell: MagicCannonDamage
+    cost: [mana 75]
+    str-missing-reagents: Insufficient mana! 75 mana required!
+    str-cast-self: You fire a massive burst of mana.
+    effects:
+        MagicCannon:
+            position: special
+            effect: effectlibentity
+            effectlib:
+              class: Cone
+              particle: crit
+              duration: 450
+              visible_range: 90
+        MagicCannonB:
+            position: special
+            effect: effectlibentity
+            effectlib:
+              class: Cone
+              particle: crit_magic
+              duration: 450
+              delay: 3
+              visible_range: 90
+        MagicCannonC:
+            position: target
+            effect: effectlibentity
+            effectlib:
+              class: Explode
+              duration: 200
+
+MagicCannonDamage:
+    spell-class: ".targeted.ForcetossSpell"
+    damage: 10
+    horizontal-force: 15
+    vertical-force: 5
+    ignore-armor: false
+
+
+##Mana Flare - Functional 1/2/2020
+
+ManaFlare:
+    spell-class: ".MultiSpell"
+    range: 50
+    cooldown: 45
+    cost: [mana 75]
+    str-missing-reagents: Insufficient mana! You require 75 mana.
+    str-no-target: No target found.
+    str-cast-self: You summon a storm of mana bolts
+    spells:
+      - CasterSlowdown10
+      - DELAY 30
+      - ManaFlareMissile
+      - DELAY 10
+      - ManaFlareMissile
+      - DELAY 10
+      - ManaFlareMissile
+      - DELAY 10
+      - ManaFlareMissile
+      - DELAY 10
+      - ManaFlareMissile
+      - DELAY 10
+      - ManaFlareMissile
+      - DELAY 10
+      - ManaFlareMissile
+      - DELAY 10
+      - ManaFlareMissile
+      - DELAY 10
+      - ManaFlareMissile
+      - DELAY 10
+      - ManaFlareMissile
+      - DELAY 10
+      - ManaFlareMissile
+      - DELAY 10
+      - ManaFlareMissile
+      - DELAY 10
+      - ManaFlareMissile
+      - DELAY 10
+      - ManaFlareMissile
+      - DELAY 10
+      - ManaFlareMissile
+      - DELAY 10
+      - ManaFlareMissile
+      - DELAY 10
+      - ManaFlareMissile
+    effects:
+      ManaFlareBase:
+        effect: effectlibentity
+        position: caster
+        effectlib:
+          class: Helix
+          duration: 9500
+          particle: spell_witch
+      ManaFlareOrb:
+        effect: effectlibentity
+        position: caster
+        effectlib:
+          class: AnimatedBall
+          relative_offset: 0,4,0
+          y_factor: 0.5
+          duration: 9500
+          x_factor: 0.5
+          z_factor: 0.5
+
+
+CasterSlowdown10:
+    spell-class: ".targeted.PotionEffectSpell"
+    type: slowness
+    duration: 200
+    strength: 4
+    can-target: players,nonplayers
+    target-self: true
+    ambient: false
+    hidden: true
+
+
+
+ManaFlareMissile:
+    spell-class: ".targeted.HomingProjectileSpell"
+    name: "Homing Projectile"
+    range: 50
+    projectile-type: arrow
+    can-target: players,nonplayers
+    spell: ManaFlareDamage
+    special-effect-interval: 1
+    relative-offset: 0,4.5,0
+    effects:
+        MagicMissileB:
+            position: special
+            effect: effectlibentity
+            effectlib:
+              class: Cone
+              particle: spell_witch
+              length_grow: 0.02
+              duration: 200
+              radius_grow: 0.015
+              visible_range: 90
+
+
+ManaFlareDamage:
+    spell-class: ".targeted.PainSpell"
+    damage: 6
+    ignore-armor: false
+    effects:
+        MagicMissile:
+            position: target
+            effect: effectlibentity
+            effectlib:
+              class: Sphere
+              particle: spell_witch
+              duration: 200
+              visible_range: 90
+
+
+##Drowning Mana - Silences everyone in an area around you - Functional 1/2/2020
+
+DrowningMana:
+    spell-class: ".MultiSpell"
+    str-cast-self: "You silence the field with your immense mana"
+    cooldown: 60
+    cost: [mana 150]
+    str-missing-reagents: Insufficient mana! You require 150 mana.
+    spells:
+      - DrowningManaAoE
+      - DELAY 1
+      - DrowningManaSelfSilence(mode=full)
+    effects:
+        ParticlesA:
+            position: caster
+            effect: particles
+            height-offset: 1
+            particle-name: WITCH
+            horiz-spread: 10
+            vert-spread: 1
+            count: 300
+        ParticlesB:
+            position: caster
+            effect: effectlibentity
+            effectlib:
+              class: Flame
+              particle: spell_witch
+              duration: 800
+              visible_range: 90
+
+DrowningManaAoE:
+    spell-class: ".targeted.AreaEffectSpell"
+    fail-if-no-target: false
+    target-players: true
+    horizontal-radius: 20
+    vertical-radius: 9
+    spells:
+     - DrowningManaMobStun(mode=full)
+     - DrowningManaPlayerSilence(mode=full)
+
+
+DrowningManaMobStun:
+    spell-class: ".targeted.PotionEffectSpell"
+    type: slowness
+    duration: 400
+    strength: 6
+    can-target: nonplayers
+    target-self: false
+    targeted: true
+    ambient: false
+    hidden: true
+    effects:
+        ParticlesB:
+            position: target
+            effect: effectlibentity
+            effectlib:
+              class: Flame
+              particle: spell_witch
+              duration: 800
+              visible_range: 90
+
+DrowningManaPlayerSilence:
+    spell-class: ".targeted.SilenceSpell"
+    prevent-cast: true
+    prevent-chat: false
+    prevent-commands: false
+    duration: 400
+    allowed-spells:
+       - help
+    can-target: players
+    str-no-target: No target.
+    str-cast-target: "%a silences you."
+    str-silenced: "You are silenced."
+    effects:
+        ParticlesB:
+            position: target
+            effect: effectlibentity
+            effectlib:
+              class: Flame
+              particle: spell_witch
+              duration: 800
+              visible_range: 90
+
+
+DrowningManaSelfSilence:
+    spell-class: ".targeted.SilenceSpell"
+    prevent-cast: true
+    prevent-chat: false
+    allowed-spells:
+       - help
+    prevent-commands: false
+    can-target: players
+    target-self: true
+    duration: 400
+    str-cast-target: "Your mana overwhelms the field"
+    str-silenced: "You are silenced."
+
+
+
